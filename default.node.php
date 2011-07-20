@@ -10,6 +10,8 @@
 </head>
 
 <body>
+<img id="searchIcon" src="?searchIcon" />
+<div id="message">To begin, search in the box above</div>
 <article>
 <div id="panel">
 	<div id="searchBar">

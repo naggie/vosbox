@@ -106,3 +106,20 @@ border-top:1px solid #a0a0a0 !important;
 border-bottom:1px solid #ddd !important;
 }
 
+#searchIcon
+{
+position:absolute;
+left:50%;
+margin-left:380px;
+top:20px;
+}
+
+#message
+{
+position:absolute;
+width:100%;
+text-align:center;
+color:gray;
+font-style:italic;
+top:250px;
+}

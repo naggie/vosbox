@@ -31,7 +31,7 @@ $('#search').click(function (){
 // override submit
 $('#searchBar form').submit(function(){
 	search.do();
-	$('#search').val('');
+	//$('#search').val('');
 	// remove the default page submit
 	return false;
 });
@@ -56,9 +56,14 @@ search.showResults = function (results)
 {
 	// reset results area
 	$('#searchResults').html('').scrollTop(0);
+	// clear the message
+	$('#message').text('');
 
-	for (var i in results)
-		search.addResult(results[i]);
+	if (results.length)
+		for (var i in results)
+			search.addResult(results[i]);
+	else
+		$('#message').text('No results found');
 }
 
 search.addResult = function (result)
