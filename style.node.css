@@ -1,0 +1,108 @@
+body
+{
+font-family:arial;
+text-align:center;
+margin:0;
+}
+
+article
+{
+color:#222;
+margin:10px auto;
+display:inline-block;
+width:900px;
+height:100%;
+background:#f4f4f4 url('?grad') repeat-x;
+}
+
+#searchBar
+{
+border-bottom:#888 solid 1px;
+}
+
+#search
+{
+color:#333;
+width:800px;
+font-size:120%;
+padding:10px;
+margin:10px;
+}
+
+/* shadows : inner*/
+#searchResults
+{
+border:#888 solid 1px;
+/*box-shadow: inset 0 1px 2px #333;*/
+}
+#searchBar form input
+{
+border:none;
+box-shadow: inset 0 1px 2px #333;
+}
+/* shadows : outer*/
+article
+{
+box-shadow: 0 1px 2px #333;
+}
+
+
+#searchResults
+{
+background:#fff;
+margin:10px;
+height:400px;
+overflow:auto;
+}
+
+#searchResults .item
+{
+background:#fafafa url('?grad') repeat-x;
+text-align:left;
+padding:10px;
+border-bottom:#ddd solid 1px;
+height:32px;
+}
+
+#searchResults .item:hover
+{
+background:#f0f0f0 url('?grad') repeat-x;
+}
+
+#searchResults .item .artist
+{
+color:gray;
+margin-right:15px;
+float:left;
+}
+
+#searchResults .item .name
+{
+}
+
+#searchResults .item .album
+{
+font-size:12px;
+}
+
+/* outer edges * /
+article
+{
+border: 1px solid #ccc;
+border-top:1px solid #ddd !important;
+}
+#searchBar,article
+{
+border-bottom:1px solid #a0a0a0 !important;
+}
+
+*/
+
+/*inner edges*/
+#searchResults
+{
+border: 1px solid #ccc;
+border-top:1px solid #a0a0a0 !important;
+border-bottom:1px solid #ddd !important;
+}
+

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="310"
+   height="180"
+   id="svg14411"
+   sodipodi:version="0.32"
+   inkscape:version="0.47 r22583"
+   version="1.0"
+   sodipodi:docname="voswork.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/media/disk/graphics/voswork.png"
+   inkscape:export-xdpi="61.710129"
+   inkscape:export-ydpi="61.710129">
+  <defs
+     id="defs14413">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath14407">
+      <rect
+         y="-10.362628"
+         x="73.73687"
+         height="172.66638"
+         width="296.63199"
+         id="rect14409"
+         style="opacity:0.51485153;fill:#ebebeb;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.95000005;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </clipPath>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective14419" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="118.66866"
+     inkscape:cy="64.949797"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="725"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata14416">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Voswork Logo</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Callan Bryant</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>voswork logo</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="background" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-229.15685,-451.00222)">
+    <path
+       id="path14359"
+       d="M 243.48373,56.825324 C 241.18399,56.520995 238.9081,56.425642 236.62846,56.229228 L 236.47618,56.198376 L 225.25271,84.206864 C 216.16385,84.425295 207.30993,86.12717 199.03227,89.200262 L 178.60843,67.146814 C 171.12819,70.855472 164.0607,75.516395 157.60798,80.807963 L 169.30236,108.38598 C 162.70159,115.06741 157.1295,123.09468 153.12276,131.90238 C 153.11355,131.94599 153.09316,132.04701 153.09191,132.05468 L 123.2302,130.76127 C 121.82577,134.97504 120.68864,139.39352 119.78443,143.85668 C 119.04462,147.50836 118.41553,151.13166 118.05067,154.76219 L 145.93773,165.80251 C 145.95992,176.26795 147.96807,186.44437 151.74442,195.83429 L 129.7527,215.95354 C 133.44173,223.07075 138.00318,229.79435 143.14208,235.94766 L 170.90325,224.13183 C 178.31867,231.28963 187.05331,237.02493 196.97781,240.98823 L 195.71526,270.69764 C 198.90199,271.65091 202.22953,272.33449 205.55274,273.00775 C 210.24433,273.95824 214.76173,274.68834 219.41358,275.02313 L 230.85103,246.74092 C 241.12804,246.28825 251.17463,243.9265 260.30645,239.86616 L 280.30427,261.67475 C 287.4348,257.73234 294.20163,252.9113 300.30037,247.49304 L 288.24166,219.36556 C 294.47722,212.32363 299.46124,204.16989 302.99085,195.08373 L 332.70027,196.34631 C 333.56122,193.39371 334.20356,190.49121 334.82524,187.42259 C 335.90559,182.09 336.34507,176.73585 336.63255,171.45849 L 308.47177,160.20419 C 307.89454,151.27856 305.73411,142.62246 302.41033,134.56009 L 324.40207,114.44084 C 320.38937,106.83651 315.52528,99.577354 309.85801,93.102974 L 281.57825,105.13082 C 275.2984,99.465767 268.27638,94.672604 260.31146,91.150997 L 261.60489,61.289294 C 257.54547,59.957626 253.4079,58.835898 249.11865,57.966924 C 247.95939,57.732063 246.7737,57.45389 245.61586,57.257279 C 245.05141,57.161439 244.50662,56.998593 243.94061,56.917884 C 243.78731,56.896028 243.63705,56.845617 243.48373,56.825324 z M 232.44834,131.643 C 233.01044,131.72748 233.56022,131.86826 234.12359,131.98239 C 252.15108,135.63465 263.88568,153.33199 260.23343,171.35949 C 256.58117,189.38697 238.91468,200.96929 220.8872,197.31703 C 202.85971,193.66479 191.24653,176.15058 194.89879,158.1231 C 198.43691,140.65897 215.02316,129.02393 232.44834,131.643 z"
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#808080;stroke-width:4.97245407;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       clip-path="url(#clipPath14407)"
+       transform="matrix(0.8947564,0,0,0.8947564,153.78375,411.65722)" />
+    <text
+       id="text14373"
+       y="604.01385"
+       x="239.93362"
+       style="font-size:56px;font-style:normal;font-weight:normal;fill:#6b6b6b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         id="tspan14375"
+         y="604.01385"
+         x="239.93362"
+         sodipodi:role="line">VOS</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:56px;font-style:normal;font-weight:normal;fill:#bcbcbc;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
+       x="355.79962"
+       y="604.01385"
+       id="text14377"><tspan
+         id="tspan14379"
+         sodipodi:role="line"
+         x="355.79962"
+         y="604.01385">WORK</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:56px;font-style:normal;font-weight:normal;fill:#6b6b6b;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
+       x="239.93362"
+       y="604.01385"
+       id="text14381"><tspan
+         sodipodi:role="line"
+         x="239.93362"
+         y="604.01385"
+         id="tspan14383">VOS</tspan></text>
+    <text
+       id="text14385"
+       y="604.01385"
+       x="355.79962"
+       style="font-size:56px;font-style:normal;font-weight:normal;fill:#bcbcbc;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="604.01385"
+         x="355.79962"
+         sodipodi:role="line"
+         id="tspan14387">WORK</tspan></text>
+  </g>
+</svg>
