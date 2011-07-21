@@ -1,4 +1,8 @@
 <?php
+/*
+TODO: exception based JSON error system
+*/
+
 $keywords = &$_REQUEST['keywords'];
 
 $i = new sqliteIndexer();
