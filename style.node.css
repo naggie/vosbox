@@ -1,61 +1,70 @@
 body
 {
 font-family:arial;
-text-align:center;
 margin:0;
-}
-
-article
-{
-color:#222;
-margin:10px auto;
-display:inline-block;
-width:900px;
-height:100%;
 background:#f4f4f4 url('?grad') repeat-x;
 }
 
-#searchBar
+
+#left
 {
-border-bottom:#888 solid 1px;
+position:absolute;
+left:0;right:50%;
+top:0;bottom:0;
+color:#222;
 }
+
+#right
+{
+position:absolute;
+left:50%;right:0;
+top:0;bottom:0;
+color:#222;
+}
+
 
 #search
 {
+position:absolute;
+right:0;
+left:0;
 color:#333;
-width:800px;
-font-size:120%;
+font-size:19px;
 padding:10px;
 margin:10px;
-}
-
-/* shadows : inner*/
-#searchResults
-{
-border:#888 solid 1px;
-/*box-shadow: inset 0 1px 2px #333;*/
-}
-#searchBar form input
-{
+margin-right:25px;
 border:none;
 box-shadow: inset 0 1px 2px #333;
 }
-/* shadows : outer*/
-article
+
+#searchResults, #playlist
 {
-box-shadow: 0 1px 2px #333;
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+background:#fff;
+margin:10px;
+overflow:auto;
+border: 1px solid #ccc;
+border-top:1px solid #a0a0a0 !important;
+border-bottom:1px solid #ddd !important;
 }
 
+#playlist
+{
+top:200px;
+margin-left:25px;
+display:none;
+}
 
 #searchResults
 {
-background:#fff;
-margin:10px;
-height:400px;
-overflow:auto;
+top:50px;
+margin-right:25px;
 }
 
-#searchResults .item
+.item
 {
 background:#fafafa url('?grad') repeat-x;
 text-align:left;
@@ -64,62 +73,39 @@ border-bottom:#ddd solid 1px;
 height:32px;
 }
 
-#searchResults .item:hover
+.item:hover
 {
 background:#f0f0f0 url('?grad') repeat-x;
 }
 
-#searchResults .item .artist
+.item .artist
 {
 color:gray;
 margin-right:15px;
 float:left;
 }
 
-#searchResults .item .title
+.item .title
 {
 }
 
-#searchResults .item .context
+.item .context
 {
 font-size:12px;
-}
-
-/* outer edges * /
-article
-{
-border: 1px solid #ccc;
-border-top:1px solid #ddd !important;
-}
-#searchBar,article
-{
-border-bottom:1px solid #a0a0a0 !important;
-}
-
-*/
-
-/*inner edges*/
-#searchResults
-{
-border: 1px solid #ccc;
-border-top:1px solid #a0a0a0 !important;
-border-bottom:1px solid #ddd !important;
 }
 
 #searchIcon
 {
 position:absolute;
-left:50%;
-margin-left:380px;
-top:20px;
+right:0;
+top:10px;
 }
 
-#message
+.message
 {
-position:absolute;
 width:100%;
 text-align:center;
 color:gray;
 font-style:italic;
-top:250px;
+margin-top:250px;
 }

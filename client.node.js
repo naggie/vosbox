@@ -9,6 +9,12 @@ search.placeholder = 'Search for music...';
 $(document).ready(function()
 {
 
+if($.browser.msie && (parseInt($.browser.version) < 9) )
+{
+	alert('Update your browser, please');
+	return;
+}
+
 $('#search').val(search.placeholder);
 
 // search on space
@@ -17,24 +23,18 @@ $('#search').val(search.placeholder);
 	return true;
 });
 */
+
 // ctrl+f to search
 $(document).bind('keydown', 'ctrl+f', function(){
 	$('#search').focus().val('');
 });
 
-
-if($.browser.msie && (parseInt($.browser.version) < 9) )
-{
-	$('body').text('Use a better browser :)');
-	return;
-}
-
 $('#search').click(function (){
 	$(this).val('');
 });
 
-// override submit
-$('#searchBar form').submit(function(){
+// override form submit
+$('#right form').submit(function(){
 	search.do();
 	//$('#search').val('');
 	// remove the default page submit
@@ -59,16 +59,20 @@ search.do = function()
 // given an array of nodes, display them
 search.showResults = function (results)
 {
+	if (results.error)
+	{
+		$('#searchResults').html('<div class="message">'+results.error+'</div>');
+		return;
+	}
+
 	// reset results area
 	$('#searchResults').html('').scrollTop(0);
-	// clear the message
-	$('#message').text('');
 
 	if (results.length)
 		for (var i in results)
 			search.addResult(results[i]);
 	else
-		$('#message').text('No results found');
+		$('#searchResults').html('<div class="message">No results found</div>');
 }
 
 search.addResult = function (result)

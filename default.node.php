@@ -10,17 +10,21 @@
 </head>
 
 <body>
-<img id="searchIcon" src="?searchIcon" />
-<div id="message">To begin, search in the box above</div>
-<article>
-<div id="panel">
-	<div id="searchBar">
-		<form>
-			<input type="text" id="search" value="" />
-		</form>
+
+<div id="left">
+	<div id="playlist">
 	</div>
-	<div id="searchResults"></div>
 </div>
-</article>
+
+<div id="right">
+	<form><input id="search" type="text" value="" /></form>
+	<div id="searchResults">
+		<div class="message">To begin, search in the box above</div>
+	</div>
+</div>
+
+
+<img id="searchIcon" src="?searchIcon" />
+
 </body>
 </html>
