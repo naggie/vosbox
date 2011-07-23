@@ -3,10 +3,10 @@
 
 <head>
 <title>Vosplayer</title>
+<link rel="stylesheet" href="?style" />
 <script src="?jquery"></script>
 <script src="?jshotkeys"></script>
 <script src="?client"></script>
-<link rel="stylesheet" href="?style" />
 </head>
 
 <body>
