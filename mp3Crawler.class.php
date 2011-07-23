@@ -7,6 +7,8 @@ TODO: audio file info struct class (hidden filepath etc)
 TODO: OR blacklist system? Auto blacklist system (look for globally common tags)?
 TODO: support extended tag? (TAG+) see wikipedia
 TODO: return orecho a summary
+
+TODO: fileCrawler to replace this
 */
 
 class mp3Crawler //implements crawler

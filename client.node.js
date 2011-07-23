@@ -73,9 +73,12 @@ search.showResults = function (results)
 
 search.addResult = function (result)
 {
-	// display the widget
+	// add the HTML
 	$('#searchResults').append('<div class="item">'+
 	'<div class="artist">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
 	'<div class="context">'+result.album+'</div></div>'
 	);
+	// ...attaching to it the object itself
+	// by first selecting the element just created...
+	$('#searchResults div:last-child').data('meta',result);
 }
