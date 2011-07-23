@@ -76,11 +76,11 @@ margin-right:15px;
 float:left;
 }
 
-#searchResults .item .name
+#searchResults .item .title
 {
 }
 
-#searchResults .item .album
+#searchResults .item .context
 {
 font-size:12px;
 }

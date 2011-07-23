@@ -1,3 +1,8 @@
+/*
+TODO: full keyboard interface support (arrows to nav results etc)
+TODO: error reporting system
+*/
+
 search = new Object();
 search.placeholder = 'Search for music...';
 
@@ -14,7 +19,7 @@ $('#search').val(search.placeholder);
 */
 // ctrl+f to search
 $(document).bind('keydown', 'ctrl+f', function(){
-	$('#search').focus().val('');	
+	$('#search').focus().val('');
 });
 
 
@@ -70,7 +75,7 @@ search.addResult = function (result)
 {
 	// display the widget
 	$('#searchResults').append('<div class="item">'+
-	'<div class="artist">'+result.artist+'</div><div class="name">'+result.title+'</div>'+
-	'<div class="album">'+result.album+'</div></div>'
+	'<div class="artist">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
+	'<div class="context">'+result.album+'</div></div>'
 	);
 }

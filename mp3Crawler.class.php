@@ -1,6 +1,7 @@
 <?php
 /*
 hydratag search engine ID3 tag crawler
+TODO: derive a title from non ID3 files, in filename etc
 
 TODO: audio file info struct class (hidden filepath etc)
 TODO: OR blacklist system? Auto blacklist system (look for globally common tags)?
