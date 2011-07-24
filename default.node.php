@@ -11,13 +11,6 @@
 
 <body>
 
-<div id="left">
-	<form><input id="search" type="text" /></form>
-	<div id="searchResults">
-		<div class="message">To begin, search in the box above</div>
-	</div>
-</div>
-
 <div id="right">
 	<div id="meta">
 		<div id="albumArt"><img /></div>
@@ -25,6 +18,13 @@
 	</div>
 	<div id="jplayer"></div>
 	<div id="playlist"></div>
+</div>
+
+<div id="left">
+	<form><input id="search" type="text" /></form>
+	<div id="searchResults">
+		<div class="message">To begin, search in the box above</div>
+	</div>
 </div>
 
 <img id="searchIcon" src="?searchIcon" />
