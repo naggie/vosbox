@@ -3,7 +3,7 @@ body
 {
 font-family:arial;
 margin:0;
-background:#f4f4f4 url('?grad') repeat-x;
+background:#dddddd url('?grad') repeat-x;
 }
 
 
@@ -106,12 +106,12 @@ top:50px;
 {
 top:138px;
 height:62px;
-background:none;
+background:#eeeeee url('?grad') repeat-x;
 }
 
 .item
 {
-background:#fafafa url('?grad') repeat-x;
+background:#fcfcfc url('?grad') repeat-x;
 text-align:left;
 padding:10px;
 border-bottom:#ddd solid 1px;
@@ -121,6 +121,7 @@ min-height:32px;
 .item:hover
 {
 background:#f0f0f0 url('?grad') repeat-x;
+/*box-shadow: inset 0 1px 2px #333;*/
 }
 
 .item .artist

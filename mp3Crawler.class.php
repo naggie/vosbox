@@ -61,9 +61,22 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 
 			$info = self::getID3($file);
 			if (!$info)
-				echo "No ID3v1 for $file\n";
+			{
+				// guess the title and album from the
+				// filepath
+				$info = array();
+				$bits = explode('');
+				$info['title'] = array_pop($bits);
+				$info['album'] = array_pop($bits);
+				$info['artist'] = array_pop($bits);
+				echo "No ID3v1 for $file -- metadata guessed\n";
+			}
 			else
 				echo "Adding $file\n";
+
+			// sanitise the metadata
+			foreach ($info as &$attribute)
+				$attribute = strip_tags($attribute);
 
 			$info['path'] = (string)$file;
 
