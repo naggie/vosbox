@@ -22,7 +22,6 @@ top:0;bottom:0;
 color:#222;
 }
 
-
 #search
 {
 position:absolute;
@@ -35,6 +34,20 @@ margin:10px;
 margin-right:25px;
 border:none;
 box-shadow: inset 0 1px 2px #333;
+}
+
+#albumArt
+{
+position:absolute;
+left:0;
+background:#fff;
+margin:10px;
+width:128px;
+height:128px;
+background:#ffffff url('?cd') no-repeat center center;
+border: 1px solid #ccc;
+border-top:1px solid #a0a0a0 !important;
+border-bottom:1px solid #ddd !important;
 }
 
 #searchResults, #playlist
@@ -54,8 +67,7 @@ border-bottom:1px solid #ddd !important;
 #playlist
 {
 top:200px;
-margin-left:25px;
-display:none;
+margin-right:0;
 }
 
 #searchResults
@@ -103,9 +115,10 @@ top:10px;
 
 .message
 {
-width:100%;
+position:absolute;
+right:0;left:0;top:240px;
 text-align:center;
 color:gray;
 font-style:italic;
-margin-top:250px;
+margin:10px;
 }

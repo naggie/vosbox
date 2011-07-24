@@ -12,6 +12,7 @@
 <body>
 
 <div id="left">
+	<div id="albumArt"><img /></div>
 	<div id="playlist">
 	</div>
 </div>

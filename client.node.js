@@ -1,6 +1,7 @@
 /*
 TODO: full keyboard interface support (arrows to nav results etc)
-TODO: error reporting system
+IDEA: player only appears on first add?
+clone() remove() appendTo() used to add items (with attached data) to playlists
 */
 
 search = new Object();
