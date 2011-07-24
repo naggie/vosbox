@@ -10,7 +10,7 @@ background:#dddddd url('?grad') repeat-x;
 color:#222;
 }
 
-body * 
+body > *
 {
 /*For fade in after JS manipulation*/
 display:none;
