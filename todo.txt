@@ -1,0 +1,2 @@
+parts of UI appear when required?
+support for moar file types, not just music or even media?
