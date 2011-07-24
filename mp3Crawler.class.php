@@ -65,11 +65,11 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 				// guess the title and album from the
 				// filepath
 				$info = array();
-				$bits = explode('');
+				$bits = explode('/',$file);
 				$info['title'] = array_pop($bits);
 				$info['album'] = array_pop($bits);
 				$info['artist'] = array_pop($bits);
-				echo "No ID3v1 for $file -- metadata guessed\n";
+				echo "Adding $file (no ID3 tag, metadata guessed)\n";
 			}
 			else
 				echo "Adding $file\n";
