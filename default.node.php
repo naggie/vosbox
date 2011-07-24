@@ -19,8 +19,10 @@
 </div>
 
 <div id="right">
-	<div id="albumArt"><img /></div>
-	<div id="meta"> <h2>Song</h2><p>Artist</p><p>Album</p> </div>
+	<div id="meta">
+		<div id="albumArt"><img /></div>
+		<h2>Song</h2><p>Artist</p><p>Album</p>
+	</div>
 	<div id="jplayer"></div>
 	<div id="playlist"></div>
 </div>
