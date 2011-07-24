@@ -1,7 +1,5 @@
 /*
 TODO: full keyboard interface support (arrows to nav results etc)
-IDEA: player only appears on first add?
-clone() remove() appendTo() used to add items (with attached data) to playlists
 */
 
 search = new Object();
@@ -9,6 +7,7 @@ search.placeholder = 'Search for music...';
 
 $(document).ready(function()
 {
+// on demand UI:
 // Make the left (search) pane fill the screen and fade in, 
 // leaving the right pane visible, but behind
 $('#left,#searchIcon').css('right',0).fadeIn(function(){
@@ -80,13 +79,10 @@ search.showResults = function (results)
 		// results found
 		for (var i in results)
 			search.addResult(results[i]);
-		// add instructions for playlist, if appropiate
-		if (!$('#playlist').children().size())
-		{
-			$('#playlist').html('<div class="message">Click a search result to add it to this playlist</div>');
-			$('#playlist .message').hide().fadeIn();
+
+		// show playlist if required
+//		if ($('#left').css('right') == '100%')
 			$('#left').animate({'right':'50%'});
-		}
 
 		// attach a click event to each to add to playlist
 		$('#searchResults .item').click(function(){

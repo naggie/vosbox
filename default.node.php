@@ -14,10 +14,12 @@
 <div id="right">
 	<div id="meta">
 		<div id="albumArt"><img /></div>
-		<h2>Song</h2><p>Artist</p><p>Album</p>
+		<h2></h2><p></p><p></p>
 	</div>
 	<div id="jplayer"></div>
-	<div id="playlist"></div>
+	<div id="playlist">
+		<div class="message">Click a search result to add it to this playlist</div>
+	</div>
 </div>
 
 <div id="left">
