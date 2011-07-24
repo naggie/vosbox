@@ -1,9 +1,13 @@
-/* this does need normalisation*/
+/* 
+TODO: aggregate  left:0; right:0; (create container for albumn art etc)
+*/
+
 body
 {
 font-family:arial;
 margin:0;
 background:#dddddd url('?grad') repeat-x;
+color:#222;
 }
 
 body * 
@@ -18,15 +22,31 @@ display:none;
 position:absolute;
 left:0;right:50%;
 top:0;bottom:0;
-color:#222;
 }
+
+#left > *,#right > *
+{
+margin:10px;
+}
+
 
 #right
 {
 position:absolute;
 left:50%;right:0;
 top:0;bottom:0;
-color:#222;
+}
+
+#right > *
+{
+margin-left:0;
+}
+
+#left form
+{
+position:absolute;
+right:0;
+left:0;
 }
 
 #search
@@ -36,10 +56,9 @@ right:0;
 left:0;
 color:#333;
 font-size:19px;
+margin:0;
 padding:10px;
 padding-left:40px;
-margin:10px;
-margin-right:0;
 border:none;
 box-shadow: inset 0 1px 2px #333;
 }
@@ -49,7 +68,6 @@ box-shadow: inset 0 1px 2px #333;
 position:absolute;
 left:0;
 background:#fff;
-margin:10px;
 width:128px;
 height:128px;
 background:#ffffff url('?cd') no-repeat center center;
@@ -90,7 +108,6 @@ bottom:0;
 left:0;
 right:0;
 background:#fff;
-margin:10px;
 overflow:auto;
 border: 1px solid #ccc;
 border-top:1px solid #a0a0a0 !important;
@@ -104,7 +121,6 @@ top:200px;
 
 #searchResults
 {
-margin-right:0;
 top:50px;
 }
 
@@ -127,7 +143,6 @@ min-height:32px;
 .item:hover
 {
 background:#f0f0f0 url('?grad') repeat-x;
-/*box-shadow: inset 0 1px 2px #333;*/
 }
 
 .item .artist

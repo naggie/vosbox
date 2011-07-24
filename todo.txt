@@ -9,3 +9,5 @@ on demand UI elements:
   * Album art on first add
   * 
 Try and keep this separate from CSS: eg, without the JS, all UI elements are shown
+
+normalise css: group common attributes, clever selectors
