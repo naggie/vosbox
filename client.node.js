@@ -84,7 +84,7 @@ search.showResults = function (results)
 
 		// attach a click event to each to add to playlist
 		$('#searchResults .item').click(function(){
-			$(this).clone().appendTo('#playlist');
+			$(this).clone().hide().fadeIn().appendTo('#playlist');
 			// remove the message if any
 			if ($('#playlist .message').length)
 				$('#playlist .message').empty();
