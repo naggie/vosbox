@@ -241,7 +241,7 @@ class httpResponse
 		 {
 			case 'js' :return 'text/javascript'; break;
 			case 'html':return 'text/html'; break;
-			case 'mp3':return 'audio/x-mp3'; break;
+			case 'mp3':return 'audio/mpeg'; break;
 			case 'flv':return 'video/x-flv'; break;
 			case 'ogg':return 'audio/ogg'; break;
 			case 'ogv':return 'video/ogg'; break;

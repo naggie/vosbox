@@ -67,11 +67,21 @@ search.showResults = function (results)
 	}
 
 	// reset results area
-	$('#searchResults').html('').scrollTop(0);
+	$('#searchResults').empty().scrollTop(0);
 
 	if (results.length)
+	{
+		// results found
 		for (var i in results)
 			search.addResult(results[i]);
+		// add instructions for playlist, if appropiate
+		if (!$('#playlist').children().size())
+		{
+			$('#playlist').html('<div class="message">Click a search result to add it to this playlist</div>');
+			$('#playlist .message').hide().fadeIn();
+		}
+	}
+
 	else
 		$('#searchResults').html('<div class="message">No results found</div>');
 }

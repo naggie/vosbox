@@ -80,7 +80,9 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 
 			$info['path'] = (string)$file;
 
-			
+			// type is audio -- make vosplayer able to play it
+			// and list it correctly
+			$info['type'] = 'audio';
 
 			$this->indexer->indexObject((object)$info);
 		}
