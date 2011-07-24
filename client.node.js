@@ -89,7 +89,7 @@ search.showResults = function (results)
 			// move the div to playlist, keeping metadata
 			// to copy, add .clone() to the chain and copy metadata
 			// manually 
-			$(this).hide().fadeIn().appendTo('#playlist');
+			$(this).clone().hide().fadeIn().appendTo('#playlist');
 
 			// remove the message if any
 			if ($('#playlist .message').length)
