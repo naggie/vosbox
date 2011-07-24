@@ -9,8 +9,11 @@ search.placeholder = 'Search for music...';
 
 $(document).ready(function()
 {
-//$('#left').css('right',0);
-$('body *').fadeIn();
+// Make the left (search) pane fill the screen and fade in, 
+// leaving the right pane visible, but behind
+$('#left,#searchIcon').css('right',0).fadeIn(function(){
+	$('#right').css('display','inherit');
+});
 
 if($.browser.msie && (parseInt($.browser.version) < 9) )
 {
@@ -82,6 +85,7 @@ search.showResults = function (results)
 		{
 			$('#playlist').html('<div class="message">Click a search result to add it to this playlist</div>');
 			$('#playlist .message').hide().fadeIn();
+			$('#left').animate({'right':'50%'});
 		}
 
 		// attach a click event to each to add to playlist
