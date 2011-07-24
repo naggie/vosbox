@@ -50,6 +50,7 @@ background:#ffffff url('?cd') no-repeat center center;
 border: 1px solid #ccc;
 border-top:1px solid #a0a0a0 !important;
 border-bottom:1px solid #ddd !important;
+/*box-shadow:inset 0 0 10px rgba(0,0,0,0.8);*/
 }
 
 #meta
