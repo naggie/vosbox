@@ -77,7 +77,7 @@ margin:20px;
 margin:0;
 }
 
-#searchResults, #playlist
+#searchResults, #playlist, #jplayer
 {
 position:absolute;
 bottom:0;
@@ -102,13 +102,20 @@ margin-right:0;
 top:50px;
 }
 
+#jplayer
+{
+top:138px;
+height:62px;
+background:none;
+}
+
 .item
 {
 background:#fafafa url('?grad') repeat-x;
 text-align:left;
 padding:10px;
 border-bottom:#ddd solid 1px;
-height:32px;
+min-height:32px;
 }
 
 .item:hover
@@ -142,7 +149,7 @@ top:8px;
 .message
 {
 position:absolute;
-right:0;left:0;top:240px;
+right:0;left:0;top:40%;
 text-align:center;
 color:gray;
 font-style:italic;
