@@ -63,6 +63,11 @@ height:108px;
 margin:20px;
 }
 
+#meta h2
+{
+margin:0;
+}
+
 #searchResults, #playlist
 {
 position:absolute;
