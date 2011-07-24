@@ -6,6 +6,12 @@ margin:0;
 background:#dddddd url('?grad') repeat-x;
 }
 
+body * 
+{
+/*For fade in after JS manipulation*/
+display:none;
+}
+
 
 #left
 {

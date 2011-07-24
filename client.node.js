@@ -9,6 +9,7 @@ search.placeholder = 'Search for music...';
 
 $(document).ready(function()
 {
+$('body *').fadeIn();
 
 if($.browser.msie && (parseInt($.browser.version) < 9) )
 {

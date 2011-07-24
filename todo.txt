@@ -2,3 +2,10 @@ parts of UI appear when required?
 support for moar file types, not just music or even media?
 Enqueue all button
 downloadable (json) playlists? -or- Shareable playlists? (keystore'd)
+
+
+on demand UI elements:
+  * Playlist on first successful search
+  * Album art on first add
+  * 
+Try and keep this separate from CSS: eg, without the JS, all UI elements are shown
