@@ -12,18 +12,17 @@
 <body>
 
 <div id="left">
-	<div id="albumArt"><img /></div>
-	<div id="playlist">
-	</div>
-</div>
-
-<div id="right">
-	<form><input id="search" type="text" value="" /></form>
+	<form><input id="search" type="text" /></form>
 	<div id="searchResults">
 		<div class="message">To begin, search in the box above</div>
 	</div>
 </div>
 
+<div id="right">
+	<div id="albumArt"><img /></div>
+	<div id="meta"><p>Song</p><p>Artist</p><p>Album</p></div>
+	<div id="playlist"></div>
+</div>
 
 <img id="searchIcon" src="?searchIcon" />
 

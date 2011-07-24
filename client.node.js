@@ -35,7 +35,7 @@ $('#search').click(function (){
 });
 
 // override form submit
-$('#right form').submit(function(){
+$('#left form').submit(function(){
 	search.do();
 	//$('#search').val('');
 	// remove the default page submit
