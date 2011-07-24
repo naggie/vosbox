@@ -30,6 +30,7 @@ $(document).bind('keydown', 'ctrl+f', function(){
 	$('#search').focus().val('');
 });
 
+// clear on focus TODO -- focus, not click
 $('#search').click(function (){
 	$(this).val('');
 });
@@ -80,6 +81,14 @@ search.showResults = function (results)
 			$('#playlist').html('<div class="message">Click a search result to add it to this playlist</div>');
 			$('#playlist .message').hide().fadeIn();
 		}
+
+		// attach a click event to each to add to playlist
+		$('#searchResults .item').click(function(){
+			$(this).clone().appendTo('#playlist');
+			// remove the message if any
+			if ($('#playlist .message').length)
+				$('#playlist .message').empty();
+		});
 	}
 
 	else
