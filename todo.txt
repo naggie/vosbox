@@ -15,3 +15,8 @@ drag and drop items to playlist
 label 'now playing' and 'playlist' areas?
 
 did you mean automatic search
+
+Rename left to searcher, right to player
+
+
+switch to SVG icons?
