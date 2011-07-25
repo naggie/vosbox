@@ -128,9 +128,14 @@ border-bottom:#ddd solid 1px;
 min-height:32px;
 }
 
-.item:hover
+.item:hover,.playing
 {
 background:#f0f0f0 url('?grad') repeat-x;
+}
+
+.playing
+{
+box-shadow: inset 0 1px 2px #333;
 }
 
 .item .artist
@@ -154,11 +159,6 @@ font-size:12px;
 float:right;
 font-style:italic;
 color:gray;
-}
-
-.playing
-{
-background:#dddddd;
 }
 
 #searchIcon
