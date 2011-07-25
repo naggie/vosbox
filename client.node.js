@@ -142,8 +142,10 @@ player.enqueue = function ()
 		item.each(player.play);
 	}
 
-	// scroll to the end of the list
-	$("#playlist").scrollTop($("#playlist").attr("scrollHeight"));
+	// scroll to the end of the list, clearing any conflicting animation
+	// currently running
+	var length = $("#playlist").attr("scrollHeight");
+	$("#playlist").stop().animate({scrollTop:length});
 }
 
 // play an item on the playlist (as an element in 'this' context)
