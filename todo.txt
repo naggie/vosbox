@@ -17,3 +17,5 @@ drag and drop items to playlist
 label 'now playing' and 'playlist' areas
 
 meta to now playing
+
+did you mean automatic search

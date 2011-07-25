@@ -95,7 +95,7 @@ search.showResults = function (results)
 search.addResult = function (result)
 {
 	// add the HTML
-	$('#searchResults').append('<div class="item">'+
+	$('#searchResults').append('<div class="item"><div class="state"></div>'+
 	'<div class="artist">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
 	'<div class="context">'+result.album+'</div></div>'
 	);
@@ -157,6 +157,6 @@ player.play = function ()
 	$('#meta .artist').text(meta.artist);
 
 	// highlight the item as currently playing, clearing others
-	$('#playlist .item').removeClass('playing');
-	$(this).addClass('playing');
+	$('#playlist .item').removeClass('playing').children().filter('.state').empty();
+	$(this).addClass('playing').children().filter('.state').text('Now playing');
 }

@@ -149,6 +149,13 @@ float:left;
 font-size:12px;
 }
 
+.item .state
+{
+float:right;
+font-style:italic;
+color:gray;
+}
+
 .playing
 {
 background:#dddddd;
