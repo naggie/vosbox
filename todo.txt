@@ -15,3 +15,5 @@ make a buttom to remove an item from the playlist
 drag and drop items to playlist
 
 label 'now playing' and 'playlist' areas
+
+meta to now playing
