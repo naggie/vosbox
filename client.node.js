@@ -11,42 +11,50 @@ search.placeholder = 'Search for music...';
 
 $(document).ready(function()
 {
-// make the player vanish instantly, before fading everything in
-player.init();
+	// make the player vanish instantly, before fading everything in
+	player.init();
 
-if($.browser.msie && (parseInt($.browser.version) < 9) )
-{
-	alert('Update your browser, please');
-	return;
-}
+	if($.browser.msie && (parseInt($.browser.version) < 9) )
+	{
+		alert('Update your browser, please');
+		return;
+	}
 
-$('#search').val(search.placeholder);
+	$('#search').val(search.placeholder);
 
-// search on space
-/*$('#search').bind('keydown', 'space', function(){
-	search.do();
-	return true;
-});
-*/
+	// search on space
+	/*$('#search').bind('keydown', 'space', function(){
+		search.do();
+		return true;
+	});
+	*/
 
-// ctrl+f to search
-$(document).bind('keydown', 'ctrl+f', function(){
-	$('#search').focus().val('');
-});
+	// ctrl+f to search
+	$(document).bind('keydown', 'ctrl+f', function(){
+		$('#search').focus().val('');
+	});
 
-// clear on focus TODO -- focus, not click
-$('#search').click(function (){
-	$(this).val('');
-});
+	// clear on focus TODO -- focus, not click
+	$('#search').click(function (){
+		$(this).val('');
+	});
 
-// override form submit
-$('#left form').submit(function(){
-	search.do();
-	//$('#search').val('');
-	// remove the default page submit
-	return false;
-});
+	// override form submit
+	$('#left form').submit(function(){
+		search.do();
+		//$('#search').val('');
+		// remove the default page submit
+		return false;
+	});
 
+	// controls: events
+	$('#next').click(function(){
+		$('#playlist .playing').next().each(player.play);
+	});
+
+	$('#prev').click(function(){
+		$('#playlist .playing').prev().each(player.play);
+	});
 });
 
 
