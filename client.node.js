@@ -1,5 +1,6 @@
 /*
 TODO: full keyboard interface support (arrows to nav results etc)
+TODO: split up more into methods, using classes perhaps
 */
 
 search = new Object();
@@ -86,8 +87,10 @@ search.showResults = function (results)
 
 		// attach a click event to each to add to playlist
 		$('#searchResults .item').click(function(){
-			// copy the div to playlist, keeping metadata
-			$(this).clone(1).hide().fadeIn().appendTo('#playlist');
+			// copy the div to playlist, keeping metadata,
+			// making onclick event play it, rather than
+			// adding it to the playlist. (nothing for now)
+			$(this).clone(1).hide().fadeIn().unbind('click').appendTo('#playlist');
 
 			// remove the message if any
 			if ($('#playlist .message').length)
