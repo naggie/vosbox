@@ -128,19 +128,18 @@ player.reveal = function ()
 // enqueue an item (as an element in 'this' context)
 player.enqueue = function ()
 {
-	// copy the div to playlist, keeping metadata,
-	// making onclick event play it, rather than
-	// adding it to the playlist again
-	$(this).clone(1).unbind('click').click(player.play).hide().fadeIn().appendTo('#playlist');
+	// create a clone of the item, replacing click event, fading into playlist
+	// preserving data
+	item = $(this).clone(1).unbind('click').click(player.play).hide().fadeIn().appendTo('#playlist');
 
 	// remove the message in playlist, if playlist is empty
 	if ($('#playlist .message').length)
 	{
 		// remove message
-		$('#playlist .message').empty();
+		$('#playlist .message').remove();
 
 		// play the item on first add
-		//player.play();
+		item.each(player.play);
 	}
 
 	// scroll to the end of the list
@@ -150,11 +149,12 @@ player.enqueue = function ()
 // play an item on the playlist (as an element in 'this' context)
 player.play = function ()
 {
-	// update the meta area with album art etc
+	// update the meta area with album art etc. Forcing not-null
+	// so fields are always updated
 	var meta = $(this).data('meta');
-	$('#meta .title').text(meta.title);
-	$('#meta .album').text(meta.album);
-	$('#meta .artist').text(meta.artist);
+	$('#meta .title').text(String(meta.title));
+	$('#meta .album').text(String(meta.album));
+	$('#meta .artist').text(String(meta.artist));
 
 	// highlight the item as currently playing, clearing others
 	$('#playlist .item').removeClass('playing').children().filter('.state').empty();
