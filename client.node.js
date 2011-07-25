@@ -1,19 +1,18 @@
 /*
 TODO: full keyboard interface support (arrows to nav results etc)
 TODO: split up more into methods, using classes perhaps
+TODO: set an attribute of player to show if visible
 */
 
 search = new Object();
+player = new Object();
+
 search.placeholder = 'Search for music...';
 
 $(document).ready(function()
 {
-// on demand UI:
-// Make the left (search) pane fill the screen and fade in, 
-// leaving the right pane visible, but behind
-$('#left,#searchIcon').css('right',0).fadeIn(function(){
-	$('#right').css('display','inherit');
-});
+// make the player vanish instantly, before fading everything in
+player.init();
 
 if($.browser.msie && (parseInt($.browser.version) < 9) )
 {
@@ -81,24 +80,12 @@ search.showResults = function (results)
 		for (var i in results)
 			search.addResult(results[i]);
 
-		// show playlist if required
-//		if ($('#left').css('right') == '100%')
-			$('#left').animate({'right':'50%'});
+		// make sure the player is there.
+		if(!player.visible)
+			player.reveal();
 
 		// attach a click event to each to add to playlist
-		$('#searchResults .item').click(function(){
-			// copy the div to playlist, keeping metadata,
-			// making onclick event play it, rather than
-			// adding it to the playlist. (nothing for now)
-			$(this).clone(1).hide().fadeIn().unbind('click').appendTo('#playlist');
-
-			// remove the message if any
-			if ($('#playlist .message').length)
-				$('#playlist .message').empty();
-
-			// scroll to the end of the list
-			$("#playlist").scrollTop($("#playlist").attr("scrollHeight"));
-		});
+		$('#searchResults .item').click(player.enqueue);
 	}
 
 	else
@@ -115,4 +102,51 @@ search.addResult = function (result)
 	// ...attaching to it the object itself
 	// by first selecting the element just created...
 	$('#searchResults div:last-child').data('meta',result);
+}
+
+// modify CSS to make search pane obscure player, fading everything in
+// without player visible. This allows CSS to define the full view,
+// using pure JS to handle the dynamic UI.
+player.init = function()
+{
+	// on demand UI:
+	// Make the left (search) pane fill the screen and fade in, 
+	// leaving the right pane visible, but behind
+	$('#left,#searchIcon').css('right',0).fadeIn(function(){
+		$('#right').css('display','inherit');
+	});
+	player.visible = false;
+}
+
+// animate the search panel (left) to reveal the player
+player.reveal = function ()
+{
+	$('#left').animate({'right':'50%'});
+	player.visible = true;
+}
+
+// enqueue an item (as an element in 'this' context)
+player.enqueue = function ()
+{
+	// copy the div to playlist, keeping metadata,
+	// making onclick event play it, rather than
+	// adding it to the playlist. (nothing for now)
+	$(this).clone(1).hide().fadeIn().unbind('click').appendTo('#playlist');
+
+	// remove the message if any
+	if ($('#playlist .message').length)
+		$('#playlist .message').empty();
+
+	// scroll to the end of the list
+	$("#playlist").scrollTop($("#playlist").attr("scrollHeight"));
+}
+
+// play an item on the playlist (as an element in 'this' context)
+player.play = function ()
+{
+	// update the meta area with album art etc
+	var meta = $(this).data('meta');
+	$('#meta .title').text(meta.title);
+	$('#meta .album').text(meta.album);
+	$('#meta .artist').text(meta.artist);
 }

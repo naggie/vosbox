@@ -14,7 +14,7 @@
 <div id="right">
 	<div id="meta">
 		<div id="albumArt"><img /></div>
-		<h2></h2><p></p><p></p>
+		<h2 class="title"></h2><p class="album"></p><p class="artist"></p>
 	</div>
 	<div id="jplayer"></div>
 	<div id="playlist">
