@@ -168,5 +168,6 @@ player.play = function ()
 		- $('#playlist').offset().top
 		- $('#playlist').height()/2;
 
-	$('#playlist').scrollTop(offset);
+	//$('#playlist').scrollTop(offset);
+	$('#playlist').animate({scrollTop:offset});
 }
