@@ -150,6 +150,11 @@ float:left;
 font-size:12px;
 }
 
+.playing
+{
+background:#dddddd;
+}
+
 #searchIcon
 {
 position:absolute;

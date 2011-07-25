@@ -101,7 +101,7 @@ search.addResult = function (result)
 	);
 	// ...attaching to it the object itself
 	// by first selecting the element just created...
-	$('#searchResults div:last-child').data('meta',result);
+	$('#searchResults .item:last-child').data('meta',result);
 }
 
 // modify CSS to make search pane obscure player, fading everything in
@@ -130,12 +130,18 @@ player.enqueue = function ()
 {
 	// copy the div to playlist, keeping metadata,
 	// making onclick event play it, rather than
-	// adding it to the playlist. (nothing for now)
-	$(this).clone(1).hide().fadeIn().unbind('click').appendTo('#playlist');
+	// adding it to the playlist again
+	$(this).clone(1).unbind('click').click(player.play).hide().fadeIn().appendTo('#playlist');
 
-	// remove the message if any
+	// remove the message in playlist, if playlist is empty
 	if ($('#playlist .message').length)
+	{
+		// remove message
 		$('#playlist .message').empty();
+
+		// play the item on first add
+		//player.play();
+	}
 
 	// scroll to the end of the list
 	$("#playlist").scrollTop($("#playlist").attr("scrollHeight"));
@@ -149,4 +155,8 @@ player.play = function ()
 	$('#meta .title').text(meta.title);
 	$('#meta .album').text(meta.album);
 	$('#meta .artist').text(meta.artist);
+
+	// highlight the item as currently playing, clearing others
+	$('#playlist .item').removeClass('playing');
+	$(this).addClass('playing');
 }
