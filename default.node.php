@@ -12,11 +12,11 @@
 <body>
 
 <div id="right">
-	<div id="meta">
+	<div id="nowPlaying">
 		<div id="albumArt"><img /></div>
 		<h2 class="title"></h2><p class="album"></p><p class="artist"></p>
 	</div>
-	<div id="jplayer"></div>
+	<div id="controls"></div>
 	<div id="playlist">
 		<div class="message">Click a search result to add it to this playlist</div>
 	</div>

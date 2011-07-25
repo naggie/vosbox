@@ -3,19 +3,15 @@ Enqueue all button
 downloadable (json) playlists? -or- Shareable playlists? (keystore'd)
 
 
-normalise css: group common attributes, clever selectors
-
 
 jqueryUI: make playlist sortable
 
-right pane ovely visible when serach returns audio files
+right pane ovely visible *when serach returns audio files*
 
 make a buttom to remove an item from the playlist
 
 drag and drop items to playlist
 
-label 'now playing' and 'playlist' areas
-
-meta to now playing
+label 'now playing' and 'playlist' areas?
 
 did you mean automatic search

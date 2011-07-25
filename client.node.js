@@ -154,9 +154,9 @@ player.play = function ()
 	// update the meta area with album art etc. Forcing not-null
 	// so fields are always updated
 	var meta = $(this).data('meta');
-	$('#meta .title').text(String(meta.title));
-	$('#meta .album').text(String(meta.album));
-	$('#meta .artist').text(String(meta.artist));
+	$('#nowPlaying .title').text(String(meta.title));
+	$('#nowPlaying .album').text(String(meta.album));
+	$('#nowPlaying .artist').text(String(meta.artist));
 
 	// highlight the item as currently playing, clearing others
 	$('#playlist .item').removeClass('playing').children().filter('.state').empty();

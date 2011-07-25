@@ -67,7 +67,7 @@ height:100%;
 background:rgba(255,255,255,0.8);
 }
 
-#meta
+#nowPlaying
 {
 position:absolute;
 }
@@ -86,12 +86,12 @@ overflow:hidden;
 float:left;
 }
 
-#meta h2
+#nowPlaying h2
 {
 margin-top:10px;
 }
 
-#searchResults, #playlist, #jplayer
+#searchResults, #playlist, #controls
 {
 position:absolute;
 bottom:0;
@@ -112,7 +112,7 @@ top:200px;
 top:50px;
 }
 
-#jplayer
+#controls
 {
 top:138px;
 height:62px;
