@@ -191,7 +191,9 @@ player.play = function ()
 		- $('#playlist').height()/4;
 
 	//$('#playlist').scrollTop(offset);
-	$('#playlist').animate({scrollTop:offset});
+	// animate to offset, clearing any other previous, possibly conflicting
+	// animations
+	$('#playlist').stop().animate({scrollTop:offset});
 
 	// play the file
 	player.audio.setAttribute('src', '?node=download&id='+meta.id);
