@@ -159,4 +159,14 @@ player.play = function ()
 	// highlight the item as currently playing, clearing others
 	$('#playlist .item').removeClass('playing').children().filter('.state').empty();
 	$(this).addClass('playing').children().filter('.state').text('Now playing');
+
+	// scroll the item on the playlist into view (around half way down list)
+	// find position relative to the top of the list, remove half the
+	// height of the list.
+	var offset = $('#playlist .playing').offset().top 
+		+ $('#playlist').scrollTop() 
+		- $('#playlist').offset().top
+		- $('#playlist').height()/2;
+
+	$('#playlist').scrollTop(offset);
 }
