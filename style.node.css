@@ -2,7 +2,7 @@ body
 {
 font-family:arial;
 margin:0;
-background:#dddddd url('?grad') repeat-x;
+background:#eeeeee url('?grad') repeat-x;
 color:#222;
 }
 
@@ -18,7 +18,7 @@ display:none;
 position:absolute;
 left:0;right:50%;
 top:0;bottom:0;
-background:#dddddd url('?grad') repeat-x;
+background:#eeeeee url('?grad') repeat-x;
 }
 
 #left > *,#right > *
