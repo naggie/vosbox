@@ -2,6 +2,7 @@
 TODO: full keyboard interface support (arrows to nav results etc)
 TODO: split up more into methods, using classes perhaps
 TODO: set an attribute of player to show if visible
+TODO: oiplayer?
 */
 
 search = new Object();
@@ -45,15 +46,6 @@ $(document).ready(function()
 		//$('#search').val('');
 		// remove the default page submit
 		return false;
-	});
-
-	// controls: events
-	$('#next').click(function(){
-		$('#playlist .playing').next().each(player.play);
-	});
-
-	$('#prev').click(function(){
-		$('#playlist .playing').prev().each(player.play);
 	});
 });
 
@@ -103,7 +95,7 @@ search.showResults = function (results)
 search.addResult = function (result)
 {
 	// add the HTML
-	$('#searchResults').append('<div class="item"><div class="state"></div>'+
+	$('#searchResults').append('<div class="item">'+
 	'<div class="artist">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
 	'<div class="context">'+result.album+'</div></div>'
 	);
@@ -117,13 +109,33 @@ search.addResult = function (result)
 // using pure JS to handle the dynamic UI.
 player.init = function()
 {
+	player.audio = document.createElement('audio');
+
 	// on demand UI:
 	// Make the left (search) pane fill the screen and fade in, 
 	// leaving the right pane visible, but behind
 	$('#left,#searchIcon').css('right',0).fadeIn(function(){
 		$('#right').css('display','inherit');
 	});
+
+	// TODO: add a watcher to set the progress bar
+
 	player.visible = false;
+
+	// controls: events
+	$('#next').click(player.next);
+	$('#prev').click(player.prev);
+
+	// if not searching, up and down are prev and next
+	$('*').not('#search').bind('keydown','down',player.next);
+	$('*').not('#search').bind('keydown','up',player.prev);
+	$('*').not('#search').bind('keydown','space',player.pause);
+
+	$('#stop').click(function(){
+		// pause it, resetting counter
+		player.audio.pause();
+		player.audio.currentTime = 0;
+	});
 }
 
 // animate the search panel (left) to reveal the player
@@ -168,7 +180,7 @@ player.play = function ()
 
 	// highlight the item as currently playing, clearing others
 	$('#playlist .item').removeClass('playing').children().filter('.state').empty();
-	$(this).addClass('playing').children().filter('.state').text('Now playing');
+	$(this).addClass('playing');//.children().filter('.state').text('Now playing');
 
 	// scroll the item on the playlist into view (around half way down list)
 	// find position relative to the top of the list, remove half the
@@ -180,4 +192,30 @@ player.play = function ()
 
 	//$('#playlist').scrollTop(offset);
 	$('#playlist').animate({scrollTop:offset});
+
+	// play the file
+	player.audio.setAttribute('src', '?node=download&id='+meta.id);
+	player.audio.play();
+}
+
+// select the next song, play if playing already, returns false
+// so can be used to override normal events
+player.next = function()
+{
+	$('#playlist .playing').next().each(player.play);
+	return false;
+}
+
+// select the previous song, play if playing already, returns false
+// so can be used to override normal events
+player.prev = function()
+{
+	$('#playlist .playing').prev().each(player.play);
+	return false;
+}
+
+player.playPause = function()
+{
+	player.audio.pause();
+	return false;
 }

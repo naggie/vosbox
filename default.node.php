@@ -17,6 +17,7 @@
 		<h2 class="title"></h2><p class="album"></p><p class="artist"></p>
 	</div>
 
+	<audio></audio>
 	<div id="controls">
 		<div id="prev"><img src="?prev" /></div>
 		<div id="play"><img src="?play" /></div>

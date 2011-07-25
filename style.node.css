@@ -91,7 +91,7 @@ float:left;
 margin-top:10px;
 }
 
-#searchResults, #playlist, #controls
+#searchResults, #playlist
 {
 position:absolute;
 bottom:0;
@@ -114,9 +114,9 @@ top:50px;
 
 #controls
 {
+position:absolute;
 top:138px;
 height:32px;
-background:#eeeeee url('?grad') repeat-x;
 overflow:hidden;
 padding-left:10px;
 padding-right:10px;
