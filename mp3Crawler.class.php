@@ -38,6 +38,8 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 
 	protected $indexer;
 
+	public $count = 0;
+
 	// instantiate the class given an instance of a hydratag indexer
 	public function __construct(indexer $indexer)
 	{
@@ -92,6 +94,8 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 			$info['type'] = 'audio';
 
 			$this->indexer->indexObject((object)$info);
+
+			$count++;
 		}
 	}
 
