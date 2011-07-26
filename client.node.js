@@ -123,7 +123,11 @@ player.init = function()
 	// gets to the end and advance the playlist
 	window.setInterval(function(){
 		// calculate percentage of time passed on current song
-		var percent = Math.round(100*player.audio.currentTime/player.audio.duration);
+		var percent = 100*player.audio.currentTime/player.audio.duration;
+
+		// set progress
+		$('#controls .progress .bar').css('width',percent+'%');
+
 		// at the end?
 		if ((player.audio.currentTime == player.audio.duration) && player.state == 'playing')
 			player.next();

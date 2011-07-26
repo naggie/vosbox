@@ -24,7 +24,7 @@
 		<!--- <div id="pause"><img src="?pause" /></div> --->
 		<div id="next"><img src="?next" /></div>
 		<div id="stop"><img src="?stop" /></div>
-		<div id="progress"><div class="bar"></div></div>
+		<div class="progress"><div class="bar"></div></div>
 	</div>
 
 	<div id="playlist">

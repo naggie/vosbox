@@ -132,6 +132,33 @@ float:left;
 opacity:0.5;
 }
 
+#controls .progress
+{
+position:absolute;
+left:138px;
+right:0;
+background:white;
+margin-top:11px;
+margin-left:5px;
+height:10px;
+overflow:hidden;
+border: 1px solid #ccc;
+border-top:1px solid #a0a0a0 !important;
+border-bottom:1px solid #ddd !important;
+}
+
+#controls .progress:hover
+{
+opacity:1.0;
+}
+
+#controls .progress .bar
+{
+width:0;
+height:100%;
+background:gray url('?grad') repeat-x;
+}
+
 .item
 {
 background:#fcfcfc url('?grad') repeat-x;
