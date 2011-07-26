@@ -72,7 +72,14 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 				echo "Adding $file (no ID3 tag, metadata guessed)\n";
 			}
 			else
+			{
+				// hash ID from ID3 tag only. That way,
+				// it limits the number of clones
+				// in the database by overwriting
+				// and previous entry
+				$info['id'] = md5(serialize($info));
 				echo "Adding $file\n";
+			}
 
 			// sanitise the metadata
 			foreach ($info as &$attribute)

@@ -14,7 +14,10 @@ drag and drop items to playlist
 
 did you mean automatic search
 
+check for codec, throw exception or something if not got
 
 switch to SVG icons?
 
 progress click to seek
+
+albumn art (configure crawler)
