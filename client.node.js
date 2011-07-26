@@ -127,9 +127,13 @@ player.init = function()
 	$('#prev').click(player.prev);
 
 	// if not searching, up and down are prev and next
-	$('*').not('#search').bind('keydown','down',player.next);
-	$('*').not('#search').bind('keydown','up',player.prev);
+	$('*').not('#search').bind('keydown','right',player.next);
+	$('*').not('#search').bind('keydown','left',player.prev);
 	$('*').not('#search').bind('keydown','space',player.pause);
+//	$('*').not('#search').bind('keydown','up',player.hoverNext);
+//	$('*').not('#search').bind('keydown','down',player.hoverPrev);
+//	$('*').not('#search').bind('keydown','return',player.select);
+
 
 	$('#stop').click(function(){
 		// pause it, resetting counter
