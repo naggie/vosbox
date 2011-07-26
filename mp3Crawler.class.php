@@ -61,19 +61,7 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 			if (!preg_match('/\.mp3$/i',$file))
 				continue;
 
-			$info = self::getID3($file);
-			if (!$info)
-			{
-				// guess the title and album from the
-				// filepath
-				$info = array();
-				$bits = explode('/',$file);
-				$info['title'] = array_pop($bits);
-				$info['album'] = array_pop($bits);
-				$info['artist'] = array_pop($bits);
-				echo "Adding $file (no ID3 tag, metadata guessed)\n";
-			}
-			else
+			if ($info = self::getID3($file))
 			{
 				// hash ID from ID3 tag only. That way,
 				// it limits the number of clones
@@ -82,6 +70,8 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 				$info['id'] = md5(serialize($info));
 				echo "Adding $file\n";
 			}
+			else
+				continue;
 
 			// sanitise the metadata
 			foreach ($info as &$attribute)
@@ -95,7 +85,7 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 
 			$this->indexer->indexObject((object)$info);
 
-			$count++;
+			$this->count++;
 		}
 	}
 
