@@ -136,6 +136,19 @@ player.init = function()
 	$('#prev').click(player.prev);
 	$('#pause,#play').click(player.playPause);
 
+	// seek
+	$('#controls .progress').click(function(e){
+		// translate X click pos to time in song
+		var offset = e.pageX - $(this).offset().left;
+		var proportion = offset/$(this).width();
+		var newTime = proportion*player.audio.duration;
+
+		// set the new time. Note that, for some unknown reason,
+		// this does not always work...
+		player.audio.currentTime = newTime;
+	});
+	
+
 	// if not searching, up and down are prev and next
 	$('*').not('#search').bind('keydown','right',player.next);
 	$('*').not('#search').bind('keydown','left',player.prev);
@@ -217,7 +230,7 @@ player.select = function ()
 		player.play();
 }
 
-// play the item currently selected on the playlist
+// play the item currently selected on the playlist, from start
 player.play = function ()
 {
 	player.state = 'playing';
