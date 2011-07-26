@@ -110,6 +110,7 @@ search.addResult = function (result)
 player.init = function()
 {
 	player.audio = document.createElement('audio');
+	player.state = 'stopped';
 
 	// on demand UI:
 	// Make the left (search) pane fill the screen and fade in, 
@@ -118,7 +119,15 @@ player.init = function()
 		$('#right').css('display','inherit');
 	});
 
-	// TODO: add a watcher to set the progress bar
+	// TODO: add a watcher to set the progress bar, look until the player
+	// gets to the end and advance the playlist
+	window.setInterval(function(){
+		// calculate percentage of time passed on current song
+		var percent = Math.round(100*player.audio.currentTime/player.audio.duration);
+		// at the end?
+		if ((player.audio.currentTime == player.audio.duration) && player.state == 'playing')
+			player.next();
+	},100);
 
 	player.visible = false;
 
@@ -172,9 +181,17 @@ player.enqueue = function ()
 	$("#playlist").stop().animate({scrollTop:length});
 }
 
+// select item on the playlist, playing if appropiate
+//  (as an element in 'this' context)
+player.select = function ()
+{
+
+}
+
 // play an item on the playlist (as an element in 'this' context)
 player.play = function ()
 {
+	player.state = 'playing';
 	// update the meta area with album art etc. Forcing not-null
 	// so fields are always updated
 	var meta = $(this).data('meta');
@@ -225,3 +242,4 @@ player.playPause = function()
 	player.audio.pause();
 	return false;
 }
+
