@@ -14,4 +14,6 @@ $c = new mp3Crawler($i);
 $i->flush();
 $c->crawl($argv[1]);
 
+echo "\n$c->count files indexed\n";
+
 ?>
