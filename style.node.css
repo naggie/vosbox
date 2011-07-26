@@ -115,11 +115,10 @@ top:50px;
 #controls
 {
 position:absolute;
-top:138px;
+top:134px;
 height:32px;
 overflow:hidden;
-padding-left:10px;
-padding-right:10px;
+padding-left:4px;
 }
 
 
