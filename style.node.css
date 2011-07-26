@@ -13,7 +13,7 @@ display:none;
 }
 
 
-#left
+#searcher
 {
 position:absolute;
 left:0;right:50%;
@@ -21,7 +21,7 @@ top:0;bottom:0;
 background:#eeeeee url('?grad') repeat-x;
 }
 
-#left > *,#right > *
+#searcher > *,#player > *
 {
 margin:10px;
 left:0;
@@ -29,7 +29,7 @@ right:0;
 }
 
 
-#right
+#player
 {
 position:absolute;
 left:50%;right:0;
@@ -37,12 +37,12 @@ top:0;bottom:0;
 overflow:hidden;
 }
 
-#right > *
+#player > *
 {
 margin-left:0;
 }
 
-#left form
+#searcher form
 {
 position:absolute;
 }

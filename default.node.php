@@ -11,7 +11,7 @@
 
 <body>
 
-<div id="right">
+<div id="player">
 	<div id="nowPlaying">
 		<div id="albumArt"><img /></div>
 		<h2 class="title"></h2><p class="album"></p><p class="artist"></p>
@@ -32,7 +32,7 @@
 	</div>
 </div>
 
-<div id="left">
+<div id="searcher">
 	<form><input id="search" type="text" /></form>
 	<div id="searchResults">
 		<div class="message">To begin, search in the box above</div>

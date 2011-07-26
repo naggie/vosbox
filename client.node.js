@@ -38,7 +38,7 @@ searcher.init = function()
 	});
 
 	// override form submit
-	$('#left form').submit(searcher.search);
+	$('#searcher form').submit(searcher.search);
 
 }
 
@@ -114,9 +114,9 @@ player.init = function()
 	// on demand UI:
 	// Make the left (search) pane fill the screen and fade in, 
 	// leaving the right pane visible, but behind
-	// TODO: make search icon part of #left
-	$('#left,#searchIcon').css('right',0).fadeIn(function(){
-		$('#right').css('display','inherit');
+	// TODO: make search icon part of #searcher
+	$('#searcher,#searchIcon').css('right',0).fadeIn(function(){
+		$('#player').css('display','inherit');
 	});
 
 	// add a watcher to set the progress bar, look until the player
@@ -156,7 +156,7 @@ player.init = function()
 // animate the search panel (left) to reveal the player
 player.reveal = function ()
 {
-	$('#left').animate({'right':'50%'});
+	$('#searcher').animate({'right':'50%'});
 	player.visible = true;
 }
 
