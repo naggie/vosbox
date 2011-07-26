@@ -107,7 +107,7 @@ class sqliteIndexer extends indexer
 		$object = "'".SQLite3::escapeString($object)."'";
 
 
-		return $this->db->exec("INSERT INTO objects VALUES ($id,$object)");
+		return $this->db->exec("INSERT OR REPLACE INTO objects VALUES ($id,$object)");
 	}
 
 	public function depreciateObject($id)
