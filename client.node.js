@@ -1,7 +1,5 @@
 /*
 TODO: full keyboard interface support (arrows to nav results etc)
-TODO: split up more into methods, using classes perhaps
-TODO: set an attribute of player to show if visible
 TODO: oiplayer?
 */
 
@@ -119,19 +117,17 @@ player.init = function()
 		$('#player').css('display','inherit');
 	});
 
-	// add a watcher to set the progress bar, look until the player
-	// gets to the end and advance the playlist
+	// add a watcher to set the progress bar
 	window.setInterval(function(){
 		// calculate percentage of time passed on current song
 		var percent = 100*player.audio.currentTime/player.audio.duration;
 
 		// set progress
 		$('#controls .progress .bar').css('width',percent+'%');
-
-		// at the end?
-		if ((player.audio.currentTime == player.audio.duration) && player.state == 'playing')
-			player.next();
 	},100);
+
+	// add event to advance the playlist on song completion
+	player.audio.addEventListener('ended',player.next);
 
 	player.visible = false;
 
