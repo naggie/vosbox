@@ -21,7 +21,7 @@
 	<div id="controls">
 		<div id="prev"><img src="?prev" /></div>
 		<div id="play"><img src="?play" /></div>
-		<!--- <div id="pause"><img src="?pause" /></div> --->
+		<div id="pause"><img src="?pause" /></div>
 		<div id="next"><img src="?next" /></div>
 		<div id="stop"><img src="?stop" /></div>
 		<div class="progress"><div class="bar"></div></div>

@@ -20,3 +20,5 @@ Rename left to searcher, right to player
 
 
 switch to SVG icons?
+
+progress click to seek

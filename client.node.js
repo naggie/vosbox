@@ -5,30 +5,27 @@ TODO: set an attribute of player to show if visible
 TODO: oiplayer?
 */
 
-search = new Object();
+searcher = new Object();
 player = new Object();
-
-search.placeholder = 'Search for music...';
 
 $(document).ready(function()
 {
-	// make the player vanish instantly, before fading everything in
-	player.init();
-
 	if($.browser.msie && (parseInt($.browser.version) < 9) )
 	{
 		alert('Update your browser, please');
 		return;
 	}
 
-	$('#search').val(search.placeholder);
+	// make the player vanish instantly, before fading everything in
+	player.init();
+	searcher.init();
+});
 
-	// search on space
-	/*$('#search').bind('keydown', 'space', function(){
-		search.do();
-		return true;
-	});
-	*/
+searcher.init = function()
+{
+	searcher.placeholder = 'Search for music...';
+
+	$('#search').val(searcher.placeholder);
 
 	// ctrl+f to search
 	$(document).bind('keydown', 'ctrl+f', function(){
@@ -41,16 +38,12 @@ $(document).ready(function()
 	});
 
 	// override form submit
-	$('#left form').submit(function(){
-		search.do();
-		//$('#search').val('');
-		// remove the default page submit
-		return false;
-	});
-});
+	$('#left form').submit(searcher.search);
+
+}
 
 
-search.do = function()
+searcher.search = function()
 {
 	$.ajax(
 	{
@@ -58,12 +51,15 @@ search.do = function()
 		url: "?node=search",
 		dataType: 'json',
 		cache: false,
-		success: search.showResults
+		success: searcher.showResults
 	}); 
+
+	// when used as a callback, replace the default action
+	return false;
 }
 
 // given an array of nodes, display them
-search.showResults = function (results)
+searcher.showResults = function (results)
 {
 	if (results.error)
 	{
@@ -78,7 +74,7 @@ search.showResults = function (results)
 	{
 		// results found
 		for (var i in results)
-			search.addResult(results[i]);
+			searcher.addResult(results[i]);
 
 		// make sure the player is there.
 		if(!player.visible)
@@ -92,7 +88,7 @@ search.showResults = function (results)
 		$('#searchResults').html('<div class="message">No results found</div>');
 }
 
-search.addResult = function (result)
+searcher.addResult = function (result)
 {
 	// add the HTML
 	$('#searchResults').append('<div class="item">'+
@@ -112,14 +108,18 @@ player.init = function()
 	player.audio = document.createElement('audio');
 	player.state = 'stopped';
 
+	// remove the pause button
+	//$('#pause').hide();
+
 	// on demand UI:
 	// Make the left (search) pane fill the screen and fade in, 
 	// leaving the right pane visible, but behind
+	// TODO: make search icon part of #left
 	$('#left,#searchIcon').css('right',0).fadeIn(function(){
 		$('#right').css('display','inherit');
 	});
 
-	// TODO: add a watcher to set the progress bar, look until the player
+	// add a watcher to set the progress bar, look until the player
 	// gets to the end and advance the playlist
 	window.setInterval(function(){
 		// calculate percentage of time passed on current song
@@ -138,21 +138,19 @@ player.init = function()
 	// controls: events
 	$('#next').click(player.next);
 	$('#prev').click(player.prev);
+	$('#pause,#play').click(player.playPause);
 
 	// if not searching, up and down are prev and next
 	$('*').not('#search').bind('keydown','right',player.next);
 	$('*').not('#search').bind('keydown','left',player.prev);
-	$('*').not('#search').bind('keydown','space',player.pause);
+	$('*').not('#search').bind('keydown','space',player.playPause);
 //	$('*').not('#search').bind('keydown','up',player.hoverNext);
 //	$('*').not('#search').bind('keydown','down',player.hoverPrev);
 //	$('*').not('#search').bind('keydown','return',player.select);
 
 
-	$('#stop').click(function(){
-		// pause it, resetting counter
-		player.audio.pause();
-		player.audio.currentTime = 0;
-	});
+	$('#stop').click(player.stop);
+	$(document).bind('keydown','esc',player.stop);
 }
 
 // animate the search panel (left) to reveal the player
@@ -167,7 +165,7 @@ player.enqueue = function ()
 {
 	// create a clone of the item, replacing click event, fading into playlist
 	// preserving data
-	item = $(this).clone(1).unbind('click').click(player.play).hide().fadeIn().appendTo('#playlist');
+	item = $(this).clone(1).unbind('click').click(player.select).hide().fadeIn().appendTo('#playlist');
 
 	// remove the message in playlist, if playlist is empty
 	if ($('#playlist .message').length)
@@ -176,7 +174,8 @@ player.enqueue = function ()
 		$('#playlist .message').remove();
 
 		// play the item on first add
-		item.each(player.play);
+		item.each(player.select);
+		player.play();
 	}
 
 	// scroll to the end of the list, clearing any conflicting animation
@@ -189,22 +188,8 @@ player.enqueue = function ()
 //  (as an element in 'this' context)
 player.select = function ()
 {
-
-}
-
-// play an item on the playlist (as an element in 'this' context)
-player.play = function ()
-{
-	player.state = 'playing';
-	// update the meta area with album art etc. Forcing not-null
-	// so fields are always updated
-	var meta = $(this).data('meta');
-	$('#nowPlaying .title').text(String(meta.title));
-	$('#nowPlaying .album').text(String(meta.album));
-	$('#nowPlaying .artist').text(String(meta.artist));
-
 	// highlight the item as currently playing, clearing others
-	$('#playlist .item').removeClass('playing').children().filter('.state').empty();
+	$('#playlist .item').removeClass('playing');//.children().filter('.state').empty();
 	$(this).addClass('playing');//.children().filter('.state').text('Now playing');
 
 	// scroll the item on the playlist into view (around half way down list)
@@ -220,6 +205,27 @@ player.play = function ()
 	// animations
 	$('#playlist').stop().animate({scrollTop:offset});
 
+	// play it if appropiate
+	if (player.state == 'playing')
+		player.play();
+}
+
+// play the item currently selected on the playlist
+player.play = function ()
+{
+	player.state = 'playing';
+
+	// make sure the controls are set right
+	$('#play').hide();
+	$('#pause').show();
+
+	// update the meta area with album art etc. Forcing not-null
+	// so fields are always updated
+	var meta = $('#playlist .playing').data('meta');
+	$('#nowPlaying .title').text(String(meta.title));
+	$('#nowPlaying .album').text(String(meta.album));
+	$('#nowPlaying .artist').text(String(meta.artist));
+
 	// play the file
 	player.audio.setAttribute('src', '?node=download&id='+meta.id);
 	player.audio.play();
@@ -229,7 +235,7 @@ player.play = function ()
 // so can be used to override normal events
 player.next = function()
 {
-	$('#playlist .playing').next().each(player.play);
+	$('#playlist .playing').next().each(player.select);
 	return false;
 }
 
@@ -237,13 +243,46 @@ player.next = function()
 // so can be used to override normal events
 player.prev = function()
 {
-	$('#playlist .playing').prev().each(player.play);
+	$('#playlist .playing').prev().each(player.select);
 	return false;
 }
 
 player.playPause = function()
 {
-	player.audio.pause();
+	switch (player.state)
+	{
+		case 'paused':
+		case 'stopped':
+			player.audio.play();
+			// update icon
+			$('#play').hide();
+			$('#pause').show();
+			// update state
+			player.state = 'playing';
+		break;
+		case 'playing':
+			player.audio.pause();
+			// update icon
+			$('#pause').hide();
+			$('#play').show();
+			// update state
+			player.state = 'paused';
+		break;
+	}
 	return false;
+}
+
+player.stop = function()
+{
+		// pause it, resetting counter
+		player.audio.pause();
+		player.audio.currentTime = 0;
+
+		// update icon
+		$('#pause').hide();
+		$('#play').show();
+
+		// update state
+		player.state = 'stopped';
 }
 
