@@ -130,7 +130,16 @@ abstract class indexer
 	// returns the chosen actor indexer
 	final public static function getInstance($namespace = null)
 	{
-		// replace with logic when more indexers are made
-		return new keyStoreIndexer($namespace);
+		switch (constant('INDEXER'))
+		{
+			case 'sqlite':
+			case 'sqlite3':
+				return new sqliteIndexer($namespace);
+
+			case 'keyStore':
+			case 'keystore':
+			default:
+				return new keyStoreIndexer($namespace);
+		}
 	}
 }

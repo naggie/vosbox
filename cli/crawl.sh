@@ -8,7 +8,7 @@ if (!isset($argv[1]))
 	die("Usage $argv[0] <directory>\n");
 
 
-$i = new sqliteIndexer();
+$i = indexer::getInstance();
 $c = new mp3Crawler($i);
 
 $i->flush();

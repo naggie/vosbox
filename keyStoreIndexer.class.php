@@ -73,6 +73,6 @@ class keyStoreIndexer extends indexer
 	}
 
 	public function getObject($id){return $this->store->get($id);}
-	public function saveObject($id,$object){return $this->store->set($id);}
+	public function saveObject($id,$object){return $this->store->set($id,$object);}
 	public function depreciateObject($id){return $this->store->delete($id);}
 }

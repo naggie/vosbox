@@ -34,3 +34,7 @@ fade in loading bar?
 
 fix search bar width and submit with firefox (gecko)
 fix submit override with firefox
+
+switch to event driven player\
+
+fix when track stops at end, and add doesn'tplay

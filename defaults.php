@@ -14,6 +14,9 @@
 @define ('KEYSTORE_DIR',VAR_DIR.'keystore/');
 @define ('DEFAULT_LOG_FILE',VAR_DIR.'events.log');
 
+// Indexer actor
+@define ('INDEXER','keyStore');
+
 // Cache actor (ordered by speed)
 // * APC : fastest!
 // * disk : no setup required

@@ -10,7 +10,7 @@ try
 	if (!$keywords)
 		throw new Exception('Erm, please search for something!');
 
-	$i = new sqliteIndexer();
+	$i = indexer::getInstance();
 	$response = $i->search($keywords);
 }
 catch (Exception $e)

@@ -2,7 +2,7 @@
 $id = &$_REQUEST['id'];
 
 
-$i = new sqliteIndexer();
+$i = indexer::getInstance();
 
 $filepath = $i->getObject($id)->path;
 
