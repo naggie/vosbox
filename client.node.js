@@ -191,7 +191,7 @@ player.enqueue = function ()
 	item = $(this).clone(1).unbind('click').click(player.select).hide().fadeIn().appendTo('#playlist');
 
 	// remove the message in playlist, if playlist is empty
-	if ($('#playlist .message').length)
+	if ($('#playlist .message').length || player.state == 'stopped')
 	{
 		// remove message
 		$('#playlist .message').remove();

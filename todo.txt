@@ -28,3 +28,8 @@ optimise JS, CSS etc
 ask for JSON extension
 
 JSONP support for remote media server?
+
+'loading' state
+
+fade in loading bar?
+
