@@ -29,7 +29,8 @@ ask for JSON extension
 
 JSONP support for remote media server?
 
-'loading' state
-
 fade in loading bar?
 
+
+fix search bar width and submit with firefox (gecko)
+fix submit override with firefox

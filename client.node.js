@@ -10,7 +10,8 @@ $(document).ready(function()
 {
 	if(!$.browser.webkit)
 	{
-		body.html('For now only webkit browsers are supported. <a href="http://www.google.com/chrome/">Chrome</a> is good.');
+		$('body').html('For now only webkit browsers are supported. <a href="http://www.google.com/chrome/">Chrome</a> is good.');
+		$('body > *').show();
 		return;
 	}
 
