@@ -2,7 +2,7 @@ body
 {
 font-family:arial;
 margin:0;
-background:#eeeeee url('?grad') repeat-x;
+background:#eeeeee repeat-x;
 color:#222;
 }
 
@@ -18,7 +18,7 @@ display:none;
 position:absolute;
 left:0;right:50%;
 top:0;bottom:0;
-background:#eeeeee url('?grad') repeat-x;
+background:#eeeeee repeat-x;
 }
 
 #searcher > *,#player > *
@@ -160,12 +160,12 @@ opacity:1.0;
 {
 width:0;
 height:100%;
-background:gray url('?grad') repeat-x;
+background:gray repeat-x;
 }
 
 .item
 {
-background:#fcfcfc url('?grad') repeat-x;
+background:#fcfcfc repeat-x;
 text-align:left;
 padding:10px;
 border-bottom:#ddd solid 1px;
@@ -174,7 +174,7 @@ min-height:32px;
 
 .item:hover,.playing
 {
-background:#f0f0f0 url('?grad') repeat-x;
+background:#f0f0f0 repeat-x;
 }
 
 .playing

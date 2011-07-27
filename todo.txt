@@ -21,3 +21,6 @@ switch to SVG icons?
 when loading (time = 0) and playing, display animated bar for loading
 
 albumn art (configure crawler)
+
+
+optimise JS, CSS etc
