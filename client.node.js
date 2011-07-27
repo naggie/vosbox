@@ -52,6 +52,9 @@ searcher.search = function()
 		success: searcher.showResults
 	}); 
 
+	// add loading message
+	$('#searchResults').html('<div class="message">Searching...</div>');
+
 	// when used as a callback, replace the default action
 	return false;
 }
