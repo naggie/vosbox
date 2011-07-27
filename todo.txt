@@ -24,3 +24,7 @@ albumn art (configure crawler)
 
 
 optimise JS, CSS etc
+
+ask for JSON extension
+
+JSONP support for remote media server?

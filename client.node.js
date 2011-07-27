@@ -122,6 +122,20 @@ player.init = function()
 		// calculate percentage of time passed on current song
 		var percent = 100*player.audio.currentTime/player.audio.duration;
 
+		// set loader if appropiate
+		if (player.state == 'playing' && player.audio.currentTime == 0)
+		{
+			// must be loading
+			$('#controls .progress .bar').hide();
+			$('#controls .progress').css('background','url("?load")')
+		}
+		else
+		{
+			// not loading, playing properly	
+			$('#controls .progress .bar').show();
+			$('#controls .progress').css('background','white')
+		}
+
 		// set progress
 		$('#controls .progress .bar').css('width',percent+'%');
 	},100);
