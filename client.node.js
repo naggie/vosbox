@@ -8,6 +8,12 @@ player = new Object();
 
 $(document).ready(function()
 {
+	if(!$.browser.webkit)
+	{
+		alert('For now only google chrome is supported.');
+		return;
+	}
+
 	if($.browser.msie && (parseInt($.browser.version) < 9) )
 	{
 		alert('Update your browser, please');
