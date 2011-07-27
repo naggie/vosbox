@@ -80,8 +80,8 @@ height:128px;
 margin-right:20px;
 background:#ffffff url('?cd') no-repeat center center;
 border: 1px solid #ccc;
-border-top:1px solid #a0a0a0 !important;
-border-bottom:1px solid #ddd !important;
+border-top:1px solid #a0a0a0;
+border-bottom:1px solid #ddd;
 overflow:hidden;
 float:left;
 }
@@ -98,8 +98,8 @@ bottom:0;
 background:#fff;
 overflow:auto;
 border: 1px solid #ccc;
-border-top:1px solid #a0a0a0 !important;
-border-bottom:1px solid #ddd !important;
+border-top:1px solid #a0a0a0;
+border-bottom:1px solid #ddd;
 }
 
 #playlist
@@ -147,8 +147,8 @@ margin-left:5px;
 height:10px;
 overflow:hidden;
 border: 1px solid #ccc;
-border-top:1px solid #a0a0a0 !important;
-border-bottom:1px solid #ddd !important;
+border-top:1px solid #a0a0a0;
+border-bottom:1px solid #ddd;
 }
 
 #controls .progress:hover

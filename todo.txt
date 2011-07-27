@@ -18,6 +18,6 @@ check for codec, throw exception or something if not got
 
 switch to SVG icons?
 
-progress click to seek
+when loading (time = 0) and playing, display animated bar for loading
 
 albumn art (configure crawler)
