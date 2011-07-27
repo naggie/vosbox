@@ -70,6 +70,8 @@ background:rgba(255,255,255,0.8);
 #nowPlaying
 {
 position:absolute;
+height:130px;
+overflow:hidden;
 }
 
 #albumArt
