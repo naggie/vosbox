@@ -10,7 +10,7 @@ $(document).ready(function()
 {
 	if(!$.browser.webkit)
 	{
-		alert('For now only google chrome is supported.');
+		body.html('For now only webkit browsers are supported. <a href="http://www.google.com/chrome/">Chrome</a> is good.');
 		return;
 	}
 
