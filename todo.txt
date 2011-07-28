@@ -38,3 +38,5 @@ fix submit override with firefox
 switch to event driven player\
 
 fix when track stops at end, and add doesn'tplay
+
+optimise for speed

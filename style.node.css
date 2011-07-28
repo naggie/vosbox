@@ -212,14 +212,19 @@ top:8px;
 .message
 {
 position:absolute;
-right:0;left:0;top:40%;
+right:0;left:0;top:0;
 text-align:center;
 color:gray;
 font-style:italic;
 margin:10px;
 }
 
+#searcher .message
+{
+margin-top:240px;
+}
+
 #player .message
 {
-margin-top:150px;
+margin-top:320px;
 }
