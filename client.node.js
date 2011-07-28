@@ -11,7 +11,6 @@ $(document).ready(function()
 	if(!$.browser.webkit)
 	{
 		$('body').html('For now only webkit browsers are supported. <a href="http://www.google.com/chrome/">Chrome</a> is good.');
-		$('body > *').show();
 		return;
 	}
 
@@ -44,6 +43,7 @@ searcher.init = function()
 	// override form submit
 	$('#searcher form').submit(searcher.search);
 
+	$('#searcher .message').show().text('To begin, search for music in the box above');
 }
 
 
@@ -58,8 +58,9 @@ searcher.search = function()
 		success: searcher.showResults
 	}); 
 
-	// add loading message
-	$('#searchResults').html('<div class="message">Searching...</div>');
+	// reset results area
+	$('#searchResults').empty().scrollTop(0);
+	$('#searcher .message').show().text('Searching...');
 
 	// when used as a callback, replace the default action
 	return false;
@@ -70,12 +71,16 @@ searcher.showResults = function (results)
 {
 	if (results.error)
 	{
-		$('#searchResults').html('<div class="message">'+results.error+'</div>');
+		$('#searcher .message').show().text(results.error);
 		return;
 	}
 
-	// reset results area
-	$('#searchResults').empty().scrollTop(0);
+	// playlist is empty, successful search: tell user what to do next
+	if (results.length && !$('#playlist *').length)
+		$('#player .message').hide().fadeIn().text('Click a result to add it to this playlist');
+
+	// remove the message
+	$('#searcher .message').hide();
 
 	if (results.length)
 	{
@@ -83,16 +88,12 @@ searcher.showResults = function (results)
 		for (var i in results)
 			searcher.addResult(results[i]);
 
-		// make sure the player is there.
-		if(!player.visible)
-			player.reveal();
-
 		// attach a click event to each to add to playlist
 		$('#searchResults .item').click(player.enqueue);
 	}
 
 	else
-		$('#searchResults').html('<div class="message">No results found</div>');
+		$('#searcher .message').show().text('No results found');
 }
 
 searcher.addResult = function (result)
@@ -100,8 +101,7 @@ searcher.addResult = function (result)
 	// add the HTML
 	$('#searchResults').append('<div class="item">'+
 	'<div class="artist">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
-	'<div class="context">'+result.album+'</div></div>'
-	);
+	'<div class="context">'+result.album+'</div></div>');
 	// ...attaching to it the object itself
 	// by first selecting the element just created...
 	$('#searchResults .item:last-child').data('meta',result);
@@ -117,12 +117,6 @@ player.init = function()
 
 	// remove the pause button
 	//$('#pause').hide();
-
-	// on demand UI:
-	// Make the left (search) pane fill the screen and fade in, 
-	// leaving the right pane visible, but behind
-	// TODO: make search icon part of #searcher
-	$('#searcher,#searchIcon').css('right',0).fadeIn();
 
 	// add a watcher to set the progress bar
 	window.setInterval(function(){
@@ -149,8 +143,6 @@ player.init = function()
 
 	// add event to advance the playlist on song completion
 	player.audio.addEventListener('ended',player.next);
-
-	player.visible = false;
 
 	// controls: events
 	$('#next').click(player.next);
@@ -183,14 +175,6 @@ player.init = function()
 	$(document).bind('keydown','esc',player.stop);
 }
 
-// animate the search panel (left) to reveal the player
-player.reveal = function ()
-{
-	$('#player').show();
-	$('#searcher').animate({'right':'500px'});
-	player.visible = true;
-}
-
 // enqueue an item (as an element in 'this' context)
 player.enqueue = function ()
 {
@@ -198,13 +182,11 @@ player.enqueue = function ()
 	// preserving data
 	item = $(this).clone(1).unbind('click').click(player.select).hide().fadeIn().appendTo('#playlist');
 
-	// remove the message in playlist, if playlist is empty
-	if ($('#playlist .message').length || player.state == 'stopped')
-	{
-		// remove message
-		$('#playlist .message').remove();
+	$('#player .message').hide();
 
-		// play the item on first add
+	// play the item on first add (to empty playlist) or add to idle playlist
+	if (player.state == 'stopped' || !$('#playlist').length)
+	{
 		item.each(player.select);
 		player.play();
 	}

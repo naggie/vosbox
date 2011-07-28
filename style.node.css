@@ -6,13 +6,6 @@ background:#eeeeee;
 color:#222;
 }
 
-body > *
-{
-/*For fade in after JS manipulation*/
-display:none;
-}
-
-
 #searcher
 {
 position:absolute;
@@ -224,4 +217,9 @@ text-align:center;
 color:gray;
 font-style:italic;
 margin:10px;
+}
+
+#player .message
+{
+margin-top:150px;
 }
