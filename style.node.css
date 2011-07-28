@@ -16,7 +16,7 @@ display:none;
 #searcher
 {
 position:absolute;
-left:0;right:50%;
+left:0;right:500px;
 top:0;bottom:0;
 background:#eeeeee repeat-x;
 }
@@ -32,7 +32,7 @@ right:0;
 #player
 {
 position:absolute;
-left:50%;right:0;
+right:0;width:500px;
 top:0;bottom:0;
 overflow:hidden;
 }
@@ -88,9 +88,11 @@ overflow:hidden;
 float:left;
 }
 
-#nowPlaying h2
+#nowPlaying .title
 {
+font-weight:bold;
 margin-top:10px;
+margin-bottom:10px;
 }
 
 #searchResults, #playlist

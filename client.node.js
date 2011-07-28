@@ -123,9 +123,7 @@ player.init = function()
 	// Make the left (search) pane fill the screen and fade in, 
 	// leaving the right pane visible, but behind
 	// TODO: make search icon part of #searcher
-	$('#searcher,#searchIcon').css('right',0).fadeIn(function(){
-		$('#player').css('display','inherit');
-	});
+	$('#searcher,#searchIcon').css('right',0).fadeIn();
 
 	// add a watcher to set the progress bar
 	window.setInterval(function(){
@@ -189,7 +187,8 @@ player.init = function()
 // animate the search panel (left) to reveal the player
 player.reveal = function ()
 {
-	$('#searcher').animate({'right':'50%'});
+	$('#player').show();
+	$('#searcher').animate({'right':'500px'});
 	player.visible = true;
 }
 
