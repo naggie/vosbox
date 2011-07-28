@@ -16,6 +16,9 @@ class sqliteIndexer extends indexer
 	// check for/create DB
 	public function __construct($namespace = null)
 	{
+		if (!extension_loaded('sqlite3'))
+			throw new Exception('sqlite3 extension not loaded');
+
 		$this->store = new keyStore('index'.$namespace);
 
 		// get a nice filepath for the database
