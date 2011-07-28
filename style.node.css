@@ -2,7 +2,7 @@ body
 {
 font-family:arial;
 margin:0;
-background:#eeeeee;
+background:#f2f2f2;
 color:#222;
 }
 
@@ -11,7 +11,6 @@ color:#222;
 position:absolute;
 left:0;right:500px;
 top:0;bottom:0;
-background:#eeeeee;
 }
 
 #searcher > *,#player > *
