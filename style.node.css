@@ -197,7 +197,7 @@ float:left;
 {
 }
 
-.item .context
+.item .context,#nowPlaying .artist
 {
 font-size:12px;
 }
