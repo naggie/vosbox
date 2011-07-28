@@ -28,9 +28,8 @@ $(document).ready(function()
 
 searcher.init = function()
 {
-	searcher.placeholder = 'Search for music...';
-
-	$('#search').val(searcher.placeholder);
+	//$('#search').val(searcher.placeholder);
+	$('#search').focus();
 
 	// ctrl+f to search
 	$(document).bind('keydown', 'ctrl+f', function(){
