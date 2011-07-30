@@ -29,8 +29,8 @@ class sqliteIndexer extends indexer
 		{
 			$db = new SQLite3($file);
 
-			// make the map of tags to ids
-			$db->exec("CREATE TABLE map (id TEXT,tag TEXT)");
+			// make the map of tags to ids -- forcing the relationship to be unique
+			$db->exec("CREATE TABLE map (id TEXT,tag TEXT, PRIMARY KEY (id,tag))");
 
 			// make the object store
 			$db->exec("CREATE TABLE objects (id TEXT PRIMARY KEY,object BLOB)");
@@ -65,7 +65,8 @@ class sqliteIndexer extends indexer
 			// sanitise
 			$tag = "'".SQLite3::escapeString($tag)."'";
 
-			$this->db->exec("INSERT INTO map VALUES ($id,$tag)");
+			// insert into db if that relationship doesn't already exist
+			$this->db->exec("INSERT OR IGNORE INTO map VALUES ($id,$tag)");
 		}		
 	}
 

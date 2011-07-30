@@ -27,3 +27,5 @@ optimise for speed:
   * Provide option of using google API for jQuery
   * Caching
   * PHP APC
+
+re benchmark index backends with revised sqlite backend
