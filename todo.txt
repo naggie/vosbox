@@ -1,42 +1,29 @@
-support for moar file types, not just music or even media?
 Enqueue all button
 downloadable (json) playlists? -or- Shareable playlists? (keystore'd)
 
-
-
 jqueryUI: make playlist sortable
-
-right pane ovely visible *when serach returns audio files*
 
 make a buttom to remove an item from the playlist
 
 drag and drop items to playlist
 
-did you mean automatic search
+did you mean? automatic search
 
 check for codec, throw exception or something if not got
 
-switch to SVG icons?
-
-when loading (time = 0) and playing, display animated bar for loading
-
 albumn art (configure crawler)
-
-
-optimise JS, CSS etc
-
-ask for JSON extension
 
 JSONP support for remote media server?
 
 fade in loading bar?
 
-
 fix search bar width and submit with firefox (gecko)
-fix submit override with firefox
 
-switch to event driven player\
+player should be at 'stopped' state at end of playlist
 
-fix when track stops at end, and add doesn'tplay
-
-optimise for speed
+optimise for speed:
+  * Change to sprites for buttoms
+  * Aggregate and compress JS
+  * Provide option of using google API for jQuery
+  * Caching
+  * PHP APC

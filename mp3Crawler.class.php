@@ -52,7 +52,9 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 	// generally, list all relevant items and then index() them separately
 	public function crawl($resource)
 	{
-		$iterator = new RecursiveDirectoryIterator($resource);
+		//$iterator = new RecursiveDirectoryIterator($resource);
+		// iterator that ignores locked directories
+		$iterator = new IgnorantRecursiveDirectoryIterator($resource);
 		$files = new RecursiveIteratorIterator($iterator);
 
 		foreach ($files as $file)
@@ -61,31 +63,36 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 			if (!preg_match('/\.mp3$/i',$file))
 				continue;
 
-			if ($info = self::getID3($file))
+			try
 			{
+				$info = self::getID3($file);
+
 				// hash ID from ID3 tag only. That way,
 				// it limits the number of clones
 				// in the database by overwriting
 				// and previous entry
 				$info['id'] = md5(serialize($info));
 				echo "Adding $file\n";
+
+				// sanitise the metadata
+				foreach ($info as &$attribute)
+					$attribute = strip_tags($attribute);
+
+				$info['path'] = (string)$file;
+
+				// type is audio -- make vosplayer able to play it
+				// and list it correctly
+				$info['type'] = 'audio';
+
+				$this->indexer->indexObject((object)$info);
+
+				$this->count++;
 			}
-			else
-				continue;
-
-			// sanitise the metadata
-			foreach ($info as &$attribute)
-				$attribute = strip_tags($attribute);
-
-			$info['path'] = (string)$file;
-
-			// type is audio -- make vosplayer able to play it
-			// and list it correctly
-			$info['type'] = 'audio';
-
-			$this->indexer->indexObject((object)$info);
-
-			$this->count++;
+			catch (Exception $e)
+			{
+				// error -> STDERR. Continue loop.
+				file_put_contents('php://stderr', $e->getMessage()."\n");
+			}
 		}
 	}
 
@@ -97,7 +104,7 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 		// use file pointers instead of file_get_contents
 		// to fix a memory leak due to failed re-use of allocated memory
 		// when loading successivle bigger files
-		$h = fopen($file, 'rb');
+		@$h = fopen($file, 'rb');
 		if ($h === false)
 			throw new Exception("Could not open $file");
 		fseek($h,-128,SEEK_END);
@@ -110,7 +117,7 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 		if (@$info['TAG'] == 'TAG')
 			unset ($info['TAG']);
 		else
-			return array();
+			throw new Exception ("No ID3v1 data in $file");
 
 		// replace genreid with real text genre
 		if (isset( self::$genres[$info['genreid']] ))
@@ -119,5 +126,22 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 			$info['genreid'] = 'Unknown';
 
 		return $info;
+	}
+}
+
+// hack from http://php.net/manual/en/class.recursivedirectoryiterator.php
+// so that directories with bad perms are ignored
+class IgnorantRecursiveDirectoryIterator extends RecursiveDirectoryIterator
+{
+	function getChildren()
+	{
+		try
+		{
+			return parent::getChildren();
+		}
+		catch(UnexpectedValueException $e)
+		{
+			return new RecursiveArrayIterator(array());
+		}
 	}
 }
