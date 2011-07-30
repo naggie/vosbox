@@ -237,6 +237,9 @@ player.select = function ()
 // play the item currently selected on the playlist, from start
 player.play = function ()
 {
+	if (!player.audio.src)
+		return;
+
 	player.state = 'playing';
 
 	// make sure the controls are set right
@@ -268,12 +271,7 @@ player.playPause = function()
 	{
 		case 'paused':
 		case 'stopped':
-			player.audio.play();
-			// update icon
-			$('#play').hide();
-			$('#pause').show();
-			// update state
-			player.state = 'playing';
+			player.play();
 		break;
 		case 'playing':
 			player.audio.pause();
