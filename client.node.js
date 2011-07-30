@@ -274,14 +274,22 @@ player.playPause = function()
 			player.play();
 		break;
 		case 'playing':
-			player.audio.pause();
-			// update icon
-			$('#pause').hide();
-			$('#play').show();
-			// update state
-			player.state = 'paused';
+			player.pause();
 		break;
 	}
+	return false;
+}
+
+player.pause = function()
+{
+			
+	player.audio.pause();
+	// update icon
+	$('#pause').hide();
+	$('#play').show();
+	// update state
+	player.state = 'paused';
+
 	return false;
 }
 
