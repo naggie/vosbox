@@ -8,7 +8,7 @@ searcher = new Object();
 player = new Object();
 
 // jQuery will fire this callback when the DOM is ready
-$(function()
+$(function ()
 {
 	if(!$.browser.webkit)
 	{
@@ -27,13 +27,13 @@ $(function()
 	searcher.init();
 });
 
-searcher.init = function()
+searcher.init = function ()
 {
 	//$('#search').val(searcher.placeholder);
 	$('#search').focus();
 
 	// ctrl+f to focus search
-	$(document).bind('keydown', 'ctrl+f', function(){
+	$(document).bind('keydown', 'ctrl+f', function (){
 		$('#search').focus().val('');
 	});
 
@@ -52,7 +52,7 @@ searcher.init = function()
 }
 
 
-searcher.search = function()
+searcher.search = function ()
 {
 	$.ajax(
 	{
@@ -94,7 +94,7 @@ searcher.showResults = function (results)
 			searcher.addResult(results[i]);
 
 		// attach a click event to each to add to playlist
-		$('#searchResults .item').click(function(){
+		$('#searchResults .item').click(function (){
 			meta = $(this).data('meta');
 			player.enqueue(meta);
 		});
@@ -119,9 +119,9 @@ searcher.addResult = function (result)
 }
 
 // enqueue everything currently in the search result area
-searcher.enqueueAll = function()
+searcher.enqueueAll = function ()
 {
-	$('#searchResults .item').each(function(){
+	$('#searchResults .item').each(function (){
 		player.enqueue($(this).data('meta'));
 	});
 
@@ -132,7 +132,7 @@ searcher.enqueueAll = function()
 // modify CSS to make search pane obscure player, fading everything in
 // without player visible. This allows CSS to define the full view,
 // using pure JS to handle the dynamic UI.
-player.init = function()
+player.init = function ()
 {
 	// HTML5 audio player, not part of the DOM
 	player.audio = document.createElement('audio');
@@ -143,7 +143,7 @@ player.init = function()
 	//$('#pause').hide();
 
 	// add a watcher to set the progress bar
-	window.setInterval(function(){
+	window.setInterval(function (){
 		// calculate percentage of time passed on current song
 		var percent = 100*player.audio.currentTime/player.audio.duration;
 
@@ -287,7 +287,7 @@ player.play = function ()
 
 // select the next song, play if playing already, returns false
 // so can be used to override normal events
-player.next = function()
+player.next = function ()
 {
 	$('#playlist .playing').next().each(player.selectThis);
 	return false;
@@ -295,13 +295,13 @@ player.next = function()
 
 // select the previous song, play if playing already, returns false
 // so can be used to override normal events
-player.prev = function()
+player.prev = function ()
 {
 	$('#playlist .playing').prev().each(player.selectThis);
 	return false;
 }
 
-player.playPause = function()
+player.playPause = function ()
 {
 	switch (player.state)
 	{
@@ -316,7 +316,7 @@ player.playPause = function()
 	return false;
 }
 
-player.pause = function()
+player.pause = function ()
 {
 			
 	player.audio.pause();
@@ -329,7 +329,7 @@ player.pause = function()
 	return false;
 }
 
-player.stop = function()
+player.stop = function ()
 {
 	// pause it, resetting counter
 	player.audio.pause();
@@ -341,5 +341,21 @@ player.stop = function()
 
 	// update state
 	player.state = 'stopped';
+}
+
+player.playlistIDs = function ()
+{
+	// get an array of playlist elements
+	elements = $('#playlist .item').get();
+
+	// iterate over the elements, collecting IDs
+	ids = Array();
+	for (var i in elements)
+	{
+		var id = $(elements[i]).data('meta').id;
+		ids.push(id);
+	}
+
+	return ids;
 }
 

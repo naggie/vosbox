@@ -1,11 +1,12 @@
+playlist: remove button
+searchResults: enqueue, play buttons
 Enqueue all button
-downloadable (json) playlists? -or- Shareable playlists? (keystore'd)
+
+sharable playlists (URL, eg: http://localhost/#
 
 jqueryUI: make playlist sortable
 
 make a buttom to remove an item from the playlist
-
-drag and drop items to playlist
 
 did you mean? automatic search
 
@@ -29,3 +30,5 @@ optimise for speed:
   * PHP APC
 
 re benchmark index backends with revised sqlite backend
+
+flash fallback
