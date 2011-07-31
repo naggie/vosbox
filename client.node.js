@@ -32,10 +32,13 @@ searcher.init = function()
 	//$('#search').val(searcher.placeholder);
 	$('#search').focus();
 
-	// ctrl+f to search
+	// ctrl+f to focus search
 	$(document).bind('keydown', 'ctrl+f', function(){
 		$('#search').focus().val('');
 	});
+
+	// CTRL+A to add all results to playlist
+	$(document).bind('keydown','ctrl+a',searcher.enqueueAll);
 
 	// clear on focus TODO -- focus, not click
 	$('#search').click(function (){
@@ -121,6 +124,9 @@ searcher.enqueueAll = function()
 	$('#searchResults .item').each(function(){
 		player.enqueue($(this).data('meta'));
 	});
+
+	// allow override if being used as callback
+	return false;
 }
 
 // modify CSS to make search pane obscure player, fading everything in
@@ -128,7 +134,9 @@ searcher.enqueueAll = function()
 // using pure JS to handle the dynamic UI.
 player.init = function()
 {
+	// HTML5 audio player, not part of the DOM
 	player.audio = document.createElement('audio');
+
 	player.state = 'stopped';
 
 	// remove the pause button
