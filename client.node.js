@@ -115,6 +115,14 @@ searcher.addResult = function (result)
 	item.appendTo('#searchResults');
 }
 
+// enqueue everything currently in the search result area
+searcher.enqueueAll = function()
+{
+	$('#searchResults .item').each(function(){
+		player.enqueue($(this).data('meta'));
+	});
+}
+
 // modify CSS to make search pane obscure player, fading everything in
 // without player visible. This allows CSS to define the full view,
 // using pure JS to handle the dynamic UI.
