@@ -1,12 +1,14 @@
 /*
 TODO: full keyboard interface support (arrows to nav results etc)
 TODO: oiplayer?
+TODO: compress when dev is almost done
 */
 
 searcher = new Object();
 player = new Object();
 
-$(document).ready(function()
+// jQuery will fire this callback when the DOM is ready
+$(function()
 {
 	if(!$.browser.webkit)
 	{
@@ -89,7 +91,10 @@ searcher.showResults = function (results)
 			searcher.addResult(results[i]);
 
 		// attach a click event to each to add to playlist
-		$('#searchResults .item').click(player.enqueue);
+		$('#searchResults .item').click(function(){
+			meta = $(this).data('meta');
+			player.enqueue(meta);
+		});
 	}
 
 	else
@@ -99,12 +104,15 @@ searcher.showResults = function (results)
 searcher.addResult = function (result)
 {
 	// add the HTML
-	$('#searchResults').append('<div class="item">'+
+	item = $('<div class="item">'+
 	'<div class="artist">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
 	'<div class="context">'+result.album+'</div></div>');
-	// ...attaching to it the object itself
-	// by first selecting the element just created...
-	$('#searchResults .item:last-child').data('meta',result);
+
+	// attach metadata
+	item.data('meta',result);
+
+	// add to search results area
+	item.appendTo('#searchResults');
 }
 
 // modify CSS to make search pane obscure player, fading everything in
@@ -168,26 +176,38 @@ player.init = function()
 	$('*').not('#search').bind('keydown','space',player.playPause);
 //	$('*').not('#search').bind('keydown','up',player.hoverNext);
 //	$('*').not('#search').bind('keydown','down',player.hoverPrev);
-//	$('*').not('#search').bind('keydown','return',player.select);
+//	$('*').not('#search').bind('keydown','return',player.selectThis);
 
 
 	$('#stop').click(player.stop);
 	$(document).bind('keydown','esc',player.stop);
 }
 
-// enqueue an item (as an element in 'this' context)
-player.enqueue = function ()
+// enqueue an item using the metadata
+player.enqueue = function (meta)
 {
-	// create a clone of the item, replacing click event, fading into playlist
-	// preserving data
-	item = $(this).clone(1).unbind('click').click(player.select).hide().fadeIn().appendTo('#playlist');
+	// create an element to represent the item
+	item = $('<div class="item">'+
+	'<div class="artist">'+meta.artist+'</div><div class="title">'+meta.title+'</div>'+
+	'<div class="context">'+meta.album+'</div></div>');
 
+	// attach metadata to the item
+	item.data('meta',meta);
+
+	// add event to select on click
+	item.click(player.selectThis);
+
+	// attach it to the DOM, playlist
+	item.hide().fadeIn().appendTo('#playlist');
+
+	// make sure there is no message
 	$('#player .message').hide();
 
 	// play the item on first add (to empty playlist) or add to idle playlist
 	if (player.state == 'stopped' || !$('#playlist').length)
 	{
-		item.each(player.select);
+		// each will select just that item...
+		item.each(player.selectThis);
 		player.play();
 	}
 
@@ -199,7 +219,7 @@ player.enqueue = function ()
 
 // select item on the playlist, playing if appropiate
 //  (as an element in 'this' context)
-player.select = function ()
+player.selectThis = function ()
 {
 	// highlight the item as currently playing, clearing others
 	$('#playlist .item').removeClass('playing');//.children().filter('.state').empty();
@@ -216,7 +236,7 @@ player.select = function ()
 
 	// update the meta area with album art etc. Forcing not-null
 	// so fields are always updated
-	var meta = $('#playlist .playing').data('meta');
+	var meta = $(this).data('meta');
 	$('#nowPlaying .title').text(String(meta.title));
 	$('#nowPlaying .album').text(String(meta.album));
 	$('#nowPlaying .artist').text(String(meta.artist));
@@ -253,7 +273,7 @@ player.play = function ()
 // so can be used to override normal events
 player.next = function()
 {
-	$('#playlist .playing').next().each(player.select);
+	$('#playlist .playing').next().each(player.selectThis);
 	return false;
 }
 
@@ -261,7 +281,7 @@ player.next = function()
 // so can be used to override normal events
 player.prev = function()
 {
-	$('#playlist .playing').prev().each(player.select);
+	$('#playlist .playing').prev().each(player.selectThis);
 	return false;
 }
 
