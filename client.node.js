@@ -331,15 +331,15 @@ player.pause = function()
 
 player.stop = function()
 {
-		// pause it, resetting counter
-		player.audio.pause();
-		player.audio.currentTime = 0;
+	// pause it, resetting counter
+	player.audio.pause();
+	player.audio.currentTime = 0;
 
-		// update icon
-		$('#pause').hide();
-		$('#play').show();
+	// update icon
+	$('#pause').hide();
+	$('#play').show();
 
-		// update state
-		player.state = 'stopped';
+	// update state
+	player.state = 'stopped';
 }
 
