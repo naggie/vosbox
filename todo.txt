@@ -3,6 +3,8 @@ searchResults: enqueue, play buttons
 Enqueue all button
 use live events?
 
+perhaps move images to www/images/ for perf etc
+
 sharable playlists (URL, eg: http://localhost/#
 
 jqueryUI: make playlist sortable

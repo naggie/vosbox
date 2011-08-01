@@ -289,7 +289,14 @@ player.play = function ()
 // so can be used to override normal events
 player.next = function ()
 {
-	$('#playlist .playing').next().each(player.selectThis);
+	var item = $('#playlist .playing').next();
+
+	// if there is no next item, default to the first item (repeat all)
+	if (!item.length)
+		item = $('#playlist .item:first-child');
+
+	item.each(player.selectThis);
+
 	return false;
 }
 
