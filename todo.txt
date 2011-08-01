@@ -1,6 +1,7 @@
 playlist: remove button
 searchResults: enqueue, play buttons
 Enqueue all button
+use live events?
 
 sharable playlists (URL, eg: http://localhost/#
 
@@ -24,7 +25,7 @@ player should be at 'stopped' state at end of playlist
 
 optimise for speed:
   * Change to sprites for buttoms
-  * Aggregate and compress JS
+  * Aggregate and compress JS, closure compiler etc
   * Provide option of using google API for jQuery
   * Caching
   * PHP APC

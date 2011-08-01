@@ -127,6 +127,12 @@ display:none;
 float:left;
 }
 
+#controls > * :active
+{
+position:relative;
+top:1px;
+}
+
 #controls > *:hover
 {
 opacity:0.5;
