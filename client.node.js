@@ -40,6 +40,8 @@ searcher.init = function ()
 	// CTRL+A to add all results to playlist
 	$(document).bind('keydown','ctrl+a',searcher.enqueueAll);
 
+	$('#enqueueAll').click(searcher.enqueueAll);
+
 	// clear on focus TODO -- focus, not click
 	$('#search').click(function (){
 		$(this).val('');
@@ -172,6 +174,10 @@ player.init = function ()
 	$('#next').click(player.next);
 	$('#prev').click(player.prev);
 	$('#pause,#play').click(player.playPause);
+
+	$('#empty').click(function(){
+		$('#playlist').empty();
+	});
 
 	// seek
 	$('#controls .progress').click(function(e){

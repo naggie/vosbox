@@ -39,6 +39,7 @@ searcher.init = function ()
 
 	// CTRL+A to add all results to playlist
 	$(document).bind('keydown','ctrl+a',searcher.enqueueAll);
+	$('#enqueueAll').click(searcher.enqueueAll);
 
 	// clear on focus TODO -- focus, not click
 	$('#search').click(function (){
@@ -172,6 +173,8 @@ player.init = function ()
 	$('#next').click(player.next);
 	$('#prev').click(player.prev);
 	$('#pause,#play').click(player.playPause);
+
+	$('#empty').click(player.empty);
 
 	// seek
 	$('#controls .progress').click(function(e){
@@ -366,3 +369,17 @@ player.playlistIDs = function ()
 	return ids;
 }
 
+//empty playlist, reset player
+player.empty = function()
+{
+	player.stop();
+
+	player.audio.setAttribute('src',null);
+
+	$('#nowPlaying .title,#nowPlaying .album,#nowPlaying .artist').text(' ');
+	$('#albumArt img').attr('src',null);
+
+	$('#playlist .item').fadeOut(function(){
+		$(this).remove();
+	});
+}

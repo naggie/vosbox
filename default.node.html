@@ -4,6 +4,7 @@
 <head>
 <title>Vosplayer</title>
 <link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="css3buttons.css" />
 <script src="jquery-1.6.2.min.js"></script>
 <script src="jquery.hotkeys.js"></script>
 <script src="client.js"></script>
@@ -30,6 +31,10 @@
 	<div id="playlist">
 	</div>
 	<div class="message"></div>
+	<div class="bottom">
+		<!--<button id="share" class="primary">Share</button>-->
+		<button id="empty" class="negative">Empty playlist</button>
+	</div>
 </div>
 
 <div id="searcher">
@@ -37,6 +42,10 @@
 	<div id="searchResults">
 	</div>
 	<div class="message"></div>
+
+	<div class="bottom">
+		<button id="enqueueAll">Enqueue all</button>
+	</div>
 </div>
 
 <img id="searchIcon" src="search.png" />

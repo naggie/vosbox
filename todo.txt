@@ -24,7 +24,7 @@ fix search bar width and submit with firefox (gecko)
 player should be at 'stopped' state at end of playlist
 
 optimise for speed:
-  * Change to sprites for buttoms
+  * Change to sprites for player buttons
   * Aggregate and compress JS, closure compiler etc
   * Provide option of using google API for jQuery
   * Caching
@@ -37,3 +37,5 @@ flash fallback
 clickable meta (album artist)
 
 hashchange event: searches after hash, and back button. Autodetect playlist
+
+lines separating panels etc

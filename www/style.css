@@ -15,11 +15,22 @@ top:0;bottom:0;
 
 #searcher > *,#player > *
 {
+position:absolute;
 margin:10px;
 left:0;
 right:0;
 }
 
+.bottom
+{
+bottom:0;
+height:25px;
+}
+
+.bottom > *
+{
+margin-top:5px;
+}
 
 #player
 {
@@ -34,15 +45,10 @@ overflow:hidden;
 margin-left:0;
 }
 
-#searcher form
-{
-position:absolute;
-}
-
 #search
 {
-left:0;right:0;
 position:absolute;
+left:0;right:0;
 color:#333;
 font-size:19px;
 margin:0;
@@ -61,7 +67,6 @@ background:rgba(255,255,255,0.8);
 
 #nowPlaying
 {
-position:absolute;
 height:130px;
 overflow:hidden;
 }
@@ -89,13 +94,13 @@ margin-bottom:10px;
 
 #searchResults, #playlist
 {
-position:absolute;
 bottom:0;
 background:#fff;
 overflow:auto;
 border: 1px solid #ccc;
 border-top:1px solid #a0a0a0;
 border-bottom:1px solid #ddd;
+bottom:25px;
 }
 
 #playlist
@@ -110,7 +115,6 @@ top:50px;
 
 #controls
 {
-position:absolute;
 top:134px;
 height:32px;
 overflow:hidden;
@@ -216,7 +220,6 @@ top:8px;
 
 .message
 {
-position:absolute;
 right:0;left:0;top:0;
 text-align:center;
 color:gray;
