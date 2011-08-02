@@ -25,6 +25,5 @@
 @define ('CACHE_ACTOR','disk');
 
 @define ('DISK_CACHE_DIR',VAR_DIR.'cache/');
-@define ('PERSISTENT_STATIC_NODES',false);
 @define ('MEMCACHED_IP','127.0.0.1');
 ?>

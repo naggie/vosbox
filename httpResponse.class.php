@@ -42,14 +42,14 @@
  */
 class httpResponse
 {
-	
+
 	public $handle,$name,$size,$etag;
 
 	// default mimetype - set later!
 	public $mimetype = 'application/octet-stream';
 	public $status = null;
 	public $position = 0;
-	
+
 	// inline or attachment (browser view or force download)
 	public $inline = false;
 
@@ -65,7 +65,7 @@ class httpResponse
 		// filestats are cached, which may cause problems
 		clearstatcache();
 	}
-	
+
 	/**
 	 * (magic)
 	 * verfy the attributes given when they are set
@@ -79,42 +79,42 @@ class httpResponse
 			case 'handle':
 				//no test...?
 			break;
-			
+
 			case 'mimetype':
 				if (!is_string($attr))
 			 		throw new Exception('mimetype must be a string');
 			break;
-			
+
 			case 'name':
 				if (!is_string($attr))
 			 		throw new Exception('name must be a string');
 			break;
-			
+
 			case 'size':
 				if (!is_int($attr))
 			 		throw new Exception('size must be an integer');
 			break;
-			
+
 			case 'etag':
 				if (!is_string($attr))
 			 		throw new Exception('etag must be a string');
 			break;
-			
+
 			case 'status':
 				if (!is_int($attr))
 			 		throw new Exception('status must be a HTTP response code (integer)');
 			break;
-			
+
 			case 'position':
 				if (!is_int($attr))
 			 		throw new Exception('name must be an integer');
 			break;
 		}
-		
+
 		// set it, it passed the tests
 		$this->$attr = $value;
 	}
-	
+
 	/**
 	 * Sets and checks all attributes to serve a file
 	 * @param $filepath string local path of file to serve
@@ -136,7 +136,7 @@ class httpResponse
 		// get file extension from path
 		// automatically generate it
 		$extension = self::extension($path);
-		
+
 		// set appropiate mimetype header
 		$this->mimetype = $this->mimetype($extension);
 
@@ -146,20 +146,20 @@ class httpResponse
 			$this->inline = true;
 		else
 			$this->inline = false;
-		
+
 		// set an appropiate name
 		$this->name = basename($path);
-		
+
 		// allow the browser to calculate file progress
 		$this->size = filesize($path);
 		// sprintf: show correct file size over 2GB (convert to unsigned)
 		$this->size = sprintf( "%u",$this->size);
-		
-		
+
+
 		// get Etags for 304 handling
 		$current_etag = self::etag($path);
 		$client_etag =& $_SERVER['HTTP_IF_NONE_MATCH'];
-		
+
 		// see if the client already has a current version of the file
 		if ( $current_etag === $client_etag )
 		{
@@ -168,7 +168,7 @@ class httpResponse
 			$this->status= 304;
 			return;
 		}
-		
+
 		// give the client an Etag for the file
 		header('Etag: '.$current_etag);	
 
@@ -187,14 +187,14 @@ class httpResponse
 	 * @param &$data string contents of file to serve
 	 */
 	public function load_string(&$data)
-	{		
+	{
 		// allow the browser to calculate file progress
 		$this->size = strlen($data);
-		
+
 		// get Etags for 304 handling
 		$current_etag = sha1($data);
 		$client_etag =& $_SERVER['HTTP_IF_NONE_MATCH'];
-		
+
 		// see if the client already has a current version of the file
 		if ( $current_etag === $client_etag )
 		{
@@ -203,23 +203,23 @@ class httpResponse
 			$this->status= 304;
 			return;
 		}
-		
+
 		// give the client an Etag for the file
 		header('Etag: '.$current_etag);
 
 		// open a new, temporary handle
 		$this->handle = fopen('php://temp', 'r+');
-		
+
 		// fill it up with the data
 		fputs($this->handle,$data);
 
 		// set the pointer back to the beginning
-		rewind($this->handle);		
+		rewind($this->handle);
 
 		$this->status = 200;
 	}
 
-	
+
 	/**
 	 * returns the extension of a file
 	 */
@@ -262,12 +262,12 @@ class httpResponse
 			case 'svg':return 'image/svg+xml'; break;
 			//if the ext is not recognised, force the browser to download it as a binary file
 			default:   return 'application/octet-stream';
-		}		 
+		}
 	}
-	 	
+
 	/**
 	 * echos http status code page
-	 * 
+	 *
 	 * (200, 404, 403, 304 supported)
 	 * @param integer status code
 	 */

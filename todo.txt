@@ -3,8 +3,6 @@ searchResults: enqueue, play buttons
 Enqueue all button
 use live events?
 
-perhaps move images to www/images/ for perf etc
-
 sharable playlists (URL, eg: http://localhost/#
 
 jqueryUI: make playlist sortable
@@ -35,3 +33,7 @@ optimise for speed:
 re benchmark index backends with revised sqlite backend
 
 flash fallback
+
+clickable meta (album artist)
+
+hashchange event: searches after hash, and back button. Autodetect playlist
