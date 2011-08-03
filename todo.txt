@@ -1,9 +1,6 @@
 playlist: remove button
 searchResults: enqueue, play buttons
-Enqueue all button
 use live events?
-
-sharable playlists (URL, eg: http://localhost/#
 
 jqueryUI: make playlist sortable
 
@@ -36,11 +33,7 @@ flash fallback audio.canPlayType
 
 clickable meta (album artist) with that in div and css
 
-hashchange event: searches after hash, and back button. Autodetect playlist
-
 attributes based CSS
 
-change back to fully stored plalyists
-
-
-exception handling
+don't use alert
+exception handling (playerExeption playlistException Exception (alert)

@@ -14,14 +14,17 @@ try
 		// convert to array of IDs
 		$ids = explode(',',$idsCsv);
 
-		// check each object exists
+		// check each object exists and record it
+		$objects = array();
 		foreach ($ids as $id)
-			if (!$index->getObject($id))
-				throw new Exception('Invalid playlist');
+			if ($object = $index->getObject($id))
+				$objects[] = $object;
+			else
+				throw new Exception('Invalid playlist items');
 
 		// save the playlist (list of ids), generating an ID 10 chars
 		$playlistId = substr( md5($idsCsv) ,0,10);
-		$store->set($playlistId,$ids);
+		$store->set($playlistId,$objects);
 
 		header('Content-Type:application/json');
 		echo json_encode(array('id' => $playlistId));
@@ -29,18 +32,10 @@ try
 	// load a playlist from a playlist ID
 	elseif ($id = $_REQUEST['load'])
 	{
-		$ids = (array)$store->get($id);
+		$objects = (array)$store->get($id);
 
-		if (!$ids)
+		if (!$objects)
 			throw new Exception('Playlist not found');
-
-		$objects = array();
-		// load each playlist item, fresh from the index.
-		// it is done every time because an object may have changed or moved
-		// the overhead is acceptable as this is much less work than a search!
-		foreach ($ids as $id)
-			if ($object = $index->getObject($id))
-				$objects[] = $object;
 
 		header('Content-Type:application/json');
 		echo json_encode($objects);
