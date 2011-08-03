@@ -46,6 +46,14 @@ searcher.init = function ()
 		$(this).val('');
 	});
 
+/*	// look for 'tags' which onClick, will search
+	$('.tag').live('click',function()
+	{
+		var keywords = $(this).text();
+		$('#search').val(keywords);
+		searcher.search();
+	});*/
+
 	// override form submit
 	$('#searcher form').submit(searcher.search);
 
@@ -107,8 +115,8 @@ searcher.addResult = function (result)
 {
 	// add the HTML
 	item = $('<div class="item">'+
-	'<div class="artist">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
-	'<div class="context">'+result.album+'</div></div>');
+	'<div class="artist tag">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
+	'<div class="album tag">'+result.album+'</div></div>');
 
 	// attach metadata
 	item.data('meta',result);
@@ -176,6 +184,9 @@ player.init = function ()
 	$('#share').click(player.sharePlaylist);
 	$(document).bind('keydown','ctrl+s',player.sharePlaylist);
 
+	// dynamic (live) events for playlist items
+	//$('#playlist .item').live('click',doSomething);
+
 	// seek
 	$('#controls .progress').click(function(e){
 		// translate X click pos to time in song
@@ -219,7 +230,7 @@ player.enqueue = function (meta)
 	// create an element to represent the item
 	item = $('<div class="item">'+
 	'<div class="artist">'+meta.artist+'</div><div class="title">'+meta.title+'</div>'+
-	'<div class="context">'+meta.album+'</div></div>');
+	'<div class="album">'+meta.album+'</div></div>');
 
 	// attach metadata to the item
 	item.data('meta',meta);

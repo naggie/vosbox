@@ -31,7 +31,7 @@ re benchmark index backends with revised sqlite backend
 
 flash fallback audio.canPlayType
 
-clickable meta (album artist) with that in div and css
+clickable meta (album artist) with that in div and css (tag)
 
 attributes based CSS
 

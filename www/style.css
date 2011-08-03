@@ -183,7 +183,7 @@ float:left;
 {
 }
 
-.item .context,#nowPlaying .artist
+.item .album,#nowPlaying .artist
 {
 font-size:12px;
 }
@@ -194,6 +194,12 @@ float:right;
 font-style:italic;
 color:gray;
 }
+
+/*Contents is searched for on click* /
+.tag:hover
+{
+color:black;
+}*/
 
 #searchIcon
 {
