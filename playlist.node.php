@@ -19,8 +19,8 @@ try
 			if (!$index->getObject($id))
 				throw new Exception('Invalid playlist');
 
-		// save the playlist (list of ids), generating an ID
-		$playlistId = md5($idsCsv);
+		// save the playlist (list of ids), generating an ID 10 chars
+		$playlistId = substr( md5($idsCsv) ,0,10);
 		$store->set($playlistId,$ids);
 
 		header('Content-Type:application/json');

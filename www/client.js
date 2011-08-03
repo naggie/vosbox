@@ -198,6 +198,17 @@ player.init = function ()
 
 	$('#stop').click(player.stop);
 	$(document).bind('keydown','esc',player.stop);
+
+	// load a playlist by ID from hash in URL
+	player.loadhash();
+	window.onhashchange = player.loadhash;
+}
+
+player.loadhash = function()
+{
+	if (document.location.hash)
+		// load the playlist id given, without the hash
+		player.loadPlaylist( document.location.hash.slice(1) );
 }
 
 // enqueue an item using the metadata
