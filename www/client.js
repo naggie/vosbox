@@ -377,7 +377,7 @@ player.empty = function()
 	$('#nowPlaying .title,#nowPlaying .album,#nowPlaying .artist').empty();
 	$('#albumArt img').attr('src',null);
 
-	$('#playlist .item').fadeOut(function(){
+	$('#playlist .item').css('z-index',2000).fadeOut(function(){
 		$(this).remove();
 	});
 }
@@ -405,7 +405,8 @@ player.loadPlaylist = function(id)
 			$('#player .message').hide();
 		}
 	});
-	// prepare playlist
+	// prepare playlist, bypassing fade out for messages
+	$('#playlist').empty();
 	player.empty();
 	$('#player .message').hide().fadeIn().text('Loading playlist...');
 }
