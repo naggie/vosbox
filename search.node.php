@@ -11,6 +11,9 @@ try
 
 	$i = indexer::getInstance();
 	$response = $i->search($keywords);
+
+	header('Content-Type:application/json');
+	echo json_encode($response);
 }
 catch (Exception $e)
 {
@@ -19,6 +22,3 @@ catch (Exception $e)
 	echo '{"error":"'.$e->getMessage().'"}';
 	die();
 }
-
-header('Content-Type:application/json');
-echo json_encode($response);

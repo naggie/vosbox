@@ -48,5 +48,6 @@ try
 }
 catch (Exception $e)
 {
+	header('Content-Type:application/json');
 	echo '{error:"'.$e->getMessage().'"}';
 }
