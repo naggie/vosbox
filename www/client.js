@@ -339,12 +339,10 @@ player.pause = function ()
 
 player.stop = function ()
 {
-	// reset with new player
-	player.audio = document.createElement('audio');
-
 	// pause it, resetting counter
-	//player.audio.pause();
-	//player.audio.currentTime = 0;
+	player.audio.pause();
+	if (player.audio.currentTime)
+		player.audio.currentTime = 0;
 
 	// update icon
 	$('#pause').hide();
@@ -373,7 +371,7 @@ player.playlistIDs = function ()
 //empty playlist, reset player
 player.empty = function()
 {
-	player.audio.setAttribute('src',null);
+	player.audio.src = null;
 	player.stop();
 
 	$('#nowPlaying .title,#nowPlaying .album,#nowPlaying .artist').empty();
