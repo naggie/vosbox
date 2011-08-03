@@ -174,6 +174,7 @@ player.init = function ()
 
 	$('#empty').click(player.empty);
 	$('#share').click(player.sharePlaylist);
+	$(document).bind('keydown','ctrl+s',player.sharePlaylist);
 
 	// seek
 	$('#controls .progress').click(function(e){
@@ -201,11 +202,11 @@ player.init = function ()
 	$(document).bind('keydown','esc',player.stop);
 
 	// load a playlist by ID from hash in URL
-	player.loadhash();
-	window.onhashchange = player.loadhash;
+	player.loadHash();
+	window.onhashchange = player.loadHash;
 }
 
-player.loadhash = function()
+player.loadHash = function()
 {
 	if (document.location.hash)
 		// load the playlist id given, without the hash
@@ -440,11 +441,12 @@ player.sharePlaylist = function()
 	}
 
 	var baseURL = document.location.toString().replace(/#.+$/,'');
+	var idsCsv = player.playlistIDs().toString();
 
 	// set off a request for the id
 	$.ajax(
 	{
-		data:{save: player.playlistIDs().toString() },
+		data:{save:idsCsv},
 		url: "?node=playlist",
 		success: function(data)
 		{
@@ -455,9 +457,13 @@ player.sharePlaylist = function()
 			}
 
 			var url = baseURL+'#'+data.id;
-			alert(url);
+
+			$('#player .message').show().html('<p>Playlist published to </p><a href="'+url+'">'+url+'</a>');
 		}
 	});
 
-
+	
+	$('#playlist').empty();
+	player.empty();
+	$('#player .message').show().text('Publishing playlist...');
 }
