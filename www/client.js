@@ -173,6 +173,7 @@ player.init = function ()
 	$('#pause,#play').click(player.playPause);
 
 	$('#empty').click(player.empty);
+	$('#share').click(player.sharePlaylist);
 
 	// seek
 	$('#controls .progress').click(function(e){
@@ -385,6 +386,12 @@ player.empty = function()
 	player.audio.src = null;
 	player.stop();
 
+	if (!$('#playlist .item').length)
+	{
+		$('#player .message').hide().fadeIn().text('Playlist is already empty');
+		return
+	}
+
 	$('#nowPlaying .title,#nowPlaying .album,#nowPlaying .artist').empty();
 	$('#albumArt img').attr('src',null);
 
@@ -403,12 +410,12 @@ player.loadPlaylist = function(id)
 		url: "?node=playlist",
 		success: function(items)
 		{
-
 			if (items.error)
 			{
 				$('#player .message').show().text(items.error);
 				return;
 			}
+
 			for (var i in items)
 				player.enqueue(items[i]);
 
@@ -419,5 +426,38 @@ player.loadPlaylist = function(id)
 	// prepare playlist, bypassing fade out for messages
 	$('#playlist').empty();
 	player.empty();
-	$('#player .message').hide().fadeIn().text('Loading playlist...');
+	$('#player .message').show().text('Loading playlist...');
+}
+
+// save the current playlist on the server by posting IDs.
+// informs the user of the new link containing the URL
+player.sharePlaylist = function()
+{
+	if (!$('#playlist .item').length)
+	{
+		$('#player .message').hide().fadeIn().text('Nothing to share yet!');
+		return
+	}
+
+	var baseURL = document.location.toString().replace(/#.+$/,'');
+
+	// set off a request for the id
+	$.ajax(
+	{
+		data:{save: player.playlistIDs().toString() },
+		url: "?node=playlist",
+		success: function(data)
+		{
+			if (data.error)
+			{
+				alert(data.error);
+				return;
+			}
+
+			var url = baseURL+'#'+data.id;
+			alert(url);
+		}
+	});
+
+
 }

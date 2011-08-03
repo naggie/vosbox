@@ -32,10 +32,15 @@ optimise for speed:
 
 re benchmark index backends with revised sqlite backend
 
-flash fallback
+flash fallback audio.canPlayType
 
-clickable meta (album artist)
+clickable meta (album artist) with that in div and css
 
 hashchange event: searches after hash, and back button. Autodetect playlist
 
 attributes based CSS
+
+change back to fully stored plalyists
+
+
+exception handling
