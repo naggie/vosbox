@@ -376,7 +376,7 @@ player.empty = function()
 
 	player.audio.setAttribute('src',null);
 
-	$('#nowPlaying .title,#nowPlaying .album,#nowPlaying .artist').text(' ');
+	$('#nowPlaying .title,#nowPlaying .album,#nowPlaying .artist').empty();
 	$('#albumArt img').attr('src',null);
 
 	$('#playlist .item').fadeOut(function(){

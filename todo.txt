@@ -38,4 +38,4 @@ clickable meta (album artist)
 
 hashchange event: searches after hash, and back button. Autodetect playlist
 
-lines separating panels etc
+attributes based CSS
