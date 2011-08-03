@@ -23,6 +23,7 @@ try
 		$playlistId = md5($idsCsv);
 		$store->set($playlistId,$ids);
 
+		header('Content-Type:application/json');
 		echo json_encode(array('id' => $playlistId));
 	}
 	// load a playlist from a playlist ID
@@ -41,6 +42,7 @@ try
 			if ($object = $index->getObject($id))
 				$objects[] = $object;
 
+		header('Content-Type:application/json');
 		echo json_encode($objects);
 	}
 	else
@@ -48,6 +50,7 @@ try
 }
 catch (Exception $e)
 {
+	// manually throw the error, as the json ext may not be loaded
 	header('Content-Type:application/json');
-	echo '{error:"'.$e->getMessage().'"}';
+	echo '{"error":"'.$e->getMessage().'"}';
 }

@@ -59,10 +59,8 @@ searcher.search = function ()
 	{
 		data:{keywords:$('#search').val()},
 		url: "?node=search",
-		dataType: 'json',
-		cache: false,
 		success: searcher.showResults
-	}); 
+	});
 
 	// reset results area
 	$('#searchResults').empty().scrollTop(0);
@@ -341,9 +339,12 @@ player.pause = function ()
 
 player.stop = function ()
 {
+	// reset with new player
+	player.audio = document.createElement('audio');
+
 	// pause it, resetting counter
-	player.audio.pause();
-	player.audio.currentTime = 0;
+	//player.audio.pause();
+	//player.audio.currentTime = 0;
 
 	// update icon
 	$('#pause').hide();
@@ -372,9 +373,8 @@ player.playlistIDs = function ()
 //empty playlist, reset player
 player.empty = function()
 {
-	player.stop();
-
 	player.audio.setAttribute('src',null);
+	player.stop();
 
 	$('#nowPlaying .title,#nowPlaying .album,#nowPlaying .artist').empty();
 	$('#albumArt img').attr('src',null);
@@ -382,4 +382,32 @@ player.empty = function()
 	$('#playlist .item').fadeOut(function(){
 		$(this).remove();
 	});
+}
+
+// load a playlist from the server by playlist ID
+player.loadPlaylist = function(id)
+{
+	// set off a request for the list
+	$.ajax(
+	{
+		data:{load:id},
+		url: "?node=playlist",
+		success: function(items)
+		{
+
+			if (items.error)
+			{
+				$('#player .message').show().text(items.error);
+				return;
+			}
+			for (var i in items)
+				player.enqueue(items[i]);
+
+			// clear message
+			$('#player .message').hide();
+		}
+	});
+	// prepare playlist
+	player.empty();
+	$('#player .message').hide().fadeIn().text('Loading playlist...');
 }

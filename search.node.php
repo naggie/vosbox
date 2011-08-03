@@ -20,5 +20,4 @@ catch (Exception $e)
 	// manually throw the error, as the json ext may not be loaded
 	header('Content-Type:application/json');
 	echo '{"error":"'.$e->getMessage().'"}';
-	die();
 }
