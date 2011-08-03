@@ -153,7 +153,7 @@ player.init = function ()
 		{
 			// must be loading
 			$('#controls .progress .bar').hide();
-			$('#controls .progress').css('background','url("?load")')
+			$('#controls .progress').css('background','url("load.gif")')
 		}
 		else
 		{
