@@ -58,6 +58,13 @@ searcher.init = function ()
 	$('#searcher form').submit(searcher.search);
 
 	$('#searcher .message').show().text('To begin, search for music in the box above');
+
+	// add dynamic (live) click event to every search result to enqueue
+	$('#searchResults .item').live('click',function (){
+		meta = $(this).data('meta');
+		player.enqueue(meta);
+	});
+
 }
 
 
@@ -95,18 +102,9 @@ searcher.showResults = function (results)
 	$('#searcher .message').hide();
 
 	if (results.length)
-	{
 		// results found
 		for (var i in results)
 			searcher.addResult(results[i]);
-
-		// attach a click event to each to add to playlist
-		$('#searchResults .item').click(function (){
-			meta = $(this).data('meta');
-			player.enqueue(meta);
-		});
-	}
-
 	else
 		$('#searcher .message').show().text('No results found');
 }
