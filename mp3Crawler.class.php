@@ -125,20 +125,20 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 		else
 			$info['genreid'] = 'Unknown';
 
-		// look for TAG+ data
-		fseek($h,-355,SEEK_END);
-		$data = fread($h,227);
-		$infoplus = unpack('a4TAG/a60title/a60artist/a60album/C1speed/a30genre/a6start/a6end',$data);
+//		// look for TAG+ data
+///		fseek($h,-355,SEEK_END);
+//		$data = fread($h,227);
+//		$infoplus = unpack('a4TAG/a60title/a60artist/a60album/C1speed/a30genre/a6start/a6end',$data);
 
-		if (@$infoplus['TAG'] == 'TAG+')
-		{
+//		if (@$infoplus['TAG'] == 'TAG+')
+//		{
 			// append the extended infomation
-			$info['title'] .= $infoplus['title'];
-			$info['artist'] = $infoplus['artist'];
-			$info['album'] = $infoplus['album'];
-			$info['genre'] = $infoplus['genre'];
-		}
-
+//			$info['title'] .= $infoplus['title'];
+//			$info['artist'] = $infoplus['artist'];
+//			$info['album'] = $infoplus['album'];
+//			$info['genre'] = $infoplus['genre'];
+//		}
+//
 		fclose($h);
 
 		return $info;
