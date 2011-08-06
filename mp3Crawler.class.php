@@ -99,7 +99,7 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 	// Returns an associative array of information about an mp3 file
 	// TODO: replace with getID3.org implementation
 	// idea taken from readme.txt in getID3() from getid3.org
-	protected static function getID3($file)
+	public static function getID3($file)
 	{
 		// use file pointers instead of file_get_contents
 		// to fix a memory leak due to failed re-use of allocated memory
@@ -109,10 +109,10 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 			throw new Exception("Could not open $file");
 		fseek($h,-128,SEEK_END);
 		$data = fread($h,128);	
-		fclose($h);
+		
 
 		$info = unpack('a3TAG/a30title/a30artist/a30album/a4year/a28comment/c1track/c1genreid',$data);
-
+		
 		// check for valid tag
 		if (@$info['TAG'] == 'TAG')
 			unset ($info['TAG']);
@@ -124,6 +124,22 @@ array ('Blues','Classic Rock','Country','Dance','Disco','Funk','Grunge','Hip-Hop
 			$info['genreid'] = self::$genres[$info['genreid']];
 		else
 			$info['genreid'] = 'Unknown';
+
+		// look for TAG+ data
+		fseek($h,-355,SEEK_END);
+		$data = fread($h,227);
+		$infoplus = unpack('a4TAG/a60title/a60artist/a60album/C1speed/a30genre/a6start/a6end',$data);
+
+		if (@$infoplus['TAG'] == 'TAG+')
+		{
+			// append the extended infomation
+			$info['title'] .= $infoplus['title'];
+			$info['artist'] = $infoplus['artist'];
+			$info['album'] = $infoplus['album'];
+			$info['genre'] = $infoplus['genre'];
+		}
+
+		fclose($h);
 
 		return $info;
 	}
@@ -145,3 +161,5 @@ class IgnorantRecursiveDirectoryIterator extends RecursiveDirectoryIterator
 		}
 	}
 }
+
+print_r(mp3Crawler::getID3("/Users/callanbryant/Documents/temp/Idiot pilot/Strange we should meet here/A Light At The End of the Tunnel.mp3"));
