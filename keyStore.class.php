@@ -41,28 +41,33 @@
  */
 class keyStore
 {
-	
+
 	/**
 	 * path to store folder (rel. to root)
 	 */
 	protected $dir;
-	  
+
 	/**
 	 * Core constructor
-	 * 
+	 *
 	 * @author Callan Bryant
 	 * @param $dir dir for cache
 	 */
 	public function __construct($namespace = null)
 	{
+		// force an alphanumeric namespace
+		if ($namespace and !preg_match('/^[a-z0-9]+$/i',$namespace) )
+			throw new Exception('$namespace must be alphanumeric');
+
 		// come up with a sensible dir for the keys in namespace
-		$dir = KEYSTORE_DIR.'/'.md5($namespace).'/';
+		$dir = KEYSTORE_DIR."/$namespace/";
 
 		// make sure cache dir is valid
 		if ( !file_exists($dir) )
 			if (! @mkdir($dir,0700,true) )
 				throw new Exception("Could not create dir: $dir");
 
+		// canonicalise it
 		$this->dir = realpath($dir).'/';
 	}
 
@@ -76,7 +81,7 @@ class keyStore
 		//sanitise $tag, give it an id - with salt so that if voswork
 		//is put into a different dir, the manifest won't screw up
 		$id = sha1(__FILE__.$tag);
-		
+
 		//corresponding path:
 		return $this->dir.$id.'.bin';
 	}
@@ -97,22 +102,22 @@ class keyStore
 
 		// file path to save to
 		$path	= $this->get_path($tag);
-		
+
 		// check if cache entry is there
 		if (!file_exists($path) )
 			//failure, cache miss
 			return null;
-		
+
 
 		// returns false if failed for any other reason
 		$result	= @file_get_contents($path);
-		
+
 		if ($result ===false )//failed
 			throw new Exception("failed to read $path");
-		
+
 		// convert back
 		$object = unserialize($result);
-		
+
 		// hit
 		return $object;
 	}
@@ -131,24 +136,24 @@ class keyStore
 
 		// save it......
 		$path = $this->get_path($tag);
-		
+
 		$serial = serialize($object);
-		
+
 		if (strlen($tag) > 250)
 			throw new Exception('TAG must be under 250 chars!');
-			
+
 		if (strlen($serial) > 1024*1024)
 			throw new Exception('Object must be significantly less than 1MB');
-				
+
 		$result	= @file_put_contents($path,$serial, LOCK_EX);
-		
+
 		if ( $result ===false )//failed
 			throw new Exception("failed to save $path");
 	}
-		
+
 	/**
 	 * cache object deleter
-	 * 
+	 *
 	 * @param $tag
 	 */
 	public function delete($tag)
@@ -162,15 +167,15 @@ class keyStore
 		if (!file_exists($path) )
 			//failure
 			return false;
-	
+
 		//returns false if failed for any other reason
 		$result	= @unlink($path);
-			
+
 		if ( $result ===false )//failed
 			throw new Exception("failed to delete $path");
 		return true;
 	}
-	
+
 	/**
 	 * cache flusher
 	 * Flushes _all_ bjects

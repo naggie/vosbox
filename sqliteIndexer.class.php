@@ -19,7 +19,9 @@ class sqliteIndexer extends indexer
 		if (!extension_loaded('sqlite3'))
 			throw new Exception('sqlite3 extension not loaded');
 
-		$this->store = new keyStore('index'.$namespace);
+                // force an alphanumeric namespace
+                if ($namespace and !preg_match('/^[a-z0-9]+$/i',$namespace) )
+                        throw new Exception('$namespace must be alphanumeric');
 
 		// get a nice filepath for the database
 		$file = VAR_DIR.'/index'.$namespace.'.sqlite';

@@ -161,5 +161,3 @@ class IgnorantRecursiveDirectoryIterator extends RecursiveDirectoryIterator
 		}
 	}
 }
-
-print_r(mp3Crawler::getID3("/Users/callanbryant/Documents/temp/Idiot pilot/Strange we should meet here/A Light At The End of the Tunnel.mp3"));
