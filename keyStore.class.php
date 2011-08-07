@@ -53,10 +53,10 @@ class keyStore
 	 * @author Callan Bryant
 	 * @param $dir dir for cache
 	 */
-	public function __construct($namespace = null)
+	public function __construct($namespace = 'default')
 	{
 		// force an alphanumeric namespace
-		if ($namespace and !preg_match('/^[a-z0-9]+$/i',$namespace) )
+		if (!preg_match('/^[a-z0-9]+$/i',$namespace) )
 			throw new Exception('$namespace must be alphanumeric');
 
 		// come up with a sensible dir for the keys in namespace
