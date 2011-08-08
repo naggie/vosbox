@@ -4,7 +4,7 @@ $id = &$_REQUEST['id'];
 
 $i = indexer::getInstance();
 
-$filepath = $i->getObject($id)->path;
+$filepath = $i->getObject($id)->getPath();
 
 if (!file_exists($filepath) )
 	$i->depreciateObject($id);

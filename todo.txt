@@ -1,24 +1,17 @@
 playlist: remove button
 searchResults: enqueue, play buttons
-use live events?
-
-jqueryUI: make playlist sortable
-
-make a buttom to remove an item from the playlist
-
-did you mean? automatic search
-
-check for codec, throw exception or something if not got
-
+clickable meta (album artist) with that in div and css (tag)
 albumn art (configure crawler)
-
-JSONP support for remote media server?
-
-fade in loading bar?
-
 fix search bar width and submit with firefox (gecko)
-
+attributes based CSS
 player should be at 'stopped' state at end of playlist
+check for codec
+flash fallback audio.canPlayType
+exception based error scheme
+did you mean? automatic search
+jqueryUI: make playlist sortable
+re benchmark index backends with revised sqlite backend
+
 
 optimise for speed:
   * Change to sprites for player buttons
@@ -26,14 +19,3 @@ optimise for speed:
   * Provide option of using google API for jQuery
   * Caching
   * PHP APC
-
-re benchmark index backends with revised sqlite backend
-
-flash fallback audio.canPlayType
-
-clickable meta (album artist) with that in div and css (tag)
-
-attributes based CSS
-
-don't use alert
-exception handling (playerExeption playlistException Exception (alert)
