@@ -5,7 +5,7 @@ produces an abject containing metadata of an mp3 file
 
 define ('GETID3_INCLUDEPATH', ROOT_DIR.'/getid3/');
 
-class audioFileMeta
+class audioFile
 {
 	public $title,$artist,$album,$year,$genre,$id;
 	protected $path;
@@ -43,9 +43,6 @@ class audioFileMeta
 		// aggregate both tag formats
 		getid3_lib::CopyTagsToComments($this->analysis);
 
-$this->analysis['comments']['picture'] = null;
-//print_r($this->analysis['comments']);
-
 		@$this->title = $this->analysis['comments']['title'][0];
 		@$this->artist = $this->analysis['comments']['artist'][0];
 		@$this->year = $this->analysis['comments']['year'][0];
@@ -67,7 +64,7 @@ $this->analysis['comments']['picture'] = null;
 	// get and save album art from the best source possible
 	private function obtainAlbumArt()
 	{
-		
+		//@$this->art = $this->analysis['comments']['picture'][0]['data'];
 	}
 
 	public function getPath()

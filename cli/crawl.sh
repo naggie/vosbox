@@ -24,7 +24,7 @@ foreach ($files as $file)
 		continue;
 	try
 	{
-		$meta = new audioFileMeta($file);
+		$meta = new audioFile($file);
 		$indexer->indexObject($meta);
 		echo "Added $file\n";
 		$count++;
