@@ -48,10 +48,12 @@ $this->analysis['comments']['picture'] = null;
 
 		@$this->title = $this->analysis['comments']['title'][0];
 		@$this->artist = $this->analysis['comments']['artist'][0];
-		@$this->album = $this->analysis['comments']['album'][0];
 		@$this->year = $this->analysis['comments']['year'][0];
 		@$this->genre = $this->analysis['comments']['genre'][0];
+		@$this->album = $this->analysis['comments']['album'][0];
 
+		if (!$this->album)
+			$this->album = 'Various artists';
 
 		$this->obtainAlbumArt();
 
