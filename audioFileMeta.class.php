@@ -17,6 +17,10 @@ class audioFileMeta
 
 	public function __construct($filepath)
 	{
+		// force string on filename (when using recursive file iterator,
+		// objects are returned)
+		$filepath = (string)$filepath;
+
 		if (!file_exists($filepath))
 			throw new Exception ("$filepath not found");
 
