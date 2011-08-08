@@ -9,7 +9,10 @@ class audioFile
 {
 	public $title,$artist,$album,$year,$genre,$id;
 	protected $path;
-	protected $albumArtId;
+
+	// binary jpg of front cover art
+	protected $albumArt;
+
 	public $count = 0;
 
 	// output from getid3 (removed after use)
@@ -40,7 +43,9 @@ class audioFile
 		if (!isset($this->analysis['id3v1']) and !isset($this->analysis['id3v2']) )
 			throw new Exception("no ID3v1 or ID3v2 tags in $filepath");
 
-		// aggregate both tag formats
+		$this->obtainAlbumArt();
+
+		// aggregate both tag formats (clobbering other metadata)
 		getid3_lib::CopyTagsToComments($this->analysis);
 
 		@$this->title = $this->analysis['comments']['title'][0];
@@ -52,8 +57,6 @@ class audioFile
 		if (!$this->album)
 			$this->album = 'Various artists';
 
-		$this->obtainAlbumArt();
-
 		// set an ID relative to metadata
 		$this->id = md5($this->artist.$this->album.$this->title.$this->year);
 
@@ -64,7 +67,12 @@ class audioFile
 	// get and save album art from the best source possible
 	private function obtainAlbumArt()
 	{
-		//@$this->art = $this->analysis['comments']['picture'][0]['data'];
+		@$this->albumArt = $this->analysis['comments']['picture'][0]['data'];
+	}
+
+	public function getAlbumArt()
+	{
+		return $this->albumArt;
 	}
 
 	public function getPath()
