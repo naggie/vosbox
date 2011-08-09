@@ -68,7 +68,14 @@ class audioFile
 	// then resize it to 128x128 JPG format
 	private function obtainAlbumArt()
 	{
-		@$this->albumArt = $this->analysis['comments']['picture'][0]['data'];
+		// look in the ID3v2 tag
+		if (isset($this->analysis->info['id3v2']['APIC'][0]['data']))
+			$this->albumArt = $this->analysis->info['id3v2']['APIC'][0]['data'];
+		elseif (isset($this->analysis->info['id3v2']['PIC'][0]['data']))
+			$this->albumArt = $this->analysis->info['id3v2']['PIC'][0]['data'];
+
+		// try the containing folder
+		// TODO, if necessary: try amazon web services
 	}
 
 	public function getAlbumArt()
