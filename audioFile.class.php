@@ -65,6 +65,7 @@ class audioFile
 	}
 
 	// get and save album art from the best source possible
+	// then resize it to 128x128 JPG format
 	private function obtainAlbumArt()
 	{
 		@$this->albumArt = $this->analysis['comments']['picture'][0]['data'];
