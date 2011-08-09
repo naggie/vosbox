@@ -142,8 +142,8 @@ class keyStore
 		if (strlen($tag) > 250)
 			throw new Exception('TAG must be under 250 chars!');
 
-		if (strlen($serial) > 1024*1024)
-			throw new Exception('Object must be significantly less than 1MB');
+		//if (strlen($serial) > 1024*1024)
+		//	throw new Exception('Object must be significantly less than 1MB');
 
 		$result	= @file_put_contents($path,$serial, LOCK_EX);
 
