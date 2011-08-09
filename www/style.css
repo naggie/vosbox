@@ -183,7 +183,7 @@ float:left;
 {
 }
 
-.item .album,#nowPlaying .artist
+.item .album,#nowPlaying .artist,#nowPlaying .year
 {
 font-size:12px;
 }

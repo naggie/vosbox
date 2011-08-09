@@ -282,6 +282,7 @@ player.selectThis = function ()
 	$('#nowPlaying .title').text(String(meta.title));
 	$('#nowPlaying .album').text(String(meta.album));
 	$('#nowPlaying .artist').text(String(meta.artist));
+	$('#nowPlaying .year').text(String(meta.year));
 
 	// play the file
 	player.audio.setAttribute('src', '?node=download&id='+meta.id);
@@ -405,7 +406,7 @@ player.empty = function()
 		return
 	}
 
-	$('#nowPlaying .title,#nowPlaying .album,#nowPlaying .artist').empty();
+	$('#nowPlaying .title,#nowPlaying .album,#nowPlaying .artist,#nowPlaying .year').empty();
 	$('#albumArt img').attr('src',null);
 
 	$('#playlist .item').css('z-index',2000).fadeOut(function(){
