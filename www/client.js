@@ -284,6 +284,9 @@ player.selectThis = function ()
 	$('#nowPlaying .artist').text(String(meta.artist));
 	$('#nowPlaying .year').text(String(meta.year));
 
+	// albumArt
+	$('#albumArt').html('<img src="?node=albumArt&id='+meta.id+'" />');
+
 	// play the file
 	player.audio.setAttribute('src', '?node=download&id='+meta.id);
 
@@ -406,7 +409,7 @@ player.empty = function()
 		return
 	}
 
-	$('#nowPlaying .title,#nowPlaying .album,#nowPlaying .artist,#nowPlaying .year').empty();
+	$('#albumArt,#nowPlaying .title,#nowPlaying .album,#nowPlaying .artist,#nowPlaying .year').empty();
 	$('#albumArt img').attr('src',null);
 
 	$('#playlist .item').css('z-index',2000).fadeOut(function(){
