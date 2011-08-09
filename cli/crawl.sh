@@ -26,7 +26,7 @@ foreach ($files as $file)
 	{
 		$meta = new audioFile($file);
 		$indexer->indexObject($meta);
-		echo "Added $file\n";
+		echo "+ $file\n";
 		$count++;
 	}
 	catch (Exception $e)

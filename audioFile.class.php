@@ -11,7 +11,7 @@ class audioFile
 	protected $path;
 
 	// binary jpg of front cover art
-	protected $albumArt;
+	public $albumArtId;
 
 	public $count = 0;
 
@@ -43,8 +43,6 @@ class audioFile
 		if (!isset($this->analysis['id3v1']) and !isset($this->analysis['id3v2']) )
 			throw new Exception("no ID3v1 or ID3v2 tags in $filepath");
 
-		$this->obtainAlbumArt();
-
 		// aggregate both tag formats (clobbering other metadata)
 		getid3_lib::CopyTagsToComments($this->analysis);
 
@@ -57,6 +55,8 @@ class audioFile
 		if (!$this->album)
 			$this->album = 'Various artists';
 
+		$this->assignAlbumArt();
+
 		// set an ID relative to metadata
 		$this->id = md5($this->artist.$this->album.$this->title.$this->year);
 
@@ -66,21 +66,34 @@ class audioFile
 
 	// get and save album art from the best source possible
 	// then resize it to 128x128 JPG format
-	private function obtainAlbumArt()
+	private function assignAlbumArt()
 	{
+		$k = new keyStore('albumArt');
+
+		// generate an ID corresponding to this album/artist combination
+		$this->albumArtId = md5($this->album.$this->artist);
+
+		// check for existing art from the same album
+		if ($k->get($this->albumArtId))
+			return;
+
 		// look in the ID3v2 tag
-		if (isset($this->analysis->info['id3v2']['APIC'][0]['data']))
-			$this->albumArt = $this->analysis->info['id3v2']['APIC'][0]['data'];
-		elseif (isset($this->analysis->info['id3v2']['PIC'][0]['data']))
-			$this->albumArt = $this->analysis->info['id3v2']['PIC'][0]['data'];
+		$albumArt = null;
+		if (isset($this->analysis['id3v2']['APIC'][0]['data']))
+			$albumArt = &$this->analysis['id3v2']['APIC'][0]['data'];
+		elseif (isset($this->analysis['id3v2']['PIC'][0]['data']))
+			$albumArt = &$this->analysis['id3v2']['PIC'][0]['data'];
 
 		// try the containing folder
 		// TODO, if necessary: try amazon web services
-	}
 
-	public function getAlbumArt()
-	{
-		return $this->albumArt;
+		// standardise the album art to 128x128 jpg
+
+		// save the album art under the generated ID
+		if ($albumArt)
+			$k->set($this->albumArtId,$albumArt);
+		else
+			$this->albumArtId = null;
 	}
 
 	public function getPath()

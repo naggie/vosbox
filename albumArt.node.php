@@ -2,12 +2,10 @@
 // TODO: re-enable persistent option 
 $id = &$_REQUEST['id'];
 
-$i = indexer::getInstance();
-
-$albumArt = $i->getObject($id)->getAlbumArt();
+$k = new keyStore('albumArt');
+$albumArt = $k->get($id);
 
 $response = new httpResponse();
-
 $response->load_string($albumArt);
 $response->mimetype = httpResponse::mimetype('jpg');
 
@@ -17,5 +15,5 @@ if (!$albumArt)
 $response->inline = true;
 
 // the client can cache this file forever!
-//$response->persistent = true;
+$response->persistent = true;
 $response->serve();

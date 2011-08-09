@@ -264,8 +264,8 @@ player.enqueue = function (meta)
 player.selectThis = function ()
 {
 	// highlight the item as currently playing, clearing others
-	$('#playlist .item').removeClass('playing');//.children().filter('.state').empty();
-	$(this).addClass('playing');//.children().filter('.state').text('Now playing');
+	$('#playlist .item').removeClass('playing');
+	$(this).addClass('playing');
 
 	// scroll the item on the playlist into view (around half way down list)
 	// find position relative to the top of the list, remove half the
@@ -285,7 +285,10 @@ player.selectThis = function ()
 	$('#nowPlaying .year').text(String(meta.year));
 
 	// albumArt
-	$('#albumArt').html('<img src="?node=albumArt&id='+meta.id+'" />');
+	if (meta.albumArtId)
+		$('#albumArt').html('<img src="?node=albumArt&id='+meta.albumArtId+'" />');
+	else
+		$('#albumArt').empty();
 
 	// play the file
 	player.audio.setAttribute('src', '?node=download&id='+meta.id);
