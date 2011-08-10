@@ -113,7 +113,7 @@ class kernel
 		define ('DEFAULTS_FILE',ROOT_DIR.'defaults.php');
 
 		// for the manifest of 'magic' files
-		define ('NODE_MANIFEST_REGEX','/([\-a-z0-9._ ]+)\.node\.[a-z0-9]+$/i');
+		define ('NODE_MANIFEST_REGEX','/([\-a-z0-9._ ]+)\.node\.php$/i');
 		define ('CLASS_MANIFEST_REGEX','/([a-z0-9_]+)\.(class|interface)\.php$/i');
 
 		define ('START_TIME',microtime(true));
@@ -131,9 +131,9 @@ class kernel
 
 		// specific stuff
 		@define('LOG_TIMESTAMP',true);
-		@define('KEYSTORE_DIR',VAR_DIR.'keystore/');
+		@define('KEYSTORE_DIR',VAR_DIR.'keyStore/');
 		@define('LOG_FILE',VAR_DIR.'events.log');
-		@define('CACHE_ACTOR','null');
+		@define('CACHE','null');
 		@define('DISK_CACHE_DIR',VAR_DIR.'cache/');
 		@define('PERSISTENT_STATIC_NODES',false);
 		@define('MEMCACHED_IP','127.0.0.1');
@@ -152,7 +152,7 @@ class kernel
 	{
 		require_once ROOT_DIR.'cache.interface.php';
 
-		switch (CACHE_ACTOR)
+		switch (CACHE)
 		{
 			case 'memcached':
 				require_once ROOT_DIR.'memcachedCache.class.php';
