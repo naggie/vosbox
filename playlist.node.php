@@ -9,7 +9,7 @@ try
 
 
 	// save a playlist from serialised IDs
-	if ($idsCsv = $_REQUEST['save'])
+	if (@$idsCsv = $_REQUEST['save'])
 	{
 		// convert to array of IDs
 		$ids = explode(',',$idsCsv);
@@ -30,7 +30,7 @@ try
 		echo json_encode(array('id' => $playlistId));
 	}
 	// load a playlist from a playlist ID
-	elseif ($id = $_REQUEST['load'])
+	elseif (@$id = $_REQUEST['load'])
 	{
 		$objects = (array)$store->get($id);
 
