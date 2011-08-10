@@ -70,30 +70,39 @@ class audioFile
 	{
 		$k = new keyStore('albumArt');
 
-		// generate an ID corresponding to this album/artist combination
+		// generate a potential ID corresponding to this album/artist combination
 		$this->albumArtId = md5($this->album.$this->artist);
 
 		// check for existing art from the same album
 		if ($k->get($this->albumArtId))
 			return;
 
+		// get an instance of the ImageMagick class to manipulate
+		// the album art image
+		$im = new Imagick();
+		$blob = null;
+
 		// look in the ID3v2 tag
-		$albumArt = null;
 		if (isset($this->analysis['id3v2']['APIC'][0]['data']))
-			$albumArt = &$this->analysis['id3v2']['APIC'][0]['data'];
+			$blob = &$this->analysis['id3v2']['APIC'][0]['data'];
 		elseif (isset($this->analysis['id3v2']['PIC'][0]['data']))
-			$albumArt = &$this->analysis['id3v2']['PIC'][0]['data'];
+			$blob = &$this->analysis['id3v2']['PIC'][0]['data'];
+		else
+			// bomb out, no albumn art available
+			return $this->albumArtId = null;
 
 		// try the containing folder
 		// TODO, if necessary: try amazon web services
 
 		// standardise the album art to 128x128 jpg
+		$im->readImageBlob($blob);
+		$im->thumbnailImage(128,128);
+		$im->setImageFormat('jpeg');
+        	$im->setImageCompressionQuality(80);
+		$blob = $im->getImageBlob();
 
 		// save the album art under the generated ID
-		if ($albumArt)
-			$k->set($this->albumArtId,$albumArt);
-		else
-			$this->albumArtId = null;
+		$k->set($this->albumArtId,$blob);
 	}
 
 	public function getPath()
