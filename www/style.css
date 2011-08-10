@@ -63,12 +63,10 @@ overflow:hidden;
 
 #albumArt
 {
-background:#fff;
 width:128px;
 height:128px;
-margin-right:20px;
-background:#ffffff no-repeat center center;
 border: 1px solid #ccc;
+margin-right:20px;
 overflow:hidden;
 float:left;
 }
