@@ -10,13 +10,16 @@ class audioFile
 	public $title,$artist,$album,$year,$genre,$id;
 	protected $path;
 
-	// binary jpg of front cover art
-	public $albumArtId;
+	// id of blob in keystore in namespace 'albumArt'
+	// for album cover art, if any
+	public $albumArtId = null;
 
 	public $count = 0;
 
 	// output from getid3 (removed after use)
 	private $analysis;
+
+	private $dir;
 
 	public function __construct($filepath)
 	{
@@ -31,6 +34,7 @@ class audioFile
 			throw new Exception ("permission denied reading $filepath");
 
 		$this->path = $filepath;
+		$this->dir = dirname($filepath).'/';
 
 		require_once GETID3_INCLUDEPATH.'/getid3.php';
 
@@ -71,11 +75,12 @@ class audioFile
 		$k = new keyStore('albumArt');
 
 		// generate a potential ID corresponding to this album/artist combination
-		$this->albumArtId = md5($this->album.$this->artist);
+		$id = md5($this->album.$this->artist);
 
 		// check for existing art from the same album
-		if ($k->get($this->albumArtId))
-			return;
+		// if there, then assign this song that albumn ID
+		if ($k->get($id))
+			return $this->albumArtId = $id;
 
 		// get an instance of the ImageMagick class to manipulate
 		// the album art image
@@ -87,11 +92,32 @@ class audioFile
 			$blob = &$this->analysis['id3v2']['APIC'][0]['data'];
 		elseif (isset($this->analysis['id3v2']['PIC'][0]['data']))
 			$blob = &$this->analysis['id3v2']['PIC'][0]['data'];
-		else
-			// bomb out, no albumn art available
-			return $this->albumArtId = null;
 
-		// try the containing folder
+		// look in containing folder for images
+		elseif($images = glob($this->dir.'*.{jpg,png}',GLOB_BRACE) )
+		{
+			// use file pointers instead of file_get_contents
+			// to fix a memory leak due to failed re-use of allocated memory
+			// when loading successivle bigger files
+			@$h = fopen($images[0], 'rb');
+			$size = filesize($images[0]);
+
+			if ($h === false)
+				throw new Exception("Could not open cover art: $images[0]");
+
+			if (!$size)
+				// invalid or no image
+				//throw new Exception("Could not open cover art: $images[0]");
+				// assign no art
+				return;
+
+			$blob = fread($h,$size);
+			fclose($h);
+		}
+		else
+			// no albumn art available, assign none
+			return;
+
 		// TODO, if necessary: try amazon web services
 
 		// standardise the album art to 128x128 jpg
@@ -102,7 +128,10 @@ class audioFile
 		$blob = $im->getImageBlob();
 
 		// save the album art under the generated ID
-		$k->set($this->albumArtId,$blob);
+		$k->set($id,$blob);
+		// assign this song that albumn art ID
+		$this->albumArtId = $id;
+
 	}
 
 	public function getPath()
