@@ -1,5 +1,7 @@
 <?php
-// TODO: re-enable persistent option 
+require_once __DIR__.'/../keyStore.class.php';
+require_once __DIR__.'/../httpResponse.class.php';
+
 $id = &$_REQUEST['id'];
 
 $k = new keyStore('albumArt');

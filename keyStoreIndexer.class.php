@@ -4,6 +4,9 @@ hydratag search engine indexer: Keystore
 Uses the voswork keystore (cache and files)
 */
 
+require_once __DIR__.'/indexer.class.php';
+require_once __DIR__.'/keyStore.class.php';
+
 class keyStoreIndexer extends indexer
 {
 	// keyStore instance

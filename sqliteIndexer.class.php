@@ -5,6 +5,8 @@ TODO:
 benchmark getmany() compared to get one on sqlite keystore (w/primary key)
 */
 
+require_once __DIR__.'/indexer.class.php';
+require_once __DIR__.'/constants.php';
 
 class sqliteIndexer extends indexer
 {
@@ -69,7 +71,7 @@ class sqliteIndexer extends indexer
 
 			// insert into db if that relationship doesn't already exist
 			$this->db->exec("INSERT OR IGNORE INTO map VALUES ($id,$tag)");
-		}		
+		}
 	}
 
 	// Return an array of IDs that have $tags in common

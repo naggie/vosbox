@@ -11,6 +11,7 @@ did you mean? automatic search
 jqueryUI: make playlist sortable
 re benchmark index backends with revised sqlite backend
 ogg support
+ionotify for new tracks
 
 optimise for speed:
   * Change to sprites for player buttons

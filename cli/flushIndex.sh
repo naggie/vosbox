@@ -1,15 +1,12 @@
 #!/usr/bin/php
 <?php
-// initialise the voswork environment
-require_once __DIR__.'/../kernel.class.php';
-kernel::bootstrap();
+// flushes index (including cache) and playlists -- not album art
 
-// flushes index (including cache) and playlists
+require_once __DIR__.'/../indexer.class.php';
+require_once __DIR__.'/../keyStore.class.php';
 
-$i = indexer::getInstance();
+indexer::getInstance()->flush();
 $k = new keyStore('playlists');
-
-$i->flush();
 $k->flush();
 
 ?>

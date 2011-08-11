@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__.'/../indexer.class.php';
+require_once __DIR__.'/../audioFile.class.php';
+require_once __DIR__.'/../keyStore.class.php';
+
 try
 {
 	if (!extension_loaded('json'))

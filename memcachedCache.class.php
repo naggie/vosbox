@@ -1,46 +1,48 @@
 <?php
 /**
  * memcached cache class page
- * 
+ *
  *     Voswork - the PHP app template
  *     Voswork Copyright (C) 2009-2011  Callan Bryant <callan.bryant@gmail.com>
- * 
+ *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
  *     the Free Software Foundation, either version 3 of the License, or
  *     (at your option) any later version.
- * 
+ *
  *     This program is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
- * 
+ *
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * @package core
  * @author Callan Bryant <callan.bryant@gmail.com>
  */
 
+require_once __DIR__.'/cache.class.php';
+
 /**
  * RAM cache class
- * 
+ *
  * uses memory, memcached
- * 
+ *
  * Provides a means to store/retrieve temporary variables, arrays
  * or objects; all are refered to as objects in this context.
- * 
+ *
  * @package core
  * @author Callan Bryant
  */
-class memcachedCache implements cache
+class memcachedCache extends cache
 {
 	// memcache instance to abstract
 	protected $memcache;
 
 	/**
 	 * Core constructor
-	 * 
+	 *
 	 * @author Callan Bryant
 	 * @param $cache_dir dir for cache
 	 */
@@ -55,7 +57,7 @@ class memcachedCache implements cache
 		$this->memcache = new Memcache();
 		$this->memcache->connect($ip);
 	}
-	
+
 	/**
 	 * calls parent set with correct param order
 	 * 
@@ -67,10 +69,10 @@ class memcachedCache implements cache
 	{
 		$this->memcache->set($tag,$object,false,$expiry);
 	}
-	
+
 	/**
 	 * calls parent get with correct param order
-	 * 
+	 *
 	 * @param $tag string identifier for object
 	 * @param $object mixed var to save
 	 * @param $expiry int time is seconds
@@ -79,10 +81,10 @@ class memcachedCache implements cache
 	{
 		return $this->memcache->get($tag,false);
 	}
-	
+
 	/**
 	 * calls parent delete with correct param order
-	 * 
+	 *
 	 * @param $tag string identifier for object
 	 * @param $object mixed var to save
 	 * @param $expiry int time is seconds

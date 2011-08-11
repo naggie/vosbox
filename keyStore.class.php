@@ -1,41 +1,40 @@
 <?php
 /**
  * key based database class page
- * 
+ *
  *     Voswork - the PHP app template
  *     Voswork Copyright (C) 2009-2011  Callan Bryant <callan.bryant@gmail.com>
- * 
+ *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
  *     the Free Software Foundation, either version 3 of the License, or
  *     (at your option) any later version.
- * 
+ *
  *     This program is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
- * 
+ *
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * @package core
  * @author Callan Bryant <callan.bryant@gmail.com>
  */
 
-//example way to set default cache dir eg:
-//define('KEYSTORE_DIR','store/');
+require_once __DIR__.'/constants.php';
 
 /**
  * key based database class page
- * 
+ *
  * Provides a means to store/retrieve small amount of data, arrays
  * or objects; all are refered to as objects in this context.
- * 
+ *
  * As this is a key based store, there is no way to flush by namespace.
  * The solution is to store in folders per category.
- * 
+ *
  * This can be used as an alternative to a full database
- * 
+ *
  * @package core
  * @author Callan Bryant
  */
@@ -97,8 +96,8 @@ class keyStore
 			throw new Exception('$tag must be scalar');
 
 		// see if it was cached, salted with the store dir
-		if ($object = kernel::$cache->get($this->dir.$tag))
-			return $object;
+		//if ($object = kernel::$cache->get($this->dir.$tag))
+		//	return $object;
 
 		// file path to save to
 		$path	= $this->get_path($tag);
@@ -132,7 +131,7 @@ class keyStore
 			throw new Exception('$tag must be scalar');
 
 		// write it to cache, salted
-		kernel::$cache->set($this->dir.$tag,$object);
+		//kernel::$cache->set($this->dir.$tag,$object);
 
 		// save it......
 		$path = $this->get_path($tag);
@@ -161,7 +160,7 @@ class keyStore
 		$path = $this->get_path($tag);
 
 		// delete it from cache
-		kernel::$cache->delete($this->dir.$tag);
+		//kernel::$cache->delete($this->dir.$tag);
 
 		//check if entry is there
 		if (!file_exists($path) )
@@ -173,6 +172,7 @@ class keyStore
 
 		if ( $result ===false )//failed
 			throw new Exception("failed to delete $path");
+
 		return true;
 	}
 
@@ -195,7 +195,7 @@ class keyStore
 			if ($file->isDot())
 				continue;
 
-			$filepath		= $this->dir.'/'.$file;
+			$filepath = $this->dir.'/'.$file;
 
 			if (! @unlink($filepath) )
 				throw new Exception("Error deleting $filepath");

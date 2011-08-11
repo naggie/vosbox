@@ -11,10 +11,12 @@ TODO:
 documentation for concepts and usage. EG: crawler gathers metadata into objects
 */
 
+require_once __DIR__.'/constants.php';
+
 abstract class indexer
 {
 	// the maximum number of results to return in one query. Remember
-	// that total relevance is probably inversely proportional to number 
+	// that total relevance is probably inversely proportional to number
 	// of results.
 	public static $maxResults = 100;
 
@@ -24,7 +26,7 @@ abstract class indexer
 	abstract protected function map($id, array $tags);
 	// Return an array of IDs that have $tags in common
 	abstract protected function reduce(array $tags);
-	// Empty the index, objects and caches. This is typically used before a 
+	// Empty the index, objects and caches. This is typically used before a
 	// new absolute crawl.
 	abstract public function flush();
 	// remove an object (by ID) from the index, not necessarily removing
@@ -33,7 +35,7 @@ abstract class indexer
 	// almost never used.
 	abstract public function depreciateObject($id);
 	// save an object under an id
-	abstract protected function saveObject($id,$object);	
+	abstract protected function saveObject($id,$object);
 	// load an object by ID
 	abstract public function getObject($id);
 
@@ -76,7 +78,7 @@ abstract class indexer
 
 		// force limit on number of results. This should have been done
 		// already; this is precautionary.
-		$ids = array_slice($ids,0,self::$maxResults);		
+		$ids = array_slice($ids,0,self::$maxResults);
 
 		$objects = array();
 
@@ -134,11 +136,13 @@ abstract class indexer
 		{
 			case 'sqlite':
 			case 'sqlite3':
+				require_once __DIR__.'/sqliteIndexer.class.php';
 				return new sqliteIndexer($namespace);
 
 			case 'keyStore':
 			case 'keystore':
 			default:
+				require_once __DIR__.'/keyStoreIndexer.class.php';
 				return new keyStoreIndexer($namespace);
 		}
 	}

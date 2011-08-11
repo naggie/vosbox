@@ -1,20 +1,20 @@
 <?php
 /**
  * Special server page - http
- * 
+ *
  *     Voswork - the PHP app template
  *     Voswork Copyright (C) 2009-2011  Callan Bryant <callan.bryant@gmail.com>
- * 
+ *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
  *     the Free Software Foundation, either version 3 of the License, or
  *     (at your option) any later version.
- * 
+ *
  *     This program is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
- * 
+ *
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -24,16 +24,16 @@
 
 /**
  * http server class
- * 
+ *
  * Allows voswork to serve files other than normal script output.
- * For example, It can be used to download images, CSS or javascript - or more 
+ * For example, It can be used to download images, CSS or javascript - or more
  * importantly, dynamically served files, possibly with authentication
  * It makes use of caching and acts as a normal webserver.
  *
  * Internal attributes must be set up. Then run serve() to commit and serve.
  * For local files, use load_local_file() to set sensible attibutes.
  * They can be overidden after, if necessary.
- * 
+ *
  * @todo http resume
  * @package core
  * @final
@@ -69,7 +69,7 @@ class httpResponse
 	/**
 	 * (magic)
 	 * verfy the attributes given when they are set
-	 * 
+	 *
 	 * @param $attr string attribute to set
 	 */
 	public function __set($attr,$value)
@@ -170,7 +170,7 @@ class httpResponse
 		}
 
 		// give the client an Etag for the file
-		header('Etag: '.$current_etag);	
+		header('Etag: '.$current_etag);
 
 		// try to open a handle
 		$this->handle = @fopen($path, 'rb');
@@ -302,23 +302,23 @@ class httpResponse
 			return;
 		}
 	}
-	 
+
 	/**
 	 * main server method - outputs a file by the handle, without headers
-	 * 
+	 *
 	 * low memory usage
-	 * 
+	 *
 	 * @param string handle of file
 	 */
 	protected function read()
 	{
 		// stop all output buffering, to decrease memory usage and increase speed
 		while (@ob_end_flush());
-		
+
 		// set the position of the file pointer (for HTTP resume)
 		if (@fseek($this->handle,$this->position) !== 0 )
 			throw new Exception('Seek/handle error');
-		
+
 		// loop through 4K at a time
 		while (!feof($this->handle))
 		{
@@ -330,10 +330,10 @@ class httpResponse
 
 		fclose($this->handle);
 	}
-	  
+
 	/**
 	 * returns an Etag for a file - that changes if modified
-	 * 
+	 *
 	 * is fast (does not hash the file itself)
 	 * @param $file string filepath
 	 * @return string Etag
@@ -343,11 +343,11 @@ class httpResponse
 		$mtime = filemtime($filepath);
 		$size = filesize($filepath);
 		$inode = fileinode($filepath);
-	 
+
 		// hash them together with the file path
 		return sha1($mtime.$size.$filepath);
 	}
-	  
+
 	/**
 	 * commit - send the file with the object's attributes
 	 * only for when all attributes are valid, and there is a handle!
@@ -357,20 +357,20 @@ class httpResponse
 		// it is important to unlock the session data to allow other
 		// pages to use it and hence be able to load whilst the data
 		// is being served by this class
-		session_write_close();		
+		session_write_close();
 
 		self::status(200);
 
 		header('Content-type:'.$this->mimetype);
-	 	
+
 	 	// if html or text, it must be displayed inline
 		if ($this->inline)
-			header('Content-Disposition: inline;');		
-		else		
-			//tell the browser the filename and to download it as an attachment			
+			header('Content-Disposition: inline;');
+		else
+			//tell the browser the filename and to download it as an attachment
 			header('Content-Disposition: attachment; filename="' . $this->name. '"');
-		
-		
+
+
 		if (isset($this->size))
 			// this breaks compatability with gz handling
 			header('Content-Length: '.$this->size);
@@ -381,15 +381,15 @@ class httpResponse
 		// Etag
 		if (isset($this->etag))
 			header('Etag: '.$this->etag);
-		
+
 		// serve the actual file
 		$this->read();
-	 	
+
 	 }
 
 	/**
 	 * redirects a relative or absolute url
-	 * 
+	 *
 	 * @param $url string abs. or rel. url to redirect to
 	 */
 	public static function redirect($url)
@@ -398,7 +398,7 @@ class httpResponse
 			// relative URL (must be converted)
 			$url = 'http://'.$_SERVER['HTTP_HOST'].'/'.$url;
 
-	
+
 
 		// must provide a full absolute URL
 		self::status(301);
@@ -416,7 +416,7 @@ class httpResponse
 			// cache it client side for about 3 years, effectively ~infinite!
 			header('Cache-Control: public, maxage=99999999');
 
-			// depreciated old way for HTTP/1.0 (absolute, therefore flawed)	
+			// depreciated old way for HTTP/1.0 (absolute, therefore flawed)
 			header('Expires: '.date('D, d M Y H:i:s', (time()+99999999)).' GMT');
 		}
 		else
@@ -437,7 +437,7 @@ class httpResponse
 		// does not work with cgi
 		//if (headers_sent() )
 			//throw new Exception('headers already sent, incorrect usage');
-		
+
 		switch($this->status)
 		{
 			case 200:
@@ -462,7 +462,6 @@ class httpResponse
 			default:
 				self::status($this->status);
 		}
-			
 	}
 }
 ?>

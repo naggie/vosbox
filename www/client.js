@@ -73,7 +73,7 @@ searcher.search = function ()
 	$.ajax(
 	{
 		data:{keywords:$('#search').val()},
-		url: "?node=search",
+		url: "search.php",
 		success: searcher.showResults
 	});
 
@@ -286,12 +286,12 @@ player.selectThis = function ()
 
 	// albumArt
 	if (meta.albumArtId)
-		$('#albumArt').html('<img src="?node=albumArt&id='+meta.albumArtId+'" />');
+		$('#albumArt').html('<img src="albumArt.php?id='+meta.albumArtId+'" />');
 	else
 		$('#albumArt').empty();
 
 	// play the file
-	player.audio.setAttribute('src', '?node=download&id='+meta.id);
+	player.audio.setAttribute('src', 'download.php?id='+meta.id);
 
 	//$('#playlist').scrollTop(offset);
 	// animate to offset, clearing any other previous, possibly conflicting
@@ -427,7 +427,7 @@ player.loadPlaylist = function(id)
 	$.ajax(
 	{
 		data:{load:id},
-		url: "?node=playlist",
+		url: "playlist.php",
 		success: function(items)
 		{
 			if (items.error)
@@ -466,7 +466,7 @@ player.sharePlaylist = function()
 	$.ajax(
 	{
 		data:{save:idsCsv},
-		url: "?node=playlist",
+		url: "playlist.php",
 		success: function(data)
 		{
 			if (data.error)

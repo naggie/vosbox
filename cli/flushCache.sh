@@ -26,12 +26,6 @@
  * @author Callan Bryant <callan1990@googlemail.com>
  */
 
-// initialise the voswork environment
-require_once __DIR__.'/../kernel.class.php';
-kernel::bootstrap();
-
-kernel::$cache->flush();
-
-echo "All cache objects invalidated\n";
-
+require_once __DIR__.'/../cache.class.php';
+cache::getInstance()->flush();
 ?>
