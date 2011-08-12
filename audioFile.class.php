@@ -125,7 +125,7 @@ class audioFile
 		$im->readImageBlob($blob);
 		$im->thumbnailImage(128,128);
 		$im->setImageFormat('jpeg');
-        	$im->setImageCompressionQuality(80);
+        	$im->setImageCompressionQuality(90);
 		$blob = $im->getImageBlob();
 
 		// save the album art under the generated ID

@@ -1,6 +1,6 @@
 playlist: remove button
 searchResults: enqueue, play buttons
-clickable meta (album artist) with that in div and css (tag)
+clickable meta (album artist) with that in div and css (tag)(now playing)
 fix search bar width and submit with firefox (gecko)
 attributes based CSS
 player should be at 'stopped' state at end of playlist
@@ -19,3 +19,9 @@ optimise for speed:
   * Provide option of using google API for jQuery
   * Caching
   * PHP APC
+
+
+.playing > .selected
+left border item [playlist
+look for imagick extension!
+ web interface for crawler
