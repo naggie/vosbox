@@ -130,6 +130,9 @@ searcher.enqueueAll = function ()
 		player.enqueue($(this).data('meta'));
 	});
 
+	// stop the playlist from scolling to the bottom
+	$('#playlist').stop();
+
 	// allow override if being used as callback
 	return false;
 }
@@ -252,11 +255,11 @@ player.enqueue = function (meta)
 		item.each(player.selectThis);
 		player.play();
 	}
-
-	// scroll to the end of the list, clearing any conflicting animation
-	// currently running
-	var length = $("#playlist").attr("scrollHeight");
-	$("#playlist").stop().animate({scrollTop:length});
+	else
+	{
+		var length = $("#playlist")[0].scrollHeight;
+	        $("#playlist").stop().animate({scrollTop:length});
+	}
 }
 
 // select item on the playlist, playing if appropiate
