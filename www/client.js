@@ -442,6 +442,9 @@ player.loadPlaylist = function(id)
 			for (var i in items)
 				player.enqueue(items[i]);
 
+			// stop the playlist from scolling to the bottom
+			$('#playlist').stop();
+
 			// clear message
 			$('#player .message').hide();
 		}
