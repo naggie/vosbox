@@ -301,8 +301,8 @@ player.selectThis = function ()
 	// animations
 	$('#playlist').stop().animate({scrollTop:offset});
 
-	// play it if appropiate
-	if (player.state == 'playing')
+	// play it if appropiate (it always is!)
+	//if (player.state == 'playing')
 		player.play();
 }
 
