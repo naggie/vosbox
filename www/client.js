@@ -213,6 +213,14 @@ player.init = function ()
 //	$('*').not('#search').bind('keydown','return',player.selectThis);
 
 
+	// click to search on nowPlaying
+	$('#nowPlaying .artist, #nowPlaying .album').click(function()
+	{
+		var query = $(this).text();
+		$('#search').val(query);
+		searcher.search();
+	});
+
 	$('#stop').click(player.stop);
 	$(document).bind('keydown','esc',player.stop);
 

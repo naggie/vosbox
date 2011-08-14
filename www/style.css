@@ -61,6 +61,11 @@ height:130px;
 overflow:hidden;
 }
 
+#nowPlaying .artist:hover, #nowPlaying .album:hover
+{
+opacity:0.5;
+}
+
 #albumArt
 {
 width:128px;
