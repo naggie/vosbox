@@ -12,6 +12,8 @@ jqueryUI: make playlist sortable
 re benchmark index backends with revised sqlite backend
 ogg support
 
+fix sqlite db locking issue
+
 optimise for speed:
   * Change to sprites for player buttons
   * Aggregate and compress JS, closure compiler etc
@@ -20,7 +22,6 @@ optimise for speed:
   * PHP APC
 
 
-.playing > .selected
 left border item [playlist
 look for imagick extension!
  web interface for crawler

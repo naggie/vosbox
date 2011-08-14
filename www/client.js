@@ -267,13 +267,13 @@ player.enqueue = function (meta)
 player.selectThis = function ()
 {
 	// highlight the item as currently playing, clearing others
-	$('#playlist .item').removeClass('playing');
-	$(this).addClass('playing');
+	$('#playlist .item').removeClass('selected');
+	$(this).addClass('selected');
 
 	// scroll the item on the playlist into view (around half way down list)
 	// find position relative to the top of the list, remove half the
 	// height of the list.
-	var offset = $('#playlist .playing').offset().top 
+	var offset = $('#playlist .selected').offset().top 
 		+ $('#playlist').scrollTop() 
 		- $('#playlist').offset().top
 		- $('#playlist').height()/4;
@@ -325,7 +325,7 @@ player.play = function ()
 // so can be used to override normal events
 player.next = function ()
 {
-	var item = $('#playlist .playing').next();
+	var item = $('#playlist .selected').next();
 
 	// if there is no next item, default to the first item (repeat all)
 	if (!item.length)
@@ -340,7 +340,7 @@ player.next = function ()
 // so can be used to override normal events
 player.prev = function ()
 {
-	$('#playlist .playing').prev().each(player.selectThis);
+	$('#playlist .selected').prev().each(player.selectThis);
 	return false;
 }
 

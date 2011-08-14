@@ -166,12 +166,12 @@ border-bottom:#ddd solid 1px;
 min-height:32px;
 }
 
-.item:hover,.playing
+.item:hover,.selected
 {
 background:#f0f0f0 repeat-x;
 }
 
-.playing
+.selected
 {
 border-left:gray solid 3px;
 }
