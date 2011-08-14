@@ -22,7 +22,5 @@ optimise for speed:
 
 
 left border item [playlist
-look for imagick extension!
- web interface for crawler
 
 ID3 tag exceptions should not fail to index file

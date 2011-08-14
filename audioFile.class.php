@@ -30,11 +30,14 @@ class audioFile
 		// objects are returned)
 		$filepath = (string)$filepath;
 
+		if (!extension_loaded('Imagick'))
+			throw new Exception("Imagic extension required. Not loaded");
+
 		if (!file_exists($filepath))
-			throw new Exception ("$filepath not found");
+			throw new Exception("$filepath not found");
 
 		if (!is_readable($filepath))
-			throw new Exception ("permission denied reading $filepath");
+			throw new Exception("permission denied reading $filepath");
 
 		$this->path = $filepath;
 		$this->dir = dirname($filepath).'/';
