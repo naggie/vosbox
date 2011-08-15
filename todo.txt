@@ -22,6 +22,4 @@ optimise for speed:
   * PHP APC
 
 
-left border item [playlist
-
 ID3 tag exceptions should not fail to index file

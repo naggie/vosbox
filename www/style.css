@@ -171,6 +171,11 @@ border-bottom:#ddd solid 1px;
 min-height:32px;
 }
 
+#playlist .item
+{
+border-left:#ddd solid 3px;
+}
+
 .item:hover,.selected
 {
 background:#f0f0f0 repeat-x;
@@ -178,7 +183,7 @@ background:#f0f0f0 repeat-x;
 
 .selected
 {
-border-left:gray solid 3px;
+border-left:gray solid 3px !important;
 }
 
 .item .artist
