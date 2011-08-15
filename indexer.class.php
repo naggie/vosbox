@@ -18,7 +18,7 @@ abstract class indexer
 	// the maximum number of results to return in one query. Remember
 	// that total relevance is probably inversely proportional to number
 	// of results.
-	public static $maxResults = 100;
+	public static $maxResults = 200;
 
 	// initialise the index under a namespace
 	abstract public function __construct($namespace = null);
