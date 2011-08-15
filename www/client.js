@@ -260,7 +260,7 @@ player.enqueue = function (meta)
 	// add event to remove on right click
 	item.rightClick(function()
 	{
-		$(this).empty();
+		$(this).remove();
 	});
 
 	// attach it to the DOM, playlist
