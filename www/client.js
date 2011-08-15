@@ -257,6 +257,12 @@ player.enqueue = function (meta)
 	// add event to select on click
 	item.click(player.selectThis);
 
+	// add event to remove on right click
+	item.rightClick(function()
+	{
+		$(this).empty();
+	});
+
 	// attach it to the DOM, playlist
 	item.hide().fadeIn().appendTo('#playlist');
 
