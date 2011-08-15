@@ -11,6 +11,7 @@ jqueryUI: make playlist sortable
 re benchmark index backends with revised sqlite backend
 ogg support
 
+also open for reading only when appropriate
 fix sqlite db locking issue
 
 optimise for speed:

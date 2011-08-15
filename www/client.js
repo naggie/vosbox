@@ -214,11 +214,18 @@ player.init = function ()
 
 
 	// click to search on nowPlaying
-	$('#nowPlaying .artist, #nowPlaying .album').click(function()
+	$('#nowPlaying .artist').click(function()
 	{
 		var query = $(this).text();
 		$('#search').val(query);
 		searcher.search();
+	});
+
+	$('#albumArt,#nowPlaying .album').click(function()
+	{
+		var query = $('#nowPlaying .artist').text()+' - '+$('#nowPlaying .album').text();
+		$('#search').val(query);
+		searcher.search();		
 	});
 
 	$('#stop').click(player.stop);
