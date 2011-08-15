@@ -19,7 +19,7 @@ try
 	$meta = new audioFile($file);
 
 	$indexer->indexObject($meta);
-	echo "Added $file\n";
+	echo "+ $file\n";
 }
 catch (Exception $e)
 {
