@@ -19,7 +19,7 @@ try
 	$meta = new audioFile($file);
 
 	$indexer->indexObject($meta);
-	echo "+ $file\n";
+	echo "+ $meta->artist -- $meta->title [$meta->album]\n";
 }
 catch (Exception $e)
 {

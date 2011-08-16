@@ -23,3 +23,8 @@ optimise for speed:
 
 
 ID3 tag exceptions should not fail to index file
+
+
+make watcher async
+
+crawler list song artist album rather than filepath?

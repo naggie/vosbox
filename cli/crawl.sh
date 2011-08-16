@@ -25,7 +25,7 @@ foreach ($files as $file)
 	{
 		$meta = new audioFile($file);
 		$indexer->indexObject($meta);
-		echo "+ $file\n";
+	        echo "+ $meta->artist -- $meta->title [$meta->album]\n";
 		$count++;
 	}
 	catch (Exception $e)
