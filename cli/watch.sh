@@ -5,8 +5,8 @@
 # The index current
 
 if [ -z $1 ]; then
-	echo "$0 : recursively watch a directory and index new files" >&2
-	echo "Usage: $0 <directory>" >&2
+	echo "$0 : recursively watch directories and index new files" >&2
+	echo "Usage: $0 <directory> ..." >&2
 	echo "To be used after an inital crawl" >&2
 	exit
 fi
@@ -17,7 +17,7 @@ if ! which inotifywait > /dev/null; then
 fi
 
 # REQUIRES inotify-tools for inotifywait
-nice -n 3 inotifywait -q -m --format '%w%f' -e moved_to -e close_write -r "$1" | while read
+nice -n 3 inotifywait -q -m --format '%w%f' -e moved_to -e close_write -r "$@" | while read
 do
 	"`dirname $0`"/add.sh "$REPLY"
 done
