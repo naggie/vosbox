@@ -7,7 +7,7 @@ $id = &$_REQUEST['id'];
 
 $i = indexer::getInstance();
 
-$filepath = $i->getObject($id)->getPath();
+@$filepath = $i->getObject($id)->getPath();
 
 // remove the object from teh index.
 // the http class will handle the 4oh4
