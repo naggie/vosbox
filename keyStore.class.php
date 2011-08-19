@@ -188,7 +188,7 @@ class keyStore
 
 		// the only way to guarentee the cache won't return any keys
 		// (as they are unknown) is to flush it too
-		kernel::$cache->flush();
+		//kernel::$cache->flush();
 
 		foreach (new DirectoryIterator($this->dir) as $file)
 		{

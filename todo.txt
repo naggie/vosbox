@@ -28,3 +28,11 @@ ID3 tag exceptions should not fail to index file
 make watcher async
 
 crawler list song artist album rather than filepath?
+
+
+views? :
+ * Most played
+ * Last played/persistent playlist?
+ * Popular
+ * Tag cloud?
+ * Genres?
