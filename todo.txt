@@ -36,3 +36,5 @@ views? :
  * Popular
  * Tag cloud?
  * Genres?
+
+download() method on audioFile

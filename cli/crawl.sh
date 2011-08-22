@@ -16,16 +16,22 @@ $count = 0;
 $iterator = new IgnorantRecursiveDirectoryIterator($argv[1]);
 $files = new RecursiveIteratorIterator($iterator);
 
-foreach ($files as $file)
+foreach ($files as $path)
 {
 	// must be a file capable of id3
-	if (!preg_match('/\.mp3$/i',$file))
+	if (!preg_match('/\.mp3$/i',$path))
 		continue;
 	try
 	{
-		$meta = new audioFile($file);
-		$indexer->indexObject($meta);
-	        echo "+ $meta->artist -- $meta->title [$meta->album]\n";
+		$file = new audioFile($path);
+
+		// if the same song with a higher bitrate exists, don't index it
+		if ($existingFile = $indexer->getObject($file->id) )
+			if ($existingFile->getQuality() > $file->getQuality() )
+				throw new Exception("Skipping inferior $path");
+
+		$indexer->indexObject($file);
+		echo "+ $file->artist -- $file->title [$file->album]\n";
 		$count++;
 	}
 	catch (Exception $e)

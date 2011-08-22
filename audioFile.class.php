@@ -21,8 +21,11 @@ class audioFile
 
 	// output from getid3 (removed after use)
 	private $analysis;
-
 	private $dir;
+
+	// ... for compariston purposes when multiple songs exist
+	// integer
+	protected $quality = 0;
 
 	public function __construct($filepath)
 	{
@@ -66,7 +69,10 @@ class audioFile
 		$this->assignAlbumArt();
 
 		// set an ID relative to metadata
-		$this->id = md5($this->artist.$this->album.$this->title.$this->year);
+		$this->id = md5($this->artist.$this->album.$this->title);
+
+		// let's guess quality is proportional to bitrate
+		@$this->quality = $this->analysis['audio']['bitrate'];
 
 		// remove the getID3 analysis -- it's massive. It should not be indexed!
 		unset ($this->analysis);
@@ -141,5 +147,10 @@ class audioFile
 	public function getPath()
 	{
 		return $this->path;
+	}
+
+	public function getQuality()
+	{
+		return $this->quality;
 	}
 }
