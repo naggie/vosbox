@@ -63,6 +63,9 @@ class audioFile
 		@$this->genre = $this->analysis['comments']['genre'][0];
 		@$this->album = $this->analysis['comments']['album'][0];
 
+		if (!$this->title)
+			throw new Exception("No title found in $filepath");
+
 		if (!$this->album)
 			$this->album = 'Various artists';
 
@@ -72,7 +75,7 @@ class audioFile
 		$this->id = md5($this->artist.$this->album.$this->title);
 
 		// let's guess quality is proportional to bitrate
-		@$this->quality = $this->analysis['audio']['bitrate'];
+		@$this->quality = floor($this->analysis['audio']['bitrate']/1000);
 
 		// remove the getID3 analysis -- it's massive. It should not be indexed!
 		unset ($this->analysis);
