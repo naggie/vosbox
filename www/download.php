@@ -6,17 +6,20 @@ require_once __DIR__.'/../httpResponse.class.php';
 $id = &$_REQUEST['id'];
 
 $i = indexer::getInstance();
-
-@$filepath = $i->getObject($id)->getPath();
+$response = new httpResponse();
+$file = $i->getObject($id);
 
 // remove the object from teh index.
-// the http class will handle the 4oh4
-if (!file_exists($filepath) )
+if (!$file or !file_exists( $file->getPath() ) )
+{
+	$response->status = 404;
 	$i->depreciateObject($id);
+}
+else
+{
+	$response->load_local_file( $file->getPath() );
+	// the client can cache this file forever!
+	$response->persistent = true;
+}
 
-$response = new httpResponse();
-$response->load_local_file($filepath);
-
-// the client can cache this file forever!
-$response->persistent = true;
 $response->serve();
