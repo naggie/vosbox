@@ -183,6 +183,12 @@ player.init = function ()
 
 	$('#empty').click(player.empty);
 	$('#share').click(player.sharePlaylist);
+
+	$('#shuffle').click(function()
+	{
+		$('#playlist').shuffle();
+	});
+
 	$(document).bind('keydown','ctrl+s',player.sharePlaylist);
 
 	// dynamic (live) events for playlist items
