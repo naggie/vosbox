@@ -61,7 +61,7 @@ height:130px;
 overflow:hidden;
 }
 
-#nowPlaying .artist:hover, #nowPlaying .album:hover
+#nowPlaying .artist:hover, #nowPlaying .album:hover,#nowPlaying .title:hover
 {
 opacity:0.5;
 }

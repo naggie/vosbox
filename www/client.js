@@ -234,6 +234,12 @@ player.init = function ()
 		searcher.search();		
 	});
 
+	// click title to download
+	$('#nowPlaying .title').click(function()
+	{
+		window.open(player.audio.src);
+	});
+
 	$('#stop').click(player.stop);
 	$(document).bind('keydown','esc',player.stop);
 
