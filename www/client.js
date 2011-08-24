@@ -277,7 +277,8 @@ player.enqueue = function (meta)
 	// add event to remove on right click
 	item.rightClick(function()
 	{
-		$(this).remove();
+		if (!$(this).hasClass('selected'))
+			$(this).remove();
 	});
 
 	// attach it to the DOM, playlist
