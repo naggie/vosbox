@@ -38,3 +38,5 @@ views? :
  * Genres?
 
 download() method on audioFile
+search to hash
+save/restore state

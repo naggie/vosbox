@@ -10,10 +10,10 @@ $response = new httpResponse();
 $file = $i->getObject($id);
 
 // remove the object from teh index.
-if (!$file or !file_exists( $file->getPath() ) )
+if (!$file)// or !file_exists( $file->getPath() ) )
 {
 	$response->status = 404;
-	$i->depreciateObject($id);
+//	$i->depreciateObject($id);
 }
 else
 {
