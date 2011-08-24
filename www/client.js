@@ -37,6 +37,11 @@ searcher.init = function ()
 		$('#search').focus().val('');
 	});
 
+	// f to focus search
+	$('*').not('#search').bind('keyup', 'f', function (){
+		$('#search').focus().val('');
+	});
+
 	// CTRL+A to add all results to playlist
 	$(document).bind('keydown','ctrl+a',searcher.enqueueAll);
 	$('#enqueueAll').click(searcher.enqueueAll);
