@@ -12,7 +12,8 @@ $file = $i->getObject($id);
 // remove the object from teh index.
 if (!$file)// or !file_exists( $file->getPath() ) )
 {
-	$response->status = 404;
+//	$response->status = 404;
+	$response->status = 500;
 //	$i->depreciateObject($id);
 }
 else
