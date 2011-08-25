@@ -249,15 +249,22 @@ player.init = function ()
 	$(document).bind('keydown','esc',player.stop);
 
 	// load a playlist by ID from hash in URL
-	player.loadHash();
-	window.onhashchange = player.loadHash;
-}
-
-player.loadHash = function()
-{
 	if (document.location.hash)
 		// load the playlist id given, without the hash
 		player.loadPlaylist( document.location.hash.slice(1) );
+	else
+		// resume the old playlist from the last session
+		player.resume();
+
+	window.onhashchange = function()
+	{
+		// load the playlist id given, without the hash
+		player.loadPlaylist( document.location.hash.slice(1) );
+	}
+
+
+	// bind event to hibernate playlist
+	window.onbeforeunload = player.hibernate;
 }
 
 // enqueue an item using the metadata
@@ -426,20 +433,19 @@ player.stop = function ()
 	player.state = 'stopped';
 }
 
-player.playlistIDs = function ()
+// return an array of playlist objects
+player.getPlaylistObjects = function ()
 {
 	// get an array of playlist elements
 	elements = $('#playlist .item').get();
 
 	// iterate over the elements, collecting IDs
-	ids = Array();
-	for (var i in elements)
-	{
-		var id = $(elements[i]).data('meta').id;
-		ids.push(id);
-	}
+	objects = Array();
 
-	return ids;
+	for (var i in elements)
+		objects.push( $(elements[i]).data('meta') );
+
+	return objects;
 }
 
 //empty playlist, reset player
@@ -504,13 +510,20 @@ player.sharePlaylist = function()
 		return
 	}
 
+	// get array of playlist ids
+	var objects = player.getPlaylistObjects();
+	var ids = Array();
+
+	for (var i in objects)
+		ids.push( objects[i].id );
+
 	var baseURL = document.location.toString().replace(/#.+$/,'');
-	var idsCsv = player.playlistIDs().toString();
 
 	// set off a request for the id
 	$.ajax(
 	{
-		data:{save:idsCsv},
+		// include a comma separated array of IDs
+		data:{save:ids.toString()},
 		url: "playlist.php",
 		success: function(data)
 		{
@@ -530,4 +543,28 @@ player.sharePlaylist = function()
 	$('#playlist').empty();
 	player.empty();
 	$('#player .message').show().text('Publishing playlist...');
+}
+
+// save the playlist locally
+player.hibernate = function()
+{
+	localStorage.playlist = JSON.stringify( player.getPlaylistObjects() );
+}
+
+// load the playlist from last session
+player.resume = function()
+{
+	if (localStorage.playlist)
+	{
+		var items = JSON.parse(localStorage.playlist);
+
+		for (var i in items)
+			player.enqueue(items[i]);
+
+		// stop the playlist from scolling to the bottom
+		$('#playlist').stop();
+
+		// clear message
+		$('#player .message').hide();
+	}
 }
