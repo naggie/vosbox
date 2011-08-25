@@ -41,3 +41,5 @@ download() method on audioFile
 search to hash
 
 
+http status handling for player
+netowrk down detection (timeout etc)
