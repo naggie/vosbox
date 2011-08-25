@@ -548,6 +548,11 @@ player.hibernate = function()
 // load the playlist from last session
 player.resume = function()
 {
+	// for some reason this fixes an error when using SSL ...?
+	// Apparently trying to parse a null string into JSON is ILLEGAL!
+	if (!localStorage.playlist)
+		return false;
+
 	var items = JSON.parse(localStorage.playlist);
 
 	if (items.length)
