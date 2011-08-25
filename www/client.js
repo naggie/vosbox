@@ -30,7 +30,8 @@ $(function ()
 searcher.init = function ()
 {
 	//$('#search').val(searcher.placeholder);
-	$('#search').focus();
+	// search focus now decided by player
+	//$('#search').focus();
 
 	// ctrl+f to focus search
 	$(document).bind('keydown', 'ctrl+f', function (){
@@ -51,14 +52,6 @@ searcher.init = function ()
 		$(this).val('');
 	});
 
-/*	// look for 'tags' which onClick, will search
-	$('.tag').live('click',function()
-	{
-		var keywords = $(this).text();
-		$('#search').val(keywords);
-		searcher.search();
-	});*/
-
 	// override form submit
 	$('#searcher form').submit(searcher.search);
 
@@ -71,7 +64,6 @@ searcher.init = function ()
 	});
 
 }
-
 
 searcher.search = function ()
 {
@@ -252,9 +244,11 @@ player.init = function ()
 	if (document.location.hash)
 		// load the playlist id given, without the hash
 		player.loadPlaylist( document.location.hash.slice(1) );
-	else
-		// resume the old playlist from the last session
-		player.resume();
+	// try to resume the old playlist
+	else if(!player.resume())
+		// if not, the user will probably want to search immediately for
+		// new songs. So include them.
+		$('#search').focus();
 
 	window.onhashchange = function()
 	{
@@ -554,10 +548,10 @@ player.hibernate = function()
 // load the playlist from last session
 player.resume = function()
 {
-	if (localStorage.playlist)
-	{
-		var items = JSON.parse(localStorage.playlist);
+	var items = JSON.parse(localStorage.playlist);
 
+	if (items.length)
+	{
 		for (var i in items)
 			player.enqueue(items[i]);
 
@@ -566,5 +560,8 @@ player.resume = function()
 
 		// clear message
 		$('#player .message').hide();
+		return true;
 	}
+	else
+		return false;
 }
