@@ -56,13 +56,6 @@ searcher.init = function ()
 	$('#searcher form').submit(searcher.search);
 
 	$('#searcher .message').show().text('To begin, search for music in the box above');
-
-	// add dynamic (live) click event to every search result to enqueue
-	$('#searchResults .item').live('click',function (){
-		meta = $(this).data('meta');
-		player.enqueue(meta);
-	});
-
 }
 
 searcher.search = function ()
@@ -118,6 +111,18 @@ searcher.addResult = function (result)
 
 	// add to search results area
 	item.appendTo('#searchResults');
+
+	// click to enqueue
+	item.click(function (){
+		meta = $(this).data('meta');
+		player.enqueue(meta);
+	});
+
+	// click to play immediately
+	item.rightClick(function (){
+		meta = $(this).data('meta');
+		player.enqueue(meta,true);
+	});
 }
 
 // enqueue everything currently in the search result area
@@ -263,7 +268,7 @@ player.init = function ()
 }
 
 // enqueue an item using the metadata
-player.enqueue = function (meta)
+player.enqueue = function (meta,playNow)
 {
 	// create an element to represent the item
 	item = $('<div class="item">'+
@@ -284,13 +289,19 @@ player.enqueue = function (meta)
 	});
 
 	// attach it to the DOM, playlist
-	item.hide().fadeIn().appendTo('#playlist');
+	if (playNow)
+		// right after the currently playing item
+		item.hide().fadeIn().insertAfter('#playlist > div.selected');
+	else
+		// to the bottom
+		item.hide().fadeIn().appendTo('#playlist');
 
 	// make sure there is no message
 	$('#player .message').hide();
 
 	// play the item on first add (to empty playlist) or add to idle playlist
-	if (player.state == 'stopped' || !$('#playlist').length)
+	// or playnow
+	if (player.state == 'stopped' || !$('#playlist').length || playNow)
 	{
 		// each will select just that item...
 		item.each(player.selectThis);
