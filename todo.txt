@@ -1,3 +1,5 @@
+crawler class so that add.sh can eval quality
+
 playlist: remove button
 searchResults: enqueue, play buttons
 fix search bar width and submit with firefox (gecko)
