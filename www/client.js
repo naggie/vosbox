@@ -53,7 +53,8 @@ searcher.init = function ()
 	});
 
 	// override form submit
-	$('#searcher form').submit(searcher.search);
+	$('#searcher form').submit(false);
+	$('#search').change(searcher.search);
 
 	$('#searcher .message').show().text('To begin, search for music in the box above');
 }
