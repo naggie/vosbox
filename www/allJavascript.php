@@ -10,8 +10,12 @@ $files = array();
 // jquery
 $files[] = __DIR__.'/jquery-1.6.2.min.js';
 
+// jqueryui effects core
+//$files[] = __DIR__.'/jquery-ui-1.8.16.custom.min.js';
+
 // jquery plugins
-$files = array_merge($files, glob(__DIR__.'/jquery.*.js'));
+$plugins = glob( __DIR__.'/jquery.*.js' );
+$files = array_merge($files, $plugins);
 
 // client
 $files[] = __DIR__.'/client.js';
