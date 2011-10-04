@@ -117,6 +117,7 @@ searcher.addResult = function (result)
 	item.click(function (){
 		meta = $(this).data('meta');
 		player.enqueue(meta);
+		$(this).remove();
 	});
 
 	// click to play immediately

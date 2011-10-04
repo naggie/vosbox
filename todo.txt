@@ -1,3 +1,5 @@
+empty should reset URL
+
 crawler class so that add.sh can eval quality
 
 playlist: remove button
@@ -45,3 +47,6 @@ search to hash
 
 http status handling for player
 netowrk down detection (timeout etc)
+
+
+grey out /disable enqueue all on press, re-enable on new search
