@@ -124,6 +124,7 @@ searcher.addResult = function (result)
 	item.rightClick(function (){
 		meta = $(this).data('meta');
 		player.enqueue(meta,true);
+		$(this).remove();
 	});
 }
 
