@@ -138,6 +138,10 @@ searcher.enqueueAll = function ()
 	// stop the playlist from scolling to the bottom
 	$('#playlist').stop();
 
+	// remove items from playlist
+	$('#searchResults').empty();	
+	$('#searcher .message').show().text('All search results added!');
+
 	// allow override if being used as callback
 	return false;
 }
