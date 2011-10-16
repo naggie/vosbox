@@ -17,7 +17,7 @@ if ! which inotifywait > /dev/null; then
 fi
 
 # REQUIRES inotify-tools for inotifywait
-nice -n 3 inotifywait -q -m --format '%w%f' -e moved_to -e close_write -r "$@" | while read
+nice -n 3 inotifywait -q -m --format '%w%f' -e moved_to -e close_write -e create -r "$@" | while read
 do
 	"`dirname $0`"/add.sh "$REPLY"
 done
