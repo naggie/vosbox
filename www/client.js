@@ -488,6 +488,7 @@ player.loadPlaylist = function(id)
 	{
 		data:{load:id},
 		url: "playlist.php",
+		type: 'POST',
 		success: function(items)
 		{
 			if (items.error)
@@ -536,6 +537,7 @@ player.sharePlaylist = function()
 	{
 		// include a comma separated array of IDs
 		data:{save:ids.toString()},
+		type: 'POST',
 		url: "playlist.php",
 		success: function(data)
 		{
