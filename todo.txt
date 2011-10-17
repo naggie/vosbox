@@ -1,5 +1,8 @@
 empty should reset URL
 
+enqueue/delete should clear hash at top
+
+
 crawler class so that add.sh can eval quality
 
 playlist: remove button

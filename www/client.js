@@ -40,7 +40,7 @@ searcher.init = function ()
 
 	// f to focus search
 	$('*').not('#search').bind('keyup', 'f', function (){
-		$('#search').focus().val('');
+		$('#search').focus().select();
 	});
 
 	// CTRL+A to add all results to playlist
@@ -49,7 +49,7 @@ searcher.init = function ()
 
 	// clear on focus TODO -- focus, not click
 	$('#search').click(function (){
-		$(this).val('');
+		$(this).select();
 	});
 
 	// override form submit
