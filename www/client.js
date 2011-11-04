@@ -191,7 +191,6 @@ player.init = function ()
 	$('#pause,#play').click(player.playPause);
 
 	$('#empty').click(player.empty);
-	$('#downloadAll').click(player.downloadAll);
 	$('#share').click(player.sharePlaylist);
 
 	$('#shuffle').click(function()
@@ -265,11 +264,8 @@ player.init = function ()
 
 	window.onhashchange = function()
 	{
-		var id = document.location.hash.slice(1);
-
-		if (id)
-			// load the playlist id given, without the hash
-			player.loadPlaylist(id);
+		// load the playlist id given, without the hash
+		player.loadPlaylist( document.location.hash.slice(1) );
 	}
 
 
@@ -561,25 +557,6 @@ player.sharePlaylist = function()
 	$('#playlist').empty();
 	player.empty();
 	$('#player .message').show().text('Publishing playlist...');
-}
-
-// download each individual file
-player.downloadAll = function()
-{
-	// get array of playlist ids
-	var objects = player.getPlaylistObjects();
-	// aysnchronous loop with counter
-	// to change doc location, prompting
-	// the browser to download each file individually
-	// This is experimental!
-	var i = 0;
-	var loop = setInterval(function(){
-		document.location = 'download.php?id='+objects[i].id;
-		i++;
-	
-		if (typeof objects[i] == 'undefined')
-			clearInterval(loop);
-	},200);
 }
 
 // save the playlist locally
