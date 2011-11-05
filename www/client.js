@@ -192,6 +192,8 @@ player.init = function ()
 
 	$('#empty').click(player.empty);
 	$('#share').click(player.sharePlaylist);
+	
+	$('#downloadSelected').click(player.downloadSelected);
 
 	$('#shuffle').click(function()
 	{
@@ -217,16 +219,11 @@ player.init = function ()
 	
 
 	// if not searching, up and down are prev and next
-	$('*').not('#search').bind('keydown','right',player.next);
-	$('*').not('#search').bind('keydown','left',player.prev);
-	$('*').not('#search').bind('keydown','down',player.next);
-	$('*').not('#search').bind('keydown','up',player.prev);
-	$('*').not('#search').bind('keydown','space',player.playPause);
-
-//	$('*').not('#search').bind('keydown','up',player.hoverNext);
-//	$('*').not('#search').bind('keydown','down',player.hoverPrev);
-//	$('*').not('#search').bind('keydown','return',player.selectThis);
-
+	$(document).bind('keydown','right',player.next);
+	$(document).bind('keydown','left',player.prev);
+	$(document).bind('keydown','down',player.next);
+	$(document).bind('keydown','up',player.prev);
+	$(document).bind('keydown','space',player.playPause);
 
 	// click to search on nowPlaying
 	$('#nowPlaying .artist').click(function()
@@ -236,21 +233,20 @@ player.init = function ()
 		searcher.search();
 	});
 
-	$('#albumArt,#nowPlaying .album').click(function()
-	{
+	$('#albumArt,#nowPlaying .album').click(function(){
 		var query = $('#nowPlaying .artist').text()+' - '+$('#nowPlaying .album').text();
 		$('#search').val(query);
 		searcher.search();		
 	});
 
 	// click title to download
-	$('#nowPlaying .title').click(function()
-	{
+	$('#nowPlaying .title').click(function(){
 		window.open(player.audio.src);
 	});
 
 	$('#stop').click(player.stop);
 	$(document).bind('keydown','esc',player.stop);
+	$(document).bind('keydown','d',player.downloadSelected);
 
 	// load a playlist by ID from hash in URL
 	if (document.location.hash)
@@ -262,8 +258,7 @@ player.init = function ()
 		// new songs. So include them.
 		$('#search').focus();
 
-	window.onhashchange = function()
-	{
+	window.onhashchange = function(){
 		// load the playlist id given, without the hash
 		player.loadPlaylist( document.location.hash.slice(1) );
 	}
@@ -319,6 +314,18 @@ player.enqueue = function (meta,playNow)
 	        $("#playlist").stop().animate({scrollTop:length});
 	}
 }
+
+player.downloadSelected = function(){
+	if (!$('#playlist .item').length)
+	{
+		$('#player .message').hide().fadeIn().text('Nothing to download yet!');
+		return
+	}
+
+	var id = $('#playlist .selected').data('meta').id;
+	document.location = 'download.php?id='+id;
+}
+
 
 // select item on the playlist, playing if appropiate
 //  (as an element in 'this' context)
