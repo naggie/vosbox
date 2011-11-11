@@ -51,9 +51,36 @@ A native android app that uses the API is planned.
 
 # JSON API
 
- ...
+Songs are returned as the following JSON-formatted objects:
 
-----
+	{
+		title      : "The song name",
+		artist     : "The artist name",
+		album      : "The album name",
+		year       : "2009",
+		genre      : "Indie",
+		id         : "74a12d502d7393e139e2fcca51200d67",
+		albumArtId : "b092c997d98e13a21431c9ce58b80fbf"
+	}
 
-Vosplayer is ready to be released shortly on github following GPLv3
-licensing and mercurial-to-git conversion.
+  * To search for anything, POST or GET it as the parameter **keywords** to
+
+	search.php?keywords=
+
+  * To save a playlist, POST a CSV list of IDs as the parameter **save**
+
+	playlist.php?save=
+
+  * To load a playlist, POST or GET the playlist ID as the parameter **load**
+
+	playlist.php?load=
+
+  * To download album art, POST or GET the albumArt ID, given in the song object,
+    using the parameter **id** (the result is a 128x128 JPG):
+
+	albumArt.php?id=
+
+  * To download the song itself (currently MP3 only) POST or GET the song ID, as
+    the parameter **id** to:
+
+	download.php?id=
