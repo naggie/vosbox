@@ -1,3 +1,4 @@
-syntax:glob
 var/*
 .DS_Store
+*.bin
+*.tmp
