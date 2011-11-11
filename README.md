@@ -1,8 +1,8 @@
 @hotkey V
-@url http://github.com/naggie/vosplayer/
+@url http://github.com/naggie/vosbox/
 
 
-**Vosplayer is a HTML5 PHP/jQuery based jukebox.**
+**vosbox is a HTML5 PHP/jQuery based jukebox.**
 
 It supports
 
@@ -13,14 +13,14 @@ It supports
   * Keyboard shortcuts
   * A simple interface and API
 
-Given an arbitrary mess of MP3s in any directory structure, vosplayer will
+Given an arbitrary mess of MP3s in any directory structure, vosbox will
 find all MP3s, prefering high-quality files.
 
 Album art will be extracted and resized using the <imagemagick.org> library
 from the MP3 file with the fantastic <GetID3.org> library, or loaded from
 the containing folder.
 
-Vosplayer currently supports sqlite or file based backends, with support
+vosbox currently supports sqlite or file based backends, with support
 for any other database easy to implement.
 
 A native android app that uses the API is planned.
