@@ -162,9 +162,8 @@ position:absolute;
 left:138px;
 right:0;
 background:#ccc;
-margin-top:12px;
-margin-left:5px;
-height:8px;
+margin-top:13px;
+height:5px;
 overflow:hidden;
 }
 
@@ -175,7 +174,7 @@ opacity:1.0;
 
 #controls .progress .bar
 {
-width:0;
+width:50%;
 height:100%;
 background:gray repeat-x;
 }
