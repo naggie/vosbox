@@ -194,7 +194,7 @@ player.init = function ()
 		{
 			// not loading, playing properly	
 			$('#controls .progress .bar').show();
-			$('#controls .progress').css('background','white')
+			$('#controls .progress').css('background','#ccc')
 		}
 
 		// set progress
