@@ -4,20 +4,24 @@
 
 **vosbox is a HTML5 PHP/jQuery based jukebox.**
 
+![Screenshot of vosbox](http://callanbryant.co.uk/services/images/vosbox.png)
+
 It supports
 
+  * A search-oriented interface
   * Making and sharing playlists (via a link)
   * Album art
   * Watching a directory for new music
   * A tag-based index
   * Keyboard shortcuts
   * A simple interface and API
+  * Flat file and sqlite backends (documentation for that coming soon)
 
 Given an arbitrary mess of MP3s in any directory structure, vosbox will
 find all MP3s, prefering high-quality files.
 
 Album art will be extracted and resized using the <imagemagick.org> library
-from the MP3 file with the fantastic <GetID3.org> library, or loaded from
+from the MP3 file with the fantastic <http://GetID3.org/> library, or loaded from
 the containing folder.
 
 vosbox currently supports sqlite or file based backends, with support
