@@ -133,14 +133,14 @@ searcher.addResult = function (result)
 	item.appendTo('#searchResults');
 
 	// click to enqueue
-	item.click(function (){
+	item.rightClick(function (){
 		meta = $(this).data('meta');
 		player.enqueue(meta);
 		$(this).remove();
 	});
 
 	// click to play immediately
-	item.rightClick(function (){
+	item.click(function (){
 		meta = $(this).data('meta');
 		player.enqueue(meta,true);
 		$(this).remove();
