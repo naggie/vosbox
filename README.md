@@ -84,3 +84,13 @@ Songs are returned as the following JSON-formatted objects:
     the parameter **id** to:
 
 	download.php?id=
+
+----------------------------------------------------------------------------------
+
+Vosbox uses the following excellent libraries:
+
+  * [jQuery](http://jquery.com)
+  * [js-hotkeys plugin](http://code.google.com/p/js-hotkeys/)
+  * [jQuery rightClick plugin](http://abeautifulsite.net/blog/2008/05/jquery-right-click-plugin/)
+  * [jQuery shuffle plugin](http://www.yelotofu.com/2008/08/jquery-shuffle-plugin/)
+  * [css3buttons by Micheal Henriksen](https://github.com/michenriksen/css3buttons)
