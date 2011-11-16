@@ -94,3 +94,5 @@ Vosbox uses the following excellent libraries:
   * [jQuery rightClick plugin](http://abeautifulsite.net/blog/2008/05/jquery-right-click-plugin/)
   * [jQuery shuffle plugin](http://www.yelotofu.com/2008/08/jquery-shuffle-plugin/)
   * [css3buttons by Micheal Henriksen](https://github.com/michenriksen/css3buttons)
+  * [getID3](http://getid3.org/)
+
