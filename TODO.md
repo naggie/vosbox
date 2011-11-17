@@ -1,21 +1,19 @@
+# Old issues before the issue tracker
+
+If still applicable, they may be transfered to the github issue tracker.
+
 empty should reset URL
 
 enqueue/delete should clear hash at top
 
-
 crawler class so that add.sh can eval quality
 
-playlist: remove button
-searchResults: enqueue, play buttons
+hinting for enqueue/play
+
 fix search bar width and submit with firefox (gecko)
-attributes based CSS
 player should be at 'stopped' state at end of playlist
-check for codec
-flash fallback audio.canPlayType
-exception based error scheme
 did you mean? automatic search
 jqueryUI: make playlist sortable
-re benchmark index backends with revised sqlite backend
 ogg support
 
 also open for reading only when appropriate
@@ -29,13 +27,6 @@ optimise for speed:
   * PHP APC
 
 
-ID3 tag exceptions should not fail to index file
-
-
-make watcher async
-
-crawler list song artist album rather than filepath?
-
 
 views? :
  * Most played
@@ -43,9 +34,6 @@ views? :
  * Popular
  * Tag cloud?
  * Genres?
-
-download() method on audioFile
-search to hash
 
 
 http status handling for player
