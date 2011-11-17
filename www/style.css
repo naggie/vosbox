@@ -174,7 +174,7 @@ opacity:1.0;
 
 #controls .progress .bar
 {
-width:50%;
+width:0;
 height:100%;
 background:gray repeat-x;
 }
