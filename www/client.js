@@ -31,7 +31,7 @@ $(function ()
 {
 	if(!$.browser.webkit)
 	{
-		$('body').html('For now only webkit browsers are supported. <a href="http://www.google.com/chrome/">Chrome</a> is good.');
+		$('body').html('For now only webkit browsers are supported, as they support the MP3 codoc. Once a flash fallback in implemented, all HTML5 browsers will work! <a href="http://www.google.com/chrome/">Chrome</a> is good.');
 		return;
 	}
 
