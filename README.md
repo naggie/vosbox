@@ -52,6 +52,13 @@ A native android app that uses the API is planned.
 	up/down : prev/next
 	d       : download active song
 	space   : pause/play
+	s       : shuffle
+
+# Mouse functions
+
+Search results: Left click to play, right click to enqueue.
+
+Playlist: Left click to play, right click to delete
 
 # JSON API
 
@@ -89,7 +96,32 @@ Songs are returned as the following JSON-formatted objects:
 
 	download.php?id=
 
-----------------------------------------------------------------------------------
+
+----
+
+# The vosbox search engine (VSE)
+
+The search engine that powers vosbox is very different to a standard fulltext search engine.
+
+How it indexes:
+
+  1. A PHP object per item, with descriptive attributes is added
+  2. This object is scraped for unique lower-case alphanumeric keywords (using the tokeniser)
+  3. The object is stored under an ID (specified or created automatically)
+  4. Per keyword, the ID is associated in a reverse-map list
+
+How it searches:
+
+  1. The search string is tokenised in the same manner
+  2. For each keyword, the corresponding list of IDs is intersected with the last (by the backend)
+  3. The resulting intersection of IDs is used to return a set number of corresponding objects
+
+This can be acheived with, currently, a file based or sqlite based backend.
+
+The idea is that avoiding fulltext search queries with multiple wildcards results in a speed
+increase.
+
+----
 
 Vosbox uses the following excellent libraries:
 
