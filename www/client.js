@@ -214,12 +214,16 @@ player.init = function ()
 	
 	$('#downloadSelected').click(player.downloadSelected);
 
-	$('#shuffle').click(function()
-	{
+	$('#shuffle').click(function(){
 		$('#playlist').shuffle();
 	});
 
-	$(document).bind('keydown','ctrl+s',player.sharePlaylist);
+
+//	$(document).bind('keydown','ctrl+s',player.sharePlaylist);
+
+	$(document).bind('keydown','s',function(){
+		$('#playlist').shuffle();
+	});
 
 	// dynamic (live) events for playlist items
 	//$('#playlist .item').live('click',doSomething);
