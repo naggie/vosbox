@@ -4,7 +4,7 @@
 
 **vosbox is a HTML5 PHP/jQuery based jukebox.**
 
-![Screenshot of vosbox](http://callanbryant.co.uk/services/images/vosbox.png)
+![Screenshot of vosbox](http://callanbryant.co.uk/services/images//vosbox.png)
 
 It supports
 
