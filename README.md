@@ -1,10 +1,9 @@
 @hotkey V
 @url http://github.com/naggie/vosbox/
 
-
 **vosbox is a HTML5 PHP/jQuery based jukebox.**
 
-![Screenshot of vosbox](http://callanbryant.co.uk/services/images//vosbox.png)
+![Screenshot of vosbox](http://callanbryant.co.uk/images/vosbox.png)
 
 It supports
 
@@ -145,7 +144,7 @@ Use vosbox? Please consider donating to allow continued development.
 <input type="hidden" name="no_note" value="0">
 <input type="hidden" name="currency_code" value="GBP">
 <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
-<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
+<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal -- The safer, easier way to pay online.">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
 </form>
 
