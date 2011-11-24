@@ -19,8 +19,8 @@
     Vosbox copyright Callan Bryant 2011 <callan.bryant@gmail.com>
 */
 
-require_once __DIR__.'/../indexer.class.php';
-require_once __DIR__.'/../VSE/audioFile.class.php';
+require_once __DIR__.'/../VSE/indexer.class.php';
+require_once __DIR__.'/../audioFile.class.php';
 
 if (!isset($argv[1]))
 	throw new Exception("Usage $argv[0] <directory>\n");
