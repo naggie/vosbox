@@ -313,7 +313,8 @@ player.enqueue = function (meta,playNow)
 	});
 
 	// attach it to the DOM, playlist
-	if (playNow)
+	// if populated -- or play will fail
+	if (playNow && $('#playlist .item').length)
 		// right after the currently playing item
 		item.hide().fadeIn().insertAfter('#playlist > div.selected');
 	else
