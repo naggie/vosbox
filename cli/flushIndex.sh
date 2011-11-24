@@ -22,8 +22,8 @@
 
 // flushes index (including cache) and playlists -- not album art
 
-require_once __DIR__.'/../indexer.class.php';
-require_once __DIR__.'/../keyStore.class.php';
+require_once __DIR__.'/../VSE/indexer.class.php';
+require_once __DIR__.'/../VSE/keyStore.class.php';
 
 indexer::getInstance()->flush();
 $k = new keyStore('playlists');

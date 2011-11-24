@@ -19,7 +19,7 @@
 */
 
 $keywords = &$_REQUEST['keywords'];
-require_once __DIR__.'/../indexer.class.php';
+require_once __DIR__.'/../VSE/indexer.class.php';
 // include original class to reconstruct each item
 require_once __DIR__.'/../audioFile.class.php';
 

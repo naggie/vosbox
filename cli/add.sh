@@ -20,7 +20,7 @@
 */
 
 // adds (updates) an individual file to the index
-require_once __DIR__.'/../indexer.class.php';
+require_once __DIR__.'/../VSE/indexer.class.php';
 require_once __DIR__.'/../audioFile.class.php';
 
 if (!isset($argv[1]))

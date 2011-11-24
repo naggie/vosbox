@@ -20,7 +20,7 @@
 
 // grabs albumn art given an ID
 
-require_once __DIR__.'/../keyStore.class.php';
+require_once __DIR__.'/../VSE/keyStore.class.php';
 require_once __DIR__.'/../httpResponse.class.php';
 
 $id = &$_REQUEST['id'];

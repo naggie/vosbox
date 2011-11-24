@@ -23,7 +23,7 @@ produces an abject containing metadata of an mp3 file
 define ('GETID3_INCLUDEPATH', ROOT_DIR.'/getid3/');
 */
 require_once __DIR__.'/constants.php';
-require_once __DIR__.'/keyStore.class.php';
+require_once __DIR__.'/VSE/keyStore.class.php';
 require_once GETID3_INCLUDEPATH.'/getid3.php';
 
 

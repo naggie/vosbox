@@ -30,7 +30,7 @@ TODO:
 documentation for concepts and usage. EG: crawler gathers metadata into objects
 */
 
-require_once __DIR__.'/constants.php';
+require_once __DIR__.'/../constants.php';
 
 abstract class indexer
 {

@@ -23,7 +23,7 @@ search engine indexer: sqlite
 */
 
 require_once __DIR__.'/indexer.class.php';
-require_once __DIR__.'/constants.php';
+require_once __DIR__.'/../constants.php';
 
 class sqliteIndexer extends indexer
 {

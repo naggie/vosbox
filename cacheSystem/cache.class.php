@@ -18,7 +18,7 @@
     Vosbox copyright Callan Bryant 2011 <callan.bryant@gmail.com>
 */
 
-require_once __DIR__.'/constants.php';
+require_once __DIR__.'/../constants.php';
 
 /**
  * standard voswork cache interface - for builing different types of

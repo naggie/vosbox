@@ -120,6 +120,13 @@ This can be acheived with, currently, a file based or sqlite based backend.
 The idea is that avoiding fulltext search queries with multiple wildcards results in a speed
 increase.
 
+# Configuration
+
+In order to choose a different indexer, simply create `var/config.php` and define the constant
+`INDEXER` to be either `sqlite` or `keystore`. Redis is also planned, and will involve defining
+some more constants.
+
+
 ----
 
 Vosbox uses the following excellent libraries:

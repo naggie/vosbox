@@ -20,7 +20,7 @@
 */
 
 // flushes cache
-require_once __DIR__.'/../cache.class.php';
+require_once __DIR__.'/../cacheSystem/cache.class.php';
 
 cache::getInstance()->flush();
 ?>
