@@ -61,6 +61,10 @@ class sqliteIndexer extends indexer
 		else
 			$db = new SQLite3($file);
 
+		// do everything in a batch for speed
+		// this is particularly useful for indexing
+		$db->exec("BEGIN TRANSACTION");
+
 		$this->db = $db;
 		$this->file = $file;
 		$this->namespace = $namespace;
@@ -146,5 +150,7 @@ class sqliteIndexer extends indexer
 		// create indexes after crawl for perf reasons
 		$this->db->exec("CREATE INDEX IF NOT EXISTS tags ON map (tag)");
 		$this->db->exec("CREATE UNIQUE INDEX IF NOT EXISTS ids ON objects (id)");
+
+		$this->db->exec("COMMIT TRANSACTION");
 	}
 }
