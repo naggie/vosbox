@@ -56,11 +56,15 @@ class sqliteIndexer extends indexer
 			// make the object store
 			$db->exec("CREATE TABLE objects (id TEXT PRIMARY KEY,object BLOB)");
 
-			// indicies are created on the destructor for performance reasonss
+			// indicies are created on the destructor for performance reasons
 		}
 		else
 			$db = new SQLite3($file);
 
+		// not running a bank, so don't care if a power failure causes corruption
+		$db->exec("PRAGMA journal_mode = OFF");
+		$db->exec("PRAGMA synchronous = OFF");
+	
 		// do everything in a batch for speed
 		// this is particularly useful for indexing
 		$db->exec("BEGIN TRANSACTION");
