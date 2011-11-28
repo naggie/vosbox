@@ -25,13 +25,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="22.4"
-     inkscape:cx="8.6830326"
+     inkscape:cx="0.78124689"
      inkscape:cy="14.772408"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1908"
-     inkscape:window-height="1033"
+     inkscape:window-width="1366"
+     inkscape:window-height="724"
      inkscape:window-x="4"
      inkscape:window-y="0"
      inkscape:window-maximized="0">
@@ -61,7 +61,7 @@
      id="layer1"
      transform="translate(0,-1020.3622)">
     <rect
-       style="fill:#c0c0c0;fill-opacity:1;stroke:none"
+       style="fill:#808080;fill-opacity:1;stroke:none"
        id="rect3840"
        width="16"
        height="16"
