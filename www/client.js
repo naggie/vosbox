@@ -78,6 +78,12 @@ searcher.init = function ()
 	});
 
 	$('#doSearch').click(searcher.search);
+
+	// if there is no current playlist, the user will almost
+	// certainly want to search first. Focus the search bar.
+	if ( !$('#playlist > .item').length)
+		$('#search').focus();
+
 	$('#searcher .message').show().text('To begin, search for music in the box above');
 }
 
