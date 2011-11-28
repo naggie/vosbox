@@ -74,7 +74,7 @@ searcher.init = function ()
 	// override form submit
 	$('#searcher form').submit(false);
 	$('#search').change(searcher.search);
-
+	$('#doSearch').click(searcher.search);
 	$('#searcher .message').show().text('To begin, search for music in the box above');
 }
 
