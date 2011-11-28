@@ -72,8 +72,11 @@ searcher.init = function ()
 	});
 
 	// override form submit
-	$('#searcher form').submit(false);
-	$('#search').change(searcher.search);
+	$('#searcher form').submit(function(){
+		searcher.search();
+		return false;
+	});
+
 	$('#doSearch').click(searcher.search);
 	$('#searcher .message').show().text('To begin, search for music in the box above');
 }
