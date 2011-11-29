@@ -19,7 +19,7 @@
 
 body
 {
-font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+font-family:arial;
 margin:0;
 background:#f2f2f2;
 color:#222;
@@ -38,6 +38,8 @@ position:absolute;
 margin:10px;
 left:0;
 right:0;
+border-radius:2px;
+-webkit-background-clip: padding-box;
 }
 
 .bottom
@@ -100,6 +102,8 @@ opacity:0.5;
 
 #albumArt
 {
+-webkit-background-clip: padding-box;
+border-radius:2px;
 width:128px;
 height:128px;
 border: 1px solid #ccc;
