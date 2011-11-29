@@ -70,6 +70,7 @@ margin:0;
 padding:6px;
 padding-left:5px;
 border: 1px solid #ccc;
+height:22px;
 }
 
 #doSearch
@@ -78,7 +79,7 @@ position:absolute;
 right:0;
 padding:10px;
 float:right;
-margin-top:0;
+height:36px;
 }
 
 #doSearch:active
