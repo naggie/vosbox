@@ -61,7 +61,7 @@ foreach ($files as $path)
 	}
 }
 
-echo "\n$count files indexed\n";
+echo "\n$count audio files indexed\n";
 
 
 // hack from http://php.net/manual/en/class.recursivedirectoryiterator.php
