@@ -77,6 +77,9 @@ searcher.init = function ()
 		return false;
 	});
 
+	// dragging over the items should not highlight any text
+	$('#searchResults').disableSelection();
+
 	$('#doSearch').click(searcher.search);
 
 	// if there is no current playlist, the user will almost
@@ -231,6 +234,9 @@ player.init = function ()
 	$('#playlist').sortable({
 		placeholder: "placeholder"
 	});
+
+	// dragging over the items should not highlight any text
+	$('#playlist').disableSelection();
 
 //	$(document).bind('keydown','ctrl+s',player.sharePlaylist);
 
