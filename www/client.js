@@ -227,6 +227,8 @@ player.init = function ()
 		$('#playlist').shuffle();
 	});
 
+	// uses jqueryUI
+	$('#playlist').sortable();
 
 //	$(document).bind('keydown','ctrl+s',player.sharePlaylist);
 
