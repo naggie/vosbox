@@ -228,7 +228,9 @@ player.init = function ()
 	});
 
 	// uses jqueryUI
-	$('#playlist').sortable();
+	$('#playlist').sortable({
+		placeholder: "placeholder"
+	});
 
 //	$(document).bind('keydown','ctrl+s',player.sharePlaylist);
 
