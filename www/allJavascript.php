@@ -24,20 +24,14 @@
 // Jquery itself first, then library files, then
 // the client itself.
 
-$files = array();
-
-// jquery
-$files[] = __DIR__.'/jquery-1.6.2.min.js';
-
-// jqueryui effects core
-//$files[] = __DIR__.'/jquery-ui-1.8.16.custom.min.js';
-
-// jquery plugins
-$plugins = glob( __DIR__.'/jquery.*.js' );
-$files = array_merge($files, $plugins);
-
-// client
-$files[] = __DIR__.'/client.js';
+$files = array(
+	__DIR__.'/jquery-1.6.2.min.js',
+	__DIR__.'/jquery-ui-1.8.16.custom.min.js',
+	__DIR__.'/jquery.hotkeys.js',
+	__DIR__.'/jquery.rightClick.js',
+	__DIR__.'/jquery.shuffle.js',
+	__DIR__.'/client.js'
+);
 
 // gz compression
 ob_start("ob_gzhandler");
