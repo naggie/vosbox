@@ -233,7 +233,9 @@ player.init = function ()
 	// uses jqueryUI
 	$('#playlist').sortable({
 		axis: "y",
-		placeholder: "placeholder"
+		placeholder: "placeholder",
+		revert: true,
+		opacity: 0.8
 	});
 
 	// dragging over the items should not highlight any text
@@ -328,8 +330,10 @@ player.enqueue = function (meta,playNow)
 	// add event to remove on right click
 	item.rightClick(function()
 	{
-		if (!$(this).hasClass('selected'))
-			$(this).remove();
+		if ($(this).hasClass('selected'))
+			player.next();
+	
+		$(this).remove();
 	});
 
 	// attach it to the DOM, playlist
