@@ -232,6 +232,7 @@ player.init = function ()
 
 	// uses jqueryUI
 	$('#playlist').sortable({
+		axis: "y",
 		placeholder: "placeholder"
 	});
 
