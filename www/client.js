@@ -52,8 +52,19 @@ function createItem (result){
 	'<div class="artist tag">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
 	'<div class="album tag">'+result.album+'</div></div>');
 
+	var icon = $('<div class="icon"></div>').prependTo(item);
+
 	// attach metadata
 	item.data('meta',result);
+
+	if (!result.albumArtId) return item;
+
+	var src = 'albumArt.php?id='+result.albumArtId;
+	var img = $('<img />').attr('src',src).prependTo(icon);
+
+	img.hide().load(function(){
+		$(this).fadeIn();
+	});
 
 	return item;
 }

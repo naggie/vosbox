@@ -17,42 +17,36 @@
     Vosplayer copyright Callan Bryant 2011 <callan.bryant@gmail.com>
 */
 
-body
-{
+body{
 font-family:arial;
 margin:0;
 background:#f2f2f2;
 color:#222;
 }
 
-#searcher
-{
+#searcher{
 position:absolute;
 left:0;right:40%;
 top:0;bottom:0;
 }
 
-#searcher > *,#player > *
-{
+#searcher > *,#player > *{
 position:absolute;
 margin:10px;
 left:0;
 right:0;
 }
 
-.bottom
-{
+.bottom{
 bottom:0;
 height:25px;
 }
 
-.bottom > *
-{
+.bottom > *{
 margin-top:5px;
 }
 
-#player
-{
+#player{
 position:absolute;
 right:0;left:60%;
 top:0;bottom:0;
@@ -60,8 +54,7 @@ overflow:hidden;
 border-left: 1px solid #ccc;
 }
 
-#search
-{
+#search{
 position:absolute;
 left:0;right:80px;
 color:#333;
@@ -73,8 +66,7 @@ border: 1px solid #ccc;
 height:22px;
 }
 
-#doSearch
-{
+#doSearch{
 position:absolute;
 right:0;
 padding:10px;
@@ -82,24 +74,20 @@ float:right;
 height:36px;
 }
 
-#doSearch:active
-{
+#doSearch:active{
 top:0;
 }
 
-#nowPlaying
-{
+#nowPlaying{
 height:130px;
 overflow:hidden;
 }
 
-#nowPlaying .artist:hover, #nowPlaying .album:hover,#nowPlaying .title:hover
-{
+#nowPlaying .artist:hover, #nowPlaying .album:hover,#nowPlaying .title:hover{
 opacity:0.5;
 }
 
-#albumArt
-{
+#albumArt{
 width:128px;
 height:128px;
 border: 1px solid #ccc;
@@ -108,21 +96,18 @@ overflow:hidden;
 float:left;
 }
 
-#albumArt img
-{
+#albumArt img{
 height:100%;
 width:100%;
 }
 
-#nowPlaying .title
-{
+#nowPlaying .title{
 font-weight:bold;
 margin-top:10px;
 margin-bottom:10px;
 }
 
-#searchResults, #playlist
-{
+#searchResults, #playlist{
 bottom:0;
 background:#fff;
 overflow:auto;
@@ -130,47 +115,39 @@ border: 1px solid #ccc;
 bottom:25px;
 }
 
-#playlist
-{
+#playlist{
 top:170px;
 }
 
-#searchResults
-{
+#searchResults{
 top:45px;
 }
 
-#controls
-{
+#controls{
 top:134px;
 height:32px;
 overflow:hidden;
 padding-left:4px;
 }
 
-#pause
-{
+#pause{
 display:none;
 }
 
-#controls > *
-{
+#controls > *{
 float:left;
 }
 
-#controls > * :active
-{
+#controls > * :active{
 position:relative;
 top:1px;
 }
 
-#controls > *:hover
-{
+#controls > *:hover{
 opacity:0.6;
 }
 
-#controls .progress
-{
+#controls .progress{
 position:absolute;
 left:138px;
 right:0;
@@ -180,79 +157,69 @@ height:6px;
 overflow:hidden;
 }
 
-#controls .progress:hover
-{
+#controls .progress:hover{
 opacity:1.0;
 }
 
-#controls .progress .bar
-{
+#controls .progress .bar{
 width:0;
 height:100%;
 background:gray repeat-x;
 }
 
-.item
-{
-background:#fcfcfc repeat-x;
+.item{
 text-align:left;
 padding:10px;
-border-bottom:#ddd solid 1px;
+border-bottom:#f8f8f8 solid 1px;
 min-height:32px;
 }
 
-#playlist .item
-{
-border-left:#ddd solid 3px;
-}
-
-#playlist .placeholder
-{
+#playlist .placeholder{
 box-shadow:inset 0 0 7px #333;
 height:58px;
 }
 
-.item:hover,.selected
-{
-background:#f0f0f0 repeat-x;
+.item:hover,.selected{
+background:#fcfcfc;
 }
 
-.selected
-{
-border-left:gray solid 3px !important;
-}
-
-.item .artist
-{
+.item .artist{
 color:gray;
 margin-right:15px;
 float:left;
 }
 
-.item .title
-{
+.selected{
+outline:1px solid #ccc;
 }
 
-.item .album,#nowPlaying .artist,#nowPlaying .year
-{
+.item .album,#nowPlaying .artist,#nowPlaying .year{
 font-size:12px;
 }
 
-.item .state
-{
+.item .state{
 float:right;
 font-style:italic;
 color:gray;
 }
 
+.item > .icon, .item > .icon> img{
+height:31px;
+width:31px;
+}
+
+.item .icon{
+float:left;
+margin-right:10px;
+border:1px solid #f8f8f8;
+}
+
 /*Contents is searched for on click* /
-.tag:hover
-{
+.tag:hover{
 color:black;
 }*/
 
-.message
-{
+.message{
 right:0;left:0;top:0;
 text-align:center;
 color:gray;
@@ -260,12 +227,10 @@ font-style:italic;
 margin:10px;
 }
 
-#searcher .message
-{
+#searcher .message{
 margin-top:240px;
 }
 
-#player .message
-{
+#player .message{
 margin-top:320px;
 }
