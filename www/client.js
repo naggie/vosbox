@@ -23,20 +23,18 @@ TODO: oiplayer? (flash fallback...)
 TODO: compress when dev is almost done
 */
 
-searcher = new Object();
-player = new Object();
+var searcher = {};
+var player = {};
+//var item = {};
 
 // jQuery will fire this callback when the DOM is ready
-$(function ()
-{
-	if(!$.browser.webkit)
-	{
+$(function (){
+	if(!$.browser.webkit){
 		$('body').html('For now only webkit browsers are supported, as they support the MP3 codoc. Once a flash fallback in implemented, all HTML5 browsers will work! <a href="http://www.google.com/chrome/">Chrome</a> is good.');
 		return;
 	}
 
-	if($.browser.msie && (parseInt($.browser.version) < 9) )
-	{
+	if($.browser.msie && (parseInt($.browser.version) < 9) ){
 		alert('Update your browser, please');
 		return;
 	}
@@ -46,8 +44,13 @@ $(function ()
 	searcher.init();
 });
 
-searcher.init = function ()
-{
+/*
+item.create = function (){
+
+}
+*/
+
+searcher.init = function (){
 	//$('#search').val(searcher.placeholder);
 	// search focus now decided by player
 	//$('#search').focus();
@@ -90,8 +93,7 @@ searcher.init = function ()
 	$('#searcher .message').show().text('To begin, search for music in the box above');
 }
 
-searcher.search = function ()
-{
+searcher.search = function (){
 	$.ajax(
 	{
 		data:{keywords:$('#search').val()},
@@ -108,10 +110,8 @@ searcher.search = function ()
 }
 
 // given an array of nodes, display them
-searcher.showResults = function (results)
-{
-	if (results.error)
-	{
+searcher.showResults = function (results){
+	if (results.error){
 		$('#searcher .message').show().text(results.error);
 		return;
 	}
@@ -131,8 +131,7 @@ searcher.showResults = function (results)
 		$('#searcher .message').show().text('No results found');
 }
 
-searcher.addResult = function (result)
-{
+searcher.addResult = function (result){
 	// add the HTML
 	item = $('<div class="item">'+
 	'<div class="artist tag">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
@@ -160,8 +159,7 @@ searcher.addResult = function (result)
 }
 
 // enqueue everything currently in the search result area
-searcher.enqueueAll = function ()
-{
+searcher.enqueueAll = function (){
 	$('#searchResults .item').each(function (){
 		player.enqueue($(this).data('meta'));
 	});
@@ -180,8 +178,7 @@ searcher.enqueueAll = function ()
 // modify CSS to make search pane obscure player, fading everything in
 // without player visible. This allows CSS to define the full view,
 // using pure JS to handle the dynamic UI.
-player.init = function ()
-{
+player.init = function (){
 	// HTML5 audio player, not part of the DOM
 	player.audio = document.createElement('audio');
 
@@ -196,14 +193,11 @@ player.init = function ()
 		var percent = 100*player.audio.currentTime/player.audio.duration;
 
 		// set loader if appropiate
-		if (player.state == 'playing' && player.audio.currentTime == 0)
-		{
+		if (player.state == 'playing' && player.audio.currentTime == 0){
 			// must be loading
 			$('#controls .progress .bar').hide();
 			$('#controls .progress').css('background','url("load.gif")')
-		}
-		else
-		{
+		}else{
 			// not loading, playing properly	
 			$('#controls .progress .bar').show();
 			$('#controls .progress').css('background','#ccc')
@@ -270,8 +264,7 @@ player.init = function ()
 	$(document).bind('keydown','space',player.playPause);
 
 	// click to search on nowPlaying
-	$('#nowPlaying .artist').click(function()
-	{
+	$('#nowPlaying .artist').click(function(){
 		var query = $(this).text();
 		$('#search').val(query);
 		searcher.search();
@@ -313,8 +306,7 @@ player.init = function ()
 }
 
 // enqueue an item using the metadata
-player.enqueue = function (meta,playNow)
-{
+player.enqueue = function (meta,playNow){
 	// create an element to represent the item
 	item = $('<div class="item">'+
 	'<div class="artist">'+meta.artist+'</div><div class="title">'+meta.title+'</div>'+
@@ -376,8 +368,7 @@ player.downloadSelected = function(){
 
 // select item on the playlist, playing if appropiate
 //  (as an element in 'this' context)
-player.selectThis = function ()
-{
+player.selectThis = function (){
 	// highlight the item as currently playing, clearing others
 	$('#playlist .item').removeClass('selected');
 	$(this).addClass('selected');
@@ -419,8 +410,7 @@ player.selectThis = function ()
 }
 
 // play the item currently selected on the playlist, from start
-player.play = function ()
-{
+player.play = function (){
 	if (!player.audio.src)
 		return;
 
@@ -435,8 +425,7 @@ player.play = function ()
 
 // select the next song, play if playing already, returns false
 // so can be used to override normal events
-player.next = function ()
-{
+player.next = function (){
 	var item = $('#playlist .selected').next();
 
 	// if there is no next item, default to the first item (repeat all)
@@ -450,16 +439,13 @@ player.next = function ()
 
 // select the previous song, play if playing already, returns false
 // so can be used to override normal events
-player.prev = function ()
-{
+player.prev = function (){
 	$('#playlist .selected').prev().each(player.selectThis);
 	return false;
 }
 
-player.playPause = function ()
-{
-	switch (player.state)
-	{
+player.playPause = function (){
+	switch (player.state){
 		case 'paused':
 		case 'stopped':
 			player.play();
@@ -471,8 +457,7 @@ player.playPause = function ()
 	return false;
 }
 
-player.pause = function ()
-{
+player.pause = function (){
 			
 	player.audio.pause();
 	// update icon
@@ -484,8 +469,7 @@ player.pause = function ()
 	return false;
 }
 
-player.stop = function ()
-{
+player.stop = function (){
 	// pause it, resetting counter
 	player.audio.pause();
 	if (player.audio.currentTime)
@@ -500,8 +484,7 @@ player.stop = function ()
 }
 
 // return an array of playlist objects
-player.getPlaylistObjects = function ()
-{
+player.getPlaylistObjects = function (){
 	// get an array of playlist elements
 	elements = $('#playlist .item').get();
 
@@ -515,8 +498,7 @@ player.getPlaylistObjects = function ()
 }
 
 //empty playlist, reset player
-player.empty = function()
-{
+player.empty = function(){
 	player.audio.src = null;
 	player.stop();
 
@@ -535,8 +517,7 @@ player.empty = function()
 }
 
 // load a playlist from the server by playlist ID
-player.loadPlaylist = function(id)
-{
+player.loadPlaylist = function(id){
 	// set off a request for the list
 	$.ajax(
 	{
@@ -571,8 +552,7 @@ player.loadPlaylist = function(id)
 // informs the user of the new link containing the URL
 player.sharePlaylist = function()
 {
-	if (!$('#playlist .item').length)
-	{
+	if (!$('#playlist .item').length){
 		$('#player .message').hide().fadeIn().text('Nothing to share yet!');
 		return
 	}
@@ -587,16 +567,13 @@ player.sharePlaylist = function()
 	var baseURL = document.location.toString().replace(/#.+$/,'');
 
 	// set off a request for the id
-	$.ajax(
-	{
+	$.ajax({
 		// include a comma separated array of IDs
 		data:{save:ids.toString()},
 		type: 'POST',
 		url: "playlist.php",
-		success: function(data)
-		{
-			if (data.error)
-			{
+		success: function(data){
+			if (data.error){
 				alert(data.error);
 				return;
 			}
@@ -614,14 +591,12 @@ player.sharePlaylist = function()
 }
 
 // save the playlist locally
-player.hibernate = function()
-{
+player.hibernate = function(){
 	localStorage.playlist = JSON.stringify( player.getPlaylistObjects() );
 }
 
 // load the playlist from last session
-player.resume = function()
-{
+player.resume = function(){
 	// for some reason this fixes an error when using SSL ...?
 	// Apparently trying to parse a null string into JSON is ILLEGAL!
 	if (!localStorage.playlist)
@@ -629,8 +604,7 @@ player.resume = function()
 
 	var items = JSON.parse(localStorage.playlist);
 
-	if (items.length)
-	{
+	if (items.length){
 		for (var i in items)
 			player.enqueue(items[i]);
 
