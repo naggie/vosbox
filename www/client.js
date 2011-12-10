@@ -25,7 +25,6 @@ TODO: compress when dev is almost done
 
 var searcher = {};
 var player = {};
-//var item = {};
 
 // jQuery will fire this callback when the DOM is ready
 $(function (){
@@ -44,11 +43,26 @@ $(function (){
 	searcher.init();
 });
 
-/*
-item.create = function (){
+// returns a DOM element representing a song on the playlist.
+// contains data('meta') which is currently what the object given to it is
+// Planned: individual key based metadata (artist, album etc)
+function createItem (result){
+	// add the HTML
+	item = $('<div class="item">'+
+	'<div class="artist tag">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
+	'<div class="album tag">'+result.album+'</div></div>');
 
+	// attach metadata
+	item.data('meta',result);
+
+	return item;
 }
-*/
+
+// returns original search result from item. Storage method will change soon
+function parseItem (item){
+	return $(item).data('meta');
+}
+
 
 searcher.init = function (){
 	//$('#search').val(searcher.placeholder);
@@ -132,27 +146,20 @@ searcher.showResults = function (results){
 }
 
 searcher.addResult = function (result){
-	// add the HTML
-	item = $('<div class="item">'+
-	'<div class="artist tag">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
-	'<div class="album tag">'+result.album+'</div></div>');
-
-	// attach metadata
-	item.data('meta',result);
 
 	// add to search results area
-	item.appendTo('#searchResults');
+	var item = createItem(result).appendTo('#searchResults');
 
 	// click to enqueue
 	item.rightClick(function (){
-		meta = $(this).data('meta');
+		meta = parseItem(this);
 		player.enqueue(meta);
 		$(this).remove();
 	});
 
 	// click to play immediately
 	item.click(function (){
-		meta = $(this).data('meta');
+		meta = parseItem(this);
 		player.enqueue(meta,true);
 		$(this).remove();
 	});
@@ -161,7 +168,7 @@ searcher.addResult = function (result){
 // enqueue everything currently in the search result area
 searcher.enqueueAll = function (){
 	$('#searchResults .item').each(function (){
-		player.enqueue($(this).data('meta'));
+		player.enqueue(parseItem(this));
 	});
 
 	// stop the playlist from scolling to the bottom
@@ -307,13 +314,7 @@ player.init = function (){
 
 // enqueue an item using the metadata
 player.enqueue = function (meta,playNow){
-	// create an element to represent the item
-	item = $('<div class="item">'+
-	'<div class="artist">'+meta.artist+'</div><div class="title">'+meta.title+'</div>'+
-	'<div class="album">'+meta.album+'</div></div>');
-
-	// attach metadata to the item
-	item.data('meta',meta);
+	var item = createItem(meta);
 
 	// add event to select on click
 	item.click(player.selectThis);
@@ -361,7 +362,8 @@ player.downloadSelected = function(){
 		return
 	}
 
-	var id = $('#playlist .selected').data('meta').id;
+	var id = parseItem('#playlist .selected').id;
+
 	document.location = 'download.php?id='+id;
 }
 
@@ -384,7 +386,7 @@ player.selectThis = function (){
 
 	// update the meta area with album art etc. Forcing not-null
 	// so fields are always updated
-	var meta = $(this).data('meta');
+	var meta = parseItem(this);
 	$('#nowPlaying .title').text(String(meta.title));
 	$('#nowPlaying .album').text(String(meta.album));
 	$('#nowPlaying .artist').text(String(meta.artist));
@@ -492,7 +494,7 @@ player.getPlaylistObjects = function (){
 	objects = Array();
 
 	for (var i in elements)
-		objects.push( $(elements[i]).data('meta') );
+		objects.push( parseItem(elements[i]) );
 
 	return objects;
 }
