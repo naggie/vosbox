@@ -29,7 +29,7 @@ require_once GETID3_INCLUDEPATH.'/getid3.php';
 
 class audioFile
 {
-	public $title,$artist,$album,$year,$genre,$id;
+	public $title,$artist,$album,$year,$genre,$id,$time;
 	protected $path;
 
 	// id of blob in keystore in namespace 'albumArt'
@@ -81,6 +81,9 @@ class audioFile
 		@$this->year = $this->analysis['comments']['year'][0];
 		@$this->genre = $this->analysis['comments']['genre'][0];
 		@$this->album = $this->analysis['comments']['album'][0];
+
+		@$seconds = ceil($this->analysis['playtime_seconds']);
+		@$this->time = floor($seconds/60).':'.str_pad($seconds%60, 2, "0", STR_PAD_LEFT);
 
 		if (!$this->title)
 			throw new Exception("No title found in $filepath");

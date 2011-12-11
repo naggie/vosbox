@@ -48,9 +48,9 @@ $(function (){
 // Planned: individual key based metadata (artist, album etc)
 function createItem (result){
 	// add the HTML
-	item = $('<div class="item">'+
-	'<div class="artist tag">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
-	'<div class="album tag">'+result.album+'</div></div>');
+	item = $('<div class="item"><div class="state">'+result.time+'</div>'+
+	'<div class="artist">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
+	'<div class="album">'+result.album+'</div></div>');
 
 	var icon = $('<div class="icon"></div>').prependTo(item);
 
