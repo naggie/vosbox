@@ -197,11 +197,12 @@ outline:1px solid #ccc;
 font-size:12px;
 }
 
-.item .state{
+.state{
 float:right;
 font-style:italic;
 color:gray;
 font-size:10px;
+margin:12px;
 }
 
 .item > .icon, .item > .icon> img{
