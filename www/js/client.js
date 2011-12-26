@@ -29,7 +29,7 @@ var player = {};
 // jQuery will fire this callback when the DOM is ready
 $(function (){
 	if(!$.browser.webkit){
-		$('body').html('For now only webkit browsers are supported, as they support the MP3 codoc. Once a flash fallback in implemented, all HTML5 browsers will work! <a href="http://www.google.com/chrome/">Chrome</a> is good.');
+		$('body').html('For now only webkit browsers are supported, as they support the MP3 codec. Once a flash fallback in implemented, all HTML5 browsers will work! <a href="http://www.google.com/chrome/">Chrome</a> is good.');
 		return;
 	}
 
@@ -59,7 +59,7 @@ function createItem (result){
 
 	if (!result.albumArtId) return item;
 
-	var src = 'albumArt.php?id='+result.albumArtId;
+	var src = 'api/albumArt.php?id='+result.albumArtId;
 	var img = $('<img />').attr('src',src).prependTo(icon);
 
 	img.hide().load(function(){
@@ -122,7 +122,7 @@ searcher.search = function (){
 	$.ajax(
 	{
 		data:{keywords:$('#search').val()},
-		url: "search.php",
+		url: "api/search.php",
 		success: searcher.showResults
 	});
 
@@ -214,9 +214,9 @@ player.init = function (){
 		if (player.state == 'playing' && player.audio.currentTime == 0){
 			// must be loading
 			$('#controls .progress .bar').hide();
-			$('#controls .progress').css('background','url("load.gif")')
+			$('#controls .progress').css('background','url("img/load.gif")')
 		}else{
-			// not loading, playing properly	
+			// not loading, playing properly
 			$('#controls .progress .bar').show();
 			$('#controls .progress').css('background','#ccc')
 		}
@@ -374,7 +374,7 @@ player.downloadSelected = function(){
 
 	var id = parseItem('#playlist .selected').id;
 
-	document.location = 'download.php?id='+id;
+	document.location = 'api/download.php?id='+id;
 }
 
 
@@ -404,12 +404,12 @@ player.selectThis = function (){
 
 	// albumArt
 	if (meta.albumArtId)
-		$('#albumArt').html('<img src="albumArt.php?id='+meta.albumArtId+'" />');
+		$('#albumArt').html('<img src="api/albumArt.php?id='+meta.albumArtId+'" />');
 	else
 		$('#albumArt').empty();
 
 	// play the file
-	player.audio.setAttribute('src', 'download.php?id='+meta.id);
+	player.audio.setAttribute('src', 'api/download.php?id='+meta.id);
 
 	//$('#playlist').scrollTop(offset);
 	// animate to offset, clearing any other previous, possibly conflicting
@@ -534,7 +534,7 @@ player.loadPlaylist = function(id){
 	$.ajax(
 	{
 		data:{load:id},
-		url: "playlist.php",
+		url: "api/playlist.php",
 		type: 'POST',
 		success: function(items)
 		{
@@ -583,7 +583,7 @@ player.sharePlaylist = function()
 		// include a comma separated array of IDs
 		data:{save:ids.toString()},
 		type: 'POST',
-		url: "playlist.php",
+		url: "api/playlist.php",
 		success: function(data){
 			if (data.error){
 				alert(data.error);

@@ -18,28 +18,28 @@
     Vosbox copyright Callan Bryant 2011 <callan.bryant@gmail.com>
 */
 
-$keywords = &$_REQUEST['keywords'];
-require_once __DIR__.'/../VSE/indexer.class.php';
-// include original class to reconstruct each item
-require_once __DIR__.'/../audioFile.class.php';
+require_once __DIR__.'/../../VSE/indexer.class.php';
+require_once __DIR__.'/../../audioFile.class.php';
+require_once __DIR__.'/../../httpResponse.class.php';
 
-try
+$id = &$_REQUEST['id'];
+
+$i = indexer::getInstance();
+$response = new httpResponse();
+$file = $i->getObject($id);
+
+// remove the object from teh index.
+if (!$file)// or !file_exists( $file->getPath() ) )
 {
-	if (!extension_loaded('json'))
-		throw new Exception('json extension not loaded');
-
-	if (!$keywords)
-		throw new Exception('Erm, please search for something!');
-
-	$i = indexer::getInstance();
-	$response = $i->search($keywords);
-
-	header('Content-Type:application/json');
-	echo json_encode($response);
+//	$response->status = 404;
+	$response->status = 500;
+//	$i->depreciateObject($id);
 }
-catch (Exception $e)
+else
 {
-	// manually throw the error, as the json ext may not be loaded
-	header('Content-Type:application/json');
-	echo '{"error":"'.$e->getMessage().'"}';
+	$response->load_local_file( $file->getPath() );
+	// the client can cache this file forever!
+	$response->persistent = true;
 }
+
+$response->serve();

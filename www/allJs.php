@@ -25,12 +25,12 @@
 // the client itself.
 
 $files = array(
-	__DIR__.'/jquery-1.6.2.min.js',
-	__DIR__.'/jquery-ui-1.8.16.custom.min.js',
-	__DIR__.'/jquery.hotkeys.js',
-	__DIR__.'/jquery.rightClick.js',
-	__DIR__.'/jquery.shuffle.js',
-	__DIR__.'/client.js'
+	__DIR__.'/js/jquery-1.6.2.min.js',
+	__DIR__.'/js/jquery-ui-1.8.16.custom.min.js',
+	__DIR__.'/js/jquery.hotkeys.js',
+	__DIR__.'/js/jquery.rightClick.js',
+	__DIR__.'/js/jquery.shuffle.js',
+	__DIR__.'/js/client.js'
 );
 
 // gz compression

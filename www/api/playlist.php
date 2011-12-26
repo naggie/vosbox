@@ -18,9 +18,9 @@
     Vosbox copyright Callan Bryant 2011 <callan.bryant@gmail.com>
 */
 
-require_once __DIR__.'/../VSE/indexer.class.php';
-require_once __DIR__.'/../audioFile.class.php';
-require_once __DIR__.'/../VSE/keyStore.class.php';
+require_once __DIR__.'/../../VSE/indexer.class.php';
+require_once __DIR__.'/../../audioFile.class.php';
+require_once __DIR__.'/../../VSE/keyStore.class.php';
 
 try
 {
