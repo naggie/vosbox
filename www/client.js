@@ -245,8 +245,7 @@ player.init = function (){
 	// uses jqueryUI
 	$('#playlist').sortable({
 		axis: "y",
-		placeholder: "placeholder",
-		opacity: 0.9
+		placeholder: "placeholder"
 	});
 
 	// dragging over the items should not highlight any text
