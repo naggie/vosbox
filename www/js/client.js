@@ -354,6 +354,7 @@ player.playThis = function (){
 
 	$('#pause').show();	
 	$('#play').hide();
+	$('#controls .progress .bar').css('width',0);
 
 	// play the file
 	player.sound = soundManager.createSound({
