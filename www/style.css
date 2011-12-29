@@ -1,20 +1,20 @@
 /*
-    This file is part of Vosplayer.
+    This file is part of Vosbox.
 
-    Vosplayer is free software: you can redistribute it and/or modify
+    Vosbox is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Vosplayer is distributed in the hope that it will be useful,
+    Vosbox is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+    along with Vosbox.  If not, see <http://www.gnu.org/licenses/>.
 
-    Vosplayer copyright Callan Bryant 2011 <callan.bryant@gmail.com>
+    Vosbox copyright Callan Bryant 2011 <callan.bryant@gmail.com>
 */
 
 body{
@@ -151,22 +151,27 @@ opacity:0.6;
 position:absolute;
 left:138px;
 right:0;
-background:#ccc;
-margin-top:13px;
+margin-top:12px;
 height:6px;
 overflow:hidden;
+border:1px solid #ccc;
 }
 
 #controls .progress:hover{
 opacity:1.0;
 }
 
-#controls .progress .bar{
+.progress > .bar{
+float:left;
+position:absolute;
 width:0;
 height:100%;
-background:gray repeat-x;
+background:#ccc;
 }
 
+.progress > .bar#elapsed{
+background:gray;
+}
 .item{
 text-align:left;
 padding:10px;

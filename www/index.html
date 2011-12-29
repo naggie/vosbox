@@ -45,7 +45,10 @@
 		<div id="pause"><img src="img/pause.svg" /></div>
 		<div id="next"><img src="img/next.svg" /></div>
 		<div id="stop"><img src="img/stop.svg" /></div>
-		<div class="progress"><div class="bar"></div></div>
+		<div class="progress">
+			<div class="bar" id="data"></div>
+			<div class="bar" id="elapsed"></div>
+		</div>
 	</div>
 
 	<div id="playlist">
@@ -62,7 +65,7 @@
 <div id="searcher">
 	<form>
 		<button id="doSearch"><span class="magnifier icon"></span>Search</button>
-		<input id="search" type="text" />
+		<input id="search" type="text" /> 
 	</form>
 	<div id="searchResults">
 	</div>

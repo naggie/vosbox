@@ -17,29 +17,31 @@
     Vosbox copyright Callan Bryant 2011 <callan.bryant@gmail.com>
 */
 
-/*
-TODO: full keyboard interface support (arrows to nav results etc)
-TODO: oiplayer? (flash fallback...)
-TODO: compress when dev is almost done
-*/
-
 var searcher = {};
 var player = {};
 
+// point SM2 to the SWF library files for flash fallback
+soundManager.url = 'js/SoundManager2/';
+soundManager.useHTML5Audio = true;
+soundManager.preferFlash = false;
+// occupies an 8x8px square, flash gives priority to very visible objects
+//soundManager.useHighPerformance = true;
+
+soundManager.ontimeout(function(status){
+	alert('No MP3 codec available using HTML5 or flash. Please enable flash, or use Google chrome');
+});
+
 // jQuery will fire this callback when the DOM is ready
 $(function (){
-	if(!$.browser.webkit){
-		$('body').html('For now only webkit browsers are supported, as they support the MP3 codec. Once a flash fallback in implemented, all HTML5 browsers will work! <a href="http://www.google.com/chrome/">Chrome</a> is good.');
-		return;
-	}
+	// nowhere should be selectable
+	$('body').disableSelection();
 
 	if($.browser.msie && (parseInt($.browser.version) < 9) ){
 		alert('Update your browser, please');
 		return;
 	}
 
-	// make the player vanish instantly, before fading everything in
-	player.init();
+	soundManager.onready(player.init);
 	searcher.init();
 });
 
@@ -76,17 +78,8 @@ function parseItem (item){
 
 
 searcher.init = function (){
-	//$('#search').val(searcher.placeholder);
-	// search focus now decided by player
-	//$('#search').focus();
-
-	// ctrl+f to focus search
-	$(document).bind('keydown', 'ctrl+f', function (){
-		$('#search').focus().val('');
-	});
-
 	// f to focus search
-	$('*').not('#search').bind('keyup', 'f', function (){
+	$(document).bind('keyup', 'f', function (){
 		$('#search').focus().select();
 	});
 
@@ -94,7 +87,6 @@ searcher.init = function (){
 	$(document).bind('keydown','ctrl+a',searcher.enqueueAll);
 	$('#enqueueAll').click(searcher.enqueueAll);
 
-	// clear on focus TODO -- focus, not click
 	$('#search').click(function (){
 		$(this).select();
 	});
@@ -110,10 +102,6 @@ searcher.init = function (){
 
 	$('#doSearch').click(searcher.search);
 
-	// if there is no current playlist, the user will almost
-	// certainly want to search first. Focus the search bar.
-	if ( !$('#playlist > .item').length)
-		$('#search').focus();
 
 	$('#searcher .message').show().text('To begin, search for music in the box above');
 }
@@ -197,41 +185,11 @@ searcher.enqueueAll = function (){
 // without player visible. This allows CSS to define the full view,
 // using pure JS to handle the dynamic UI.
 player.init = function (){
-	// HTML5 audio player, not part of the DOM
-	player.audio = document.createElement('audio');
-
-	player.state = 'stopped';
-
-	// remove the pause button
-	//$('#pause').hide();
-
-	// add a watcher to set the progress bar
-	window.setInterval(function (){
-		// calculate percentage of time passed on current song
-		var percent = 100*player.audio.currentTime/player.audio.duration;
-
-		// set loader if appropiate
-		if (player.state == 'playing' && player.audio.currentTime == 0){
-			// must be loading
-			$('#controls .progress .bar').hide();
-			$('#controls .progress').css('background','url("img/load.gif")')
-		}else{
-			// not loading, playing properly
-			$('#controls .progress .bar').show();
-			$('#controls .progress').css('background','#ccc')
-		}
-
-		// set progress
-		$('#controls .progress .bar').css('width',percent+'%');
-	},100);
-
-	// add event to advance the playlist on song completion
-	player.audio.addEventListener('ended',player.next);
-
 	// controls: events
 	$('#next').click(player.next);
 	$('#prev').click(player.prev);
-	$('#pause,#play').click(player.playPause);
+	$('#pause,#play').click(function(){player.sound.togglePause()});
+	$('#stop').click(function(){player.sound.stop()});
 
 	$('#empty').click(player.empty);
 	$('#share').click(player.sharePlaylist);
@@ -248,37 +206,33 @@ player.init = function (){
 		placeholder: "placeholder"
 	});
 
-	// dragging over the items should not highlight any text
-	$('#playlist').disableSelection();
-
-//	$(document).bind('keydown','ctrl+s',player.sharePlaylist);
-
 	$(document).bind('keydown','s',function(){
 		$('#playlist').shuffle();
 	});
 
-	// dynamic (live) events for playlist items
-	//$('#playlist .item').live('click',doSomething);
-
 	// seek
 	$('#controls .progress').click(function(e){
+		if (!player.sound) return false;
+
 		// translate X click pos to time in song
 		var offset = e.pageX - $(this).offset().left;
 		var proportion = offset/$(this).width();
-		var newTime = proportion*player.audio.duration;
+		var newTime = proportion*player.sound.duration;
+
+		// if user is seeking, they almost certainly want the song to play
+		player.sound.play();
 
 		// set the new time. Note that, for some unknown reason,
 		// this does not always work...
-		player.audio.currentTime = newTime;
+		player.sound.setPosition(newTime);
 	});
 	
-
 	// if not searching, up and down are prev and next
 	$(document).bind('keydown','right',player.next);
 	$(document).bind('keydown','left',player.prev);
 	$(document).bind('keydown','down',player.next);
 	$(document).bind('keydown','up',player.prev);
-	$(document).bind('keydown','space',player.playPause);
+	$(document).bind('keydown','space',function(){player.sound.togglePause()});
 
 	// click to search on nowPlaying
 	$('#nowPlaying .artist').click(function(){
@@ -293,13 +247,7 @@ player.init = function (){
 		searcher.search();		
 	});
 
-	// click title to download
-	$('#nowPlaying .title').click(function(){
-		window.open(player.audio.src);
-	});
-
-	$('#stop').click(player.stop);
-	$(document).bind('keydown','esc',player.stop);
+	$(document).bind('keydown','esc',function(){player.sound.stop()});
 	$(document).bind('keydown','d',player.downloadSelected);
 
 	// load a playlist by ID from hash in URL
@@ -326,43 +274,36 @@ player.init = function (){
 player.enqueue = function (meta,playNow){
 	var item = createItem(meta);
 
+	// first item? play it regardless!
+	if (!$('#playlist .item').length)
+		playNow = true;
+
 	// add event to select on click
-	item.click(player.selectThis);
+	item.click(player.playThis);
 
 	// add event to remove on right click
-	item.rightClick(function()
-	{
+	item.rightClick(function(){
 		if ($(this).hasClass('selected'))
 			player.next();
 	
 		$(this).remove();
 	});
 
-	// attach it to the DOM, playlist
-	// if populated -- or play will fail
+	// attach it to the DOM, next or end of playlist
 	if (playNow && $('#playlist .item').length)
 		// right after the currently playing item
 		item.hide().fadeIn().insertAfter('#playlist > div.selected');
-	else
-		// to the bottom
+	else{
+		// add/scroll to bottom
 		item.hide().fadeIn().appendTo('#playlist');
-
-	// make sure there is no message
-	$('#player .message').hide();
-
-	// play the item on first add (to empty playlist) or add to idle playlist
-	// or playnow
-	if (player.state == 'stopped' || !$('#playlist').length || playNow)
-	{
-		// each will select just that item...
-		item.each(player.selectThis);
-		player.play();
-	}
-	else
-	{
 		var length = $("#playlist")[0].scrollHeight;
 	        $("#playlist").stop().animate({scrollTop:length});
 	}
+
+	if (playNow) item.each(player.playThis);
+
+	// make sure there is no message
+	$('#player .message').hide();
 }
 
 player.downloadSelected = function(){
@@ -380,7 +321,7 @@ player.downloadSelected = function(){
 
 // select item on the playlist, playing if appropiate
 //  (as an element in 'this' context)
-player.selectThis = function (){
+player.playThis = function (){
 	// highlight the item as currently playing, clearing others
 	$('#playlist .item').removeClass('selected');
 	$(this).addClass('selected');
@@ -408,31 +349,47 @@ player.selectThis = function (){
 	else
 		$('#albumArt').empty();
 
+	if (player.sound)
+		player.sound.destruct();
+
+	$('#pause').show();	
+	$('#play').hide();
+
 	// play the file
-	player.audio.setAttribute('src', 'api/download.php?id='+meta.id);
+	player.sound = soundManager.createSound({
+    		id : 'bleh',
+    		url : 'api/download.php?id='+meta.id,
+    		// onload: myOnloadHandler,
+		whileplaying : player.updateElapsed,
+		whileloading : player.updateDataBar,
+		onfinish : player.next,
+		onresume : function(){
+			$('#play').hide();
+			$('#pause').show();	
+		},
+		onplay : function(){
+			$('#play').hide();
+			$('#pause').show();	
+		},
+
+		onpause : function(){
+			$('#pause').hide();
+			$('#play').show();	
+		},
+		onstop: function(){
+			$('#pause').hide();
+			$('#play').show();	
+		},
+	});
+
+	// preload the next one...
 
 	//$('#playlist').scrollTop(offset);
 	// animate to offset, clearing any other previous, possibly conflicting
 	// animations
 	$('#playlist').stop().animate({scrollTop:offset});
 
-	// play it if appropiate (it always is!)
-	//if (player.state == 'playing')
-		player.play();
-}
-
-// play the item currently selected on the playlist, from start
-player.play = function (){
-	if (!player.audio.src)
-		return;
-
-	player.state = 'playing';
-
-	// make sure the controls are set right
-	$('#play').hide();
-	$('#pause').show();
-
-	player.audio.play();
+	player.sound.play();
 }
 
 // select the next song, play if playing already, returns false
@@ -444,7 +401,7 @@ player.next = function (){
 	if (!item.length)
 		item = $('#playlist .item:first-child');
 
-	item.each(player.selectThis);
+	item.each(player.playThis);
 
 	return false;
 }
@@ -452,48 +409,30 @@ player.next = function (){
 // select the previous song, play if playing already, returns false
 // so can be used to override normal events
 player.prev = function (){
-	$('#playlist .selected').prev().each(player.selectThis);
+	$('#playlist .selected').prev().each(player.playThis);
 	return false;
 }
 
-player.playPause = function (){
-	switch (player.state){
-		case 'paused':
-		case 'stopped':
-			player.play();
-		break;
-		case 'playing':
-			player.pause();
-		break;
-	}
-	return false;
+// update the progress bar for time elapsed during the song
+// to be sent as a callback to whileplaying
+player.updateElapsed = function(){
+	// calculate percentage of time passed on current song
+	var percent = 100*this.position/this.duration;
+
+	// set progress
+	$('#controls .progress > .bar#elapsed').css('width',percent+'%');
 }
 
-player.pause = function (){
-			
-	player.audio.pause();
-	// update icon
-	$('#pause').hide();
-	$('#play').show();
-	// update state
-	player.state = 'paused';
+// update the progress bar for bytes downloaded
+// to be sent as a callback to whileplaying
+player.updateDataBar = function(){
+	// calculate percentage of time passed on current song
+	var percent = 100*this.bytesLoaded/this.bytesTotal;
 
-	return false;
+	// set progress
+	$('#controls .progress > .bar#data').css('width',percent+'%');
 }
 
-player.stop = function (){
-	// pause it, resetting counter
-	player.audio.pause();
-	if (player.audio.currentTime)
-		player.audio.currentTime = 0;
-
-	// update icon
-	$('#pause').hide();
-	$('#play').show();
-
-	// update state
-	player.state = 'stopped';
-}
 
 // return an array of playlist objects
 player.getPlaylistObjects = function (){
@@ -511,11 +450,10 @@ player.getPlaylistObjects = function (){
 
 //empty playlist, reset player
 player.empty = function(){
-	player.audio.src = null;
-	player.stop();
+	if (player.sound)
+		player.sound.destruct();
 
-	if (!$('#playlist .item').length)
-	{
+	if (!$('#playlist .item').length){
 		$('#player .message').hide().fadeIn().text('Playlist is already empty');
 		return
 	}
@@ -526,6 +464,10 @@ player.empty = function(){
 	$('#playlist .item').css('z-index',2000).fadeOut(function(){
 		$(this).remove();
 	});
+
+	$('#pause').hide();
+	$('#play').show();
+	$('#controls .progress .bar').css('width',0);
 }
 
 // load a playlist from the server by playlist ID
