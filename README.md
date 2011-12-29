@@ -15,6 +15,7 @@ It supports
   * Keyboard shortcuts
   * A simple interface and API
   * Flat file and sqlite backends (documentation for that coming soon)
+  * Flash fallback via SoundManager2 library
 
 Given an arbitrary mess of MP3s in any directory structure, vosbox will
 find all MP3s, prefering high-quality files.
@@ -75,25 +76,25 @@ Songs are returned as the following JSON-formatted objects:
 
   * To search for anything, POST or GET it as the parameter **keywords** to
 
-	search.php?keywords=
+	api/search.php?keywords=
 
   * To save a playlist, POST a CSV list of IDs as the parameter **save**
 
-	playlist.php?save=
+	api/playlist.php?save=
 
   * To load a playlist, POST or GET the playlist ID as the parameter **load**
 
-	playlist.php?load=
+	api/playlist.php?load=
 
   * To download album art, POST or GET the albumArt ID, given in the song object,
     using the parameter **id** (the result is a 128x128 JPG):
 
-	albumArt.php?id=
+	api/albumArt.php?id=
 
   * To download the song itself (currently MP3 only) POST or GET the song ID, as
     the parameter **id** to:
 
-	download.php?id=
+	api/download.php?id=
 
 
 ----
@@ -137,7 +138,7 @@ Vosbox uses the following excellent libraries:
   * [jQuery shuffle plugin](http://www.yelotofu.com/2008/08/jquery-shuffle-plugin/)
   * [css3buttons by Micheal Henriksen](https://github.com/michenriksen/css3buttons)
   * [getID3](http://getid3.org/)
-
+  * [SoundManager2](http://www.schillmania.com/projects/soundmanager2/)
 
 ----
 
