@@ -358,7 +358,7 @@ player.playThis = function (){
 
 	// play the file
 	player.sound = soundManager.createSound({
-    		id : 'bleh',
+    		id : meta.id, 
     		url : 'api/download.php?id='+meta.id,
     		// onload: myOnloadHandler,
 		whileplaying : player.updateElapsed,
