@@ -268,6 +268,29 @@ player.init = function (){
 
 	// bind event to hibernate playlist
 	window.onbeforeunload = player.hibernate;
+	// define default audiofile behaviour
+	soundManager.defaultOptions = {
+		whileplaying : player.updateElapsed,
+		whileloading : player.updateDataBar,
+		onfinish : player.next,
+		onresume : function(){
+			$('#play').hide();
+			$('#pause').show();	
+		},
+		onplay : function(){
+			$('#play').hide();
+			$('#pause').show();	
+		},
+
+		onpause : function(){
+			$('#pause').hide();
+			$('#play').show();	
+		},
+		onstop: function(){
+			$('#pause').hide();
+			$('#play').show();	
+		},
+	};
 }
 
 // enqueue an item using the metadata
@@ -360,27 +383,6 @@ player.playThis = function (){
 	player.sound = soundManager.createSound({
     		id : meta.id, 
     		url : 'api/download.php?id='+meta.id,
-    		// onload: myOnloadHandler,
-		whileplaying : player.updateElapsed,
-		whileloading : player.updateDataBar,
-		onfinish : player.next,
-		onresume : function(){
-			$('#play').hide();
-			$('#pause').show();	
-		},
-		onplay : function(){
-			$('#play').hide();
-			$('#pause').show();	
-		},
-
-		onpause : function(){
-			$('#pause').hide();
-			$('#play').show();	
-		},
-		onstop: function(){
-			$('#pause').hide();
-			$('#play').show();	
-		},
 	});
 
 	// preload the next one...
