@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with Vosbox.  If not, see <http://www.gnu.org/licenses/>.
 
-    Vosbox copyright Callan Bryant 2011 <callan.bryant@gmail.com>
+    Vosbox copyright Callan Bryant 2011-2012 <callan.bryant@gmail.com> http://callanbryant.co.uk/
 */
 
 // grabs albumn art given an ID
