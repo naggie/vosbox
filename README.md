@@ -3,7 +3,7 @@
 
 **vosbox is a HTML5 PHP/jQuery based jukebox.**
 
-Demo playlist, using creative commons licensed music, at <http://ccjukebox.com/#343c67477f>
+Demo playlist, using creative commons licensed music, at <http://ccjukebox.com/#dc022a5a92>
 
 ![Screenshot of vosbox](http://callanbryant.co.uk/images/vosbox.png)
 
