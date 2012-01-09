@@ -232,7 +232,10 @@ player.init = function (){
 	$(document).bind('keydown','left',player.prev);
 	$(document).bind('keydown','down',player.next);
 	$(document).bind('keydown','up',player.prev);
-	$(document).bind('keydown','space',function(){player.sound.togglePause()});
+	$(document).bind('keydown','space',function(){
+		player.sound.togglePause();
+		return false;
+	});
 
 	// click to search on nowPlaying
 	$('#nowPlaying .artist').click(function(){
@@ -264,7 +267,6 @@ player.init = function (){
 		// load the playlist id given, without the hash
 		player.loadPlaylist( document.location.hash.slice(1) );
 	}
-
 
 	// bind event to hibernate playlist
 	window.onbeforeunload = player.hibernate;
