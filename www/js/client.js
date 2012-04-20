@@ -554,7 +554,7 @@ player.sharePlaylist = function()
 
 			$.gritter.add({
 					title:'Playlist published!',
-					text:'<p>Share this link with your friends:</p> <p><a href="'+url+'">'+url+'</a></p>',
+					text:'<p>Share this link with your friends:</p> <p><input class="share-url" type="text" value="'+url+'" onclick="this.select()" /></p>',
 					sticky:true,
 					time:1000,
 			});

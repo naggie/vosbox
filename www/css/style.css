@@ -270,7 +270,11 @@ margin-top:240px;
 margin-top:320px;
 }
 
-#gritter-notice-wrapper a{
-	font-size:14px;
-	color:white;
+.share-url{
+color:#666666;
+font-size:14px;
+border:1px solid gray;
+padding:5px;
+margin-top:10px;
+width:268px;
 }
