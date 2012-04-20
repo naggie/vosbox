@@ -50,9 +50,9 @@ $(function (){
 // Planned: individual key based metadata (artist, album etc)
 function createItem (result){
 	// add the HTML
-	item = $('<div class="item"><div class="state">'+result.time+'</div>'+
+	item = $('<div class="item"><div class="removeButton">&times;</div>'+
 	'<div class="artist">'+result.artist+'</div><div class="title">'+result.title+'</div>'+
-	'<div class="album">'+result.album+'</div></div>');
+	'<span class="album">'+result.album+'</span><span class="time">'+result.time+'</span></div>');
 
 	var icon = $('<div class="icon"></div>').prependTo(item);
 
@@ -312,6 +312,13 @@ player.enqueue = function (meta,playNow){
 			player.next();
 	
 		$(this).remove();
+	});
+
+	$('.item .removeButton').click(function(){
+		if ($(this).parent().hasClass('selected'))
+			player.next();
+	
+		$(this).parent().remove();
 	});
 
 	// attach it to the DOM, next or end of playlist

@@ -179,6 +179,29 @@ border-bottom:#f8f8f8 solid 1px;
 min-height:32px;
 }
 
+.item .removeButton{
+float:right;
+font-size:28px;
+user-select:none;
+color:#666666;
+margin-top:2px;
+}
+
+#searchResults .item .removeButton{
+display:none;
+}
+
+.item .removeButton:hover{
+opacity:0.5;
+}
+
+.item .time{
+font-style:italic;
+color:gray;
+font-size:10px;
+margin-left:10px;
+}
+
 #playlist .placeholder{
 box-shadow:inset 0 1px 3px #777;
 height:58px;
