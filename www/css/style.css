@@ -74,7 +74,7 @@ float:right;
 height:36px;
 }
 
-#doSearch:active{
+#doSearch:active,#progress:active !important{
 top:0;
 }
 
