@@ -32,6 +32,8 @@ $files = array(
 	__DIR__.'/js/jquery.shuffle.js',
 	__DIR__.'/js/SoundManager2/soundmanager2-nodebug-jsmin.js',
 //debug	__DIR__.'/js/SoundManager2/soundmanager2.js',
+//	__DIR__.'/js/jquery.gritter.js',
+	__DIR__.'/js/jquery.gritter.min.js',
 	__DIR__.'/js/client.js'
 );
 

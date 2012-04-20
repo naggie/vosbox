@@ -31,6 +31,11 @@ soundManager.ontimeout(function(status){
 	alert('No MP3 codec available using HTML5 or flash. Please enable flash, or use Google chrome');
 });
 
+// global gritter potions
+$.extend($.gritter.options, { 
+        position: 'bottom-right',
+});
+
 // jQuery will fire this callback when the DOM is ready
 $(function (){
 	// nowhere should be selectable
@@ -546,14 +551,15 @@ player.sharePlaylist = function()
 
 			var url = baseURL+'#'+data.id;
 
-			$('#player .message').show().html('<p>Playlist published to </p><a href="'+url+'">'+url+'</a>');
+			$.gritter.add({
+					title:'Playlist published!',
+					text:'<p>Share this link with your friends:</p> <p><a href="'+url+'">'+url+'</a></p>',
+					sticky:true,
+			});
 		}
 	});
 
-	
-	$('#playlist').empty();
-	player.empty();
-	$('#player .message').show().text('Publishing playlist...');
+	$.gritter.add({title:'One moment...',text:'Publishing playlist'});
 }
 
 // save the playlist locally

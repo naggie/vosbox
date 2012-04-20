@@ -139,6 +139,7 @@ Vosbox uses the following excellent libraries:
   * [css3buttons by Micheal Henriksen](https://github.com/michenriksen/css3buttons)
   * [getID3](http://getid3.org/)
   * [SoundManager2](http://www.schillmania.com/projects/soundmanager2/)
+  * [Gritter](http://boedesign.com/blog/2009/07/11/growl-for-jquery-gritter/)
 
 ----
 

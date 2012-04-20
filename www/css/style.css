@@ -269,3 +269,8 @@ margin-top:240px;
 #player .message{
 margin-top:320px;
 }
+
+#gritter-notice-wrapper a{
+	font-size:18px;
+	color:white;
+}
