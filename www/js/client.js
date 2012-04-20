@@ -24,6 +24,7 @@ var player = {};
 soundManager.url = 'js/SoundManager2/';
 soundManager.useHTML5Audio = true;
 soundManager.preferFlash = false;
+soundManager.flashVersion = 9;
 // occupies an 8x8px square, flash gives priority to very visible objects
 //soundManager.useHighPerformance = true;
 

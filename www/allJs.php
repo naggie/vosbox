@@ -25,8 +25,8 @@
 // the client itself.
 
 $files = array(
-	__DIR__.'/js/jquery-1.6.2.min.js',
-	__DIR__.'/js/jquery-ui-1.8.16.custom.min.js',
+	__DIR__.'/js/jquery-1.7.2.min.js',
+	__DIR__.'/js/jquery-ui-1.8.19.custom.min.js',
 	__DIR__.'/js/jquery.hotkeys.js',
 	__DIR__.'/js/jquery.rightClick.js',
 	__DIR__.'/js/jquery.shuffle.js',
