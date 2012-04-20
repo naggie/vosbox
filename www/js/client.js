@@ -555,6 +555,7 @@ player.sharePlaylist = function()
 					title:'Playlist published!',
 					text:'<p>Share this link with your friends:</p> <p><a href="'+url+'">'+url+'</a></p>',
 					sticky:true,
+					time:1000,
 			});
 		}
 	});
