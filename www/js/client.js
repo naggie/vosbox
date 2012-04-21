@@ -39,6 +39,8 @@ $.extend($.gritter.options, {
 
 // jQuery will fire this callback when the DOM is ready
 $(function (){
+	$(document).bind('keydown','esc',function(){$.gritter.removeAll();});
+
 	// nowhere should be selectable
 	$('body').disableSelection();
 
@@ -256,7 +258,6 @@ player.init = function (){
 		searcher.search();		
 	});
 
-	$(document).bind('keydown','esc',function(){player.sound.stop()});
 	$(document).bind('keydown','d',player.downloadSelected);
 
 	// load a playlist by ID from hash in URL
