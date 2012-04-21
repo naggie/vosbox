@@ -538,6 +538,8 @@ player.sharePlaylist = function()
 
 	var baseURL = document.location.toString().replace(/#.+$/,'');
 
+	var wait = $.gritter.add({title:'One moment...',text:'Publishing playlist'});
+
 	// set off a request for the id
 	$.ajax({
 		// include a comma separated array of IDs
@@ -558,10 +560,9 @@ player.sharePlaylist = function()
 					sticky:true,
 					time:1000,
 			});
+			$.gritter.remove(wait);
 		}
 	});
-
-	$.gritter.add({title:'One moment...',text:'Publishing playlist'});
 }
 
 // save the playlist locally
