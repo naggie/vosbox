@@ -97,6 +97,7 @@ margin-right:20px;
 overflow:hidden;
 float:left;
 border-radius:2px;
+box-shadow:inset 0 0 5px #ccc;
 }
 
 #albumArt img{
@@ -252,12 +253,8 @@ width:31px;
 float:left;
 margin-right:10px;
 border:1px solid #f8f8f8;
+box-shadow:inset 0 0 5px #fdfdfd;
 }
-
-/*Contents is searched for on click* /
-.tag:hover{
-color:black;
-}*/
 
 .message{
 right:0;left:0;top:0;
