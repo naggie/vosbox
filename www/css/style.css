@@ -20,7 +20,7 @@
 body{
 font-family:arial;
 margin:0;
-background:#f2f2f2;
+background:url('../images/bar-matte.png') repeat-x #f2f2f2;
 color:#222;
 }
 
