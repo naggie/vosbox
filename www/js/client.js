@@ -388,6 +388,10 @@ player.playThis = function (){
 	else
 		$('#albumArt').empty();
 
+	$('#albumArt img').hide().load(function(){
+		$(this).fadeIn();
+	});
+
 	if (player.sound)
 		player.sound.destruct();
 
