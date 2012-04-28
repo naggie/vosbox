@@ -119,7 +119,15 @@ searcher.search = function (){
 	{
 		data:{keywords:$('#search').val()},
 		url: "api/search.php",
-		success: searcher.showResults
+		success: searcher.showResults,
+		error: function(){
+			$.gritter.add({
+				title:"Apologies...",
+				text:"There appears to be a problem searching. Please try again later!",
+				position:"bottom-left"
+			});
+			$('#searcher .message').hide();
+		}
 	});
 
 	// reset results area
