@@ -495,6 +495,7 @@ player.empty = function(){
 
 // load a playlist from the server by playlist ID
 player.loadPlaylist = function(id){
+	var wait = $.gritter.add({title:'Just a second...',text:'Downloading playlist'});
 	// set off a request for the list
 	$.ajax(
 	{
@@ -505,9 +506,12 @@ player.loadPlaylist = function(id){
 		{
 			if (items.error)
 			{
-				$('#player .message').show().text(items.error);
+				$.gritter.add({title:'Oops!',text:items.error});
+				$.gritter.remove(wait);
 				return;
 			}
+
+			player.empty();
 
 			for (var i in items)
 				player.enqueue(items[i]);
@@ -515,14 +519,9 @@ player.loadPlaylist = function(id){
 			// stop the playlist from scolling to the bottom
 			$('#playlist').stop();
 
-			// clear message
-			$('#player .message').hide();
+			$.gritter.remove(wait);
 		}
 	});
-	// prepare playlist, bypassing fade out for messages
-	$('#playlist').empty();
-	player.empty();
-	$('#player .message').show().text('Loading playlist...');
 }
 
 // save the current playlist on the server by posting IDs.
@@ -553,7 +552,7 @@ player.sharePlaylist = function()
 		url: "api/playlist.php",
 		success: function(data){
 			if (data.error){
-				alert(data.error);
+				$.gritter.add({title:'Sorry...',text:data.error});
 				return;
 			}
 
@@ -563,8 +562,11 @@ player.sharePlaylist = function()
 					title:'Playlist published!',
 					text:'<p>Share this link with your friends:</p> <p><input class="share-url" type="text" value="'+url+'" onclick="this.select()" /></p>',
 					sticky:true,
-					time:1000,
 			});
+			$.gritter.remove(wait);
+		},
+		error:function(){
+			$.gritter.add({title:'Oh my...',text:'It seems there was a problem saving your playlist. Sorry!'});
 			$.gritter.remove(wait);
 		}
 	});
