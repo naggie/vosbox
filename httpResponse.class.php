@@ -382,7 +382,7 @@ class httpResponse
 
 		if (isset($this->size))
 			// this breaks compatability with gz handling
-			header('Content-Length: '.$this->size);
+			header('Content-Length: '.($this->size-$this->position));
 
 		// if the file never changes, tell the client!!
 		$this->dictate_cache();
