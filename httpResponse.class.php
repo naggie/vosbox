@@ -16,6 +16,8 @@
     along with Vosbox.  If not, see <http://www.gnu.org/licenses/>.
 
     Vosbox copyright Callan Bryant 2011-2012 <callan.bryant@gmail.com> http://callanbryant.co.uk/
+
+TODO: proper range support  http://stackoverflow.com/questions/2209204/parsing-http-range-header-in-php
 */
 
 /**
@@ -63,7 +65,7 @@ class httpResponse
 
 		// automatic seeking from range request (partial support TODO full support)
 		// take start offset from bytes=start,finish
-		if ( $range = $_SERVER['HTTP_RANGE']){
+		if ( $range = @$_SERVER['HTTP_RANGE']){
 			$range = end(explode('bytes=',$range));
 			$range = current(explode(',',$range));
 
