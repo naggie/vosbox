@@ -67,7 +67,7 @@ class httpResponse
 		// take start offset from bytes=start,finish
 		if ( $range = @$_SERVER['HTTP_RANGE']){
 			$range = end(explode('bytes=',$range));
-			$range = current(explode(',',$range));
+			$range = current(explode('-',$range));
 
 			if (is_numeric($range))
 				$this->position = $range;
