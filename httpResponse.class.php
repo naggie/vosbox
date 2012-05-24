@@ -358,6 +358,7 @@ class httpResponse
 		self::status(200);
 
 		header('Content-type:'.$this->mimetype);
+		header('Accept-Ranges: bytes');
 
 	 	// if html or text, it must be displayed inline
 		if ($this->inline)
