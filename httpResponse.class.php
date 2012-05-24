@@ -60,6 +60,16 @@ class httpResponse
 	{
 		// filestats are cached, which may cause problems
 		clearstatcache();
+
+		// automatic seeking from range request (partial support TODO full support)
+		// take start offset from bytes=start,finish
+		if ( $range = $_SERVER['HTTP_RANGE']){
+			$range = end(explode('bytes=',$range));
+			$range = current(explode(',',$range));
+
+			if (is_numeric($range))
+				$this->position = $range;
+		}
 	}
 
 	/**
