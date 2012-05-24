@@ -287,6 +287,9 @@ class httpResponse
 			case 200:
 				header('HTTP/1.1 200 OK');
 			return;
+			case 206:
+				header('HTTP/1.1 206 Partial Content');
+			return;
 			case 304:
 				header('HTTP/1.1 304 Not Modified');
 			return;
@@ -367,7 +370,10 @@ class httpResponse
 		// is being served by this class
 		session_write_close();
 
-		self::status(200);
+		if (!$this->position)
+			self::status(200);
+		else
+			self::status(206);
 
 		header('Content-type:'.$this->mimetype);
 		header('Accept-Ranges: bytes');
@@ -450,6 +456,7 @@ class httpResponse
 		switch($this->status)
 		{
 			case 200:
+			case 206:
 				// actually serve the file based on attributes
 				// (the idea is to try to avoid this where possible for speed!)
 				$this->commit();
