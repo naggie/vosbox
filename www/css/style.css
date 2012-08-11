@@ -26,7 +26,7 @@ color:#222;
 
 #searcher{
 position:absolute;
-left:0;right:40%;
+left:0;right:55%;
 top:0;bottom:0;
 }
 
@@ -49,7 +49,7 @@ margin-top:5px;
 
 #player{
 position:absolute;
-right:0;left:60%;
+right:0;left:45%;
 top:0;bottom:0;
 overflow:hidden;
 border-left: 1px solid #ccc;
