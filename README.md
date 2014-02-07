@@ -43,6 +43,47 @@ A native android app that uses the API is planned.
   3. Watch that directory, if required, for new songs with
      `cli/watch.sh <directory>`
 
+# Example Apache configuration (000-default.conf)
+
+The use of a `.htaccess` file is recommended to enable password protection.
+
+```
+<VirtualHost *:80>
+	DocumentRoot /path/to/vosbox/www
+	ServerName pibox.local # This should be the FQDN of the Pi
+	ServerAlias pibox vosbox.local vosbox # Any aliases should go here
+	<Directory /path/to/vosbox/www>
+		AllowOverride All # Allows setting of basic auth etc. via .htaccess files
+		Order allow,deny  # Replace these two lines with 'Require all granted' for apache >2.4
+		Allow from all
+	</Directory>
+</VirtualHost>
+```
+
+To enable SSL, using a self-signed certificate:
+
+```
+<IfModule mod_ssl.c>
+	<VirtualHost *:443>
+		DocumentRoot /path/to/vosbox/www
+		ServerName pibox.local # This should be the FQDN of the Pi
+		ServerAlias pibox vosbox.local vosbox # Any aliases should go here
+		SSLEngine On
+		SSLCertificateFile /path/to/ssl/certificate
+		SSLCertificateKeyFile /path/to/ssl/keyfile
+		#SSLCACertificateFile /path/to/ssl/CAcertificate  # You probably won't need these two options unless you know what they are
+		#SSLCertificateChainFile /path/to/ssl/CAchaincertificate
+		<Directory /path/to/vosbox/www>
+			AllowOverride All # Allows setting of basic auth etc. via .htaccess files
+			Order allow,deny  # Replace these two lines with 'Require all granted' for apache >2.4
+			Allow from all
+		</Directory>
+	</VirtualHost>
+</IfModule>
+```
+
+Thanks to @frillip for this.
+
 # Keyboard shortcuts
 
 	f       : search
